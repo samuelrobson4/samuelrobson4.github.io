@@ -136,6 +136,12 @@
         panel.style.scrollSnapStop = '';
         panel.style.minWidth = '';
       });
+      
+      // Ensure mobile navigation is properly set up
+      const burger = document.querySelector('.burger');
+      const navContainer = document.querySelector('.nav-container');
+      if (burger) burger.style.display = 'flex';
+      if (navContainer) navContainer.style.display = 'none';
     }
     
     return mobile;
@@ -204,6 +210,9 @@
    */
   function updateNavProgress(activePanel) {
     if (!navItems.length) return;
+    
+    // Skip navigation updates on mobile - let the burger menu handle it
+    if (isMobile()) return;
 
     // Remove and set active state
     navItems.forEach(item => item.classList.remove('active'));

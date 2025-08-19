@@ -29840,60 +29840,31 @@
       }
     };
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "blog-container", style: { position: "relative" }, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "blog-bubbles-grid", children: cards.map((c) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
         "div",
         {
-          className: "blog-bubbles-grid",
-          style: {
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
-            gap: "16px",
-            padding: "20px",
-            width: "80%",
-            maxWidth: "80%",
-            overflowX: "auto"
+          className: "blog-bubble-card",
+          role: "link",
+          tabIndex: 0,
+          onClick: () => {
+            audio.click();
+            window.open(c.url, "_blank", "noopener");
           },
-          children: cards.map((c) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-            "div",
-            {
-              className: "blog-bubble-card",
-              role: "link",
-              tabIndex: 0,
-              onClick: () => {
-                audio.click();
-                window.open(c.url, "_blank", "noopener");
-              },
-              style: {
-                background: "rgba(255,255,255,0.9)",
-                borderRadius: "12px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "16px",
-                textAlign: "center",
-                cursor: "pointer",
-                transition: "transform 0.2s ease, box-shadow 0.2s ease",
-                boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-                border: "1px solid rgba(0,0,0,0.05)"
-              },
-              onMouseEnter: (e) => {
-                e.currentTarget.style.transform = "scale(1.05)";
-                e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.15)";
-              },
-              onMouseLeave: (e) => {
-                e.currentTarget.style.transform = "scale(1)";
-                e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.1)";
-              },
-              children: [
-                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "blog-bubble-title", children: (c.title || "").toLowerCase() }),
-                c.subtitle ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "blog-bubble-sub", children: c.subtitle }) : null
-              ]
-            },
-            c.id
-          ))
-        }
-      ),
+          onMouseEnter: (e) => {
+            e.currentTarget.style.transform = "scale(1.05)";
+            e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.15)";
+          },
+          onMouseLeave: (e) => {
+            e.currentTarget.style.transform = "scale(1)";
+            e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.1)";
+          },
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "blog-bubble-title", children: (c.title || "").toLowerCase() }),
+            c.subtitle ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "blog-bubble-sub", children: c.subtitle }) : null
+          ]
+        },
+        c.id
+      )) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { className: "blog-arrow blog-arrow-left", onClick: scrollLeft, "aria-label": "Scroll left", children: "\u2039" }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { className: "blog-arrow blog-arrow-right", onClick: scrollRight, "aria-label": "Scroll right", children: "\u203A" })
     ] });

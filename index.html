@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Samuel Robson - Portfolio</title>
-    <link rel="stylesheet" href="styles.css?v=1755565190794">
+    <link rel="stylesheet" href="styles.css?v=1755566381492">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Baskervville:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     
     <!-- GSAP Core + ScrollTrigger (local files to avoid CSP issues) -->
-    <script src="lib/gsap/gsap.min.js?v=1755565190794"></script>
-    <script src="lib/gsap/ScrollTrigger.min.js?v=1755565190794"></script>
+    <script src="lib/gsap/gsap.min.js?v=1755566381492"></script>
+    <script src="lib/gsap/ScrollTrigger.min.js?v=1755566381492"></script>
 </head>
 <body>
     <header class="header">
@@ -41,16 +41,6 @@
             </div>
             <div id="mobile-nav" class="mobile-nav" role="menu" aria-hidden="true">
               <div class="mobile-nav-header">
-                <div class="world-clock">
-                  <div class="clock-item">
-                    <span class="city">SF</span>
-                    <span class="time" id="mobile-time-sf">--:--:--</span>
-                  </div>
-                  <div class="clock-item">
-                    <span class="city">LON</span>
-                    <span class="time" id="mobile-time-london">--:--:--</span>
-                  </div>
-                </div>
                 <button class="mobile-nav-close" aria-label="Close navigation">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -175,9 +165,9 @@
     </main>
 
     <!-- Ensure bundle loads before hs-scroller to mount dynamic cards -->
-    <script src="dist/bundle.js?v=1755565190794"></script>
+    <script src="dist/bundle.js?v=1755566381492"></script>
     <!-- GSAP-powered horizontal scroller -->
-    <script src="hs-scroller-gsap.js?v=1755565190794"></script>
+    <script src="hs-scroller-gsap.js?v=1755566381492"></script>
     <!-- Gooey water droplets band -->
     <script src="gooey-water.js"></script>
     <!-- Title wiggle effect -->
@@ -199,6 +189,10 @@
           menu.setAttribute('aria-hidden','true'); 
           btn.setAttribute('aria-expanded','false'); 
           document.body.style.overflow = '';
+          // Use left positioning instead of transform
+          menu.style.left = '100%';
+          // Return focus to burger button
+          btn.focus();
         }
         
         function open(){
@@ -207,6 +201,13 @@
           menu.setAttribute('aria-hidden','false'); 
           btn.setAttribute('aria-expanded','true'); 
           document.body.style.overflow = 'hidden';
+          // Use left positioning instead of transform
+          menu.style.left = '0';
+          
+          // Focus the close button after opening
+          setTimeout(() => {
+            closeBtn?.focus();
+          }, 100);
         }
         
         function toggle(){ 
