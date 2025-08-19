@@ -51,7 +51,7 @@
     const COLLISION_GROUP = 1; // positive -> always collide with same group (stack more)
 
     const engine = Engine.create({ enableSleeping: true });
-    engine.world.gravity.scale = 0.0012;
+    engine.world.gravity.scale = 0.0003; // Reduced from 0.0006
     engine.world.gravity.y = 1;
 
     // Boundaries just outside edges so goo doesn't bleed
@@ -100,7 +100,7 @@
     let mouseX = -9999, mouseY = -9999; // offscreen by default
     let mouseDown = false;
     const interactRadius = 60; // px influence radius
-    const maxForce = 0.002;    // force strength
+    const maxForce = 0.0005;    // force strength - reduced from 0.001
 
     function setMouseFromEvent(e) {
       const rect = svg.getBoundingClientRect();
@@ -136,8 +136,8 @@
     let scrollT, scrollTX; let lastSY = window.pageYOffset || 0;
     function sloshFromDelta(dy) {
       const s = Math.sign(dy) || 0;
-      engine.world.gravity.y += s * 0.14; // slightly more sensitive
-      engine.world.gravity.x += s * 0.18;
+      engine.world.gravity.y += s * 0.035; // reduced from 0.07
+      engine.world.gravity.x += s * 0.045; // reduced from 0.09
       clearTimeout(scrollT); scrollT = setTimeout(() => (engine.world.gravity.y = 1), 160);
       clearTimeout(scrollTX); scrollTX = setTimeout(() => (engine.world.gravity.x = 0), 160);
     }
@@ -146,8 +146,8 @@
 
     window.addEventListener('deviceorientation', (e) => {
       if (e.beta == null || e.gamma == null) return;
-      engine.world.gravity.x = (e.gamma || 0) / 35;
-      engine.world.gravity.y = 1 + (e.beta || 0) / 60;
+      engine.world.gravity.x = (e.gamma || 0) / 140; // reduced sensitivity from 70
+      engine.world.gravity.y = 1 + (e.beta || 0) / 240; // reduced sensitivity from 120
     });
 
     // Runner + render

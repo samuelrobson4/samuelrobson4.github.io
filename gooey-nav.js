@@ -79,8 +79,8 @@
 
     // Layout
     const trackY = height / 2;
-    const size = 14, radius = 4, activePad = 6;
-    const startX = 18; const gap = 36; // tighter spacing
+    const size = 12, radius = 4, activePad = 5;
+    const startX = 100; const gap = 24; // tighter spacing, more corner
     const dots = PANELS.map((p, i) => ({ ...p, x: startX + i * gap }));
 
     // Static dots

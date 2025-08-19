@@ -16,7 +16,7 @@
   'use strict';
   
   // Debug flag - set window.__HS_DEBUG__ = true to enable logging
-  const DEBUG = window.__HS_DEBUG__ || false;
+  const DEBUG = window.__HS_DEBUG__ || true; // Temporarily enable debug
   const log = (...args) => DEBUG && console.log('[HS-Scroller]', ...args);
   
   /**
@@ -140,6 +140,80 @@
     
     return mobile;
   };
+
+  /**
+   * Set up panel entrance animations for all devices
+   */
+  function setupPanelAnimations() {
+    console.log('[HS-Scroller] setupPanelAnimations called');
+    console.log('[HS-Scroller] Panels found:', panels.length);
+    console.log('[HS-Scroller] Panel IDs:', Array.from(panels).map(p => p.id));
+    log('Setting up panel animations for', isMobile() ? 'mobile' : 'desktop', 'reduced motion:', prefersReducedMotion);
+    
+    panels.forEach((panel, index) => {
+      const panelInner = panel.querySelector('.hs-inner');
+      console.log('[HS-Scroller] Panel', index, panel.id, 'inner element:', !!panelInner);
+      if (panelInner) {
+        log('Setting up animation for panel', index, panel.id);
+        
+        if (isMobile() || prefersReducedMotion) {
+          // For mobile or reduced motion, use simpler fade-in animations
+          gsap.set(panelInner, {
+            opacity: 0,
+            y: 50,
+            force3D: true
+          });
+          
+          // Make first panel visible immediately
+          if (index === 0) {
+            gsap.set(panelInner, {
+              opacity: 1,
+              y: 0,
+              force3D: true
+            });
+          }
+          
+          // Create scroll-triggered fade-in animation
+          ScrollTrigger.create({
+            trigger: panel,
+            start: 'top 80%',
+            end: 'top 20%',
+            scrub: 1,
+            onUpdate: (self) => {
+              const progress = self.progress;
+              gsap.set(panelInner, {
+                opacity: progress,
+                y: 50 - (progress * 50), // Move from 50px down to 0px
+                force3D: true
+              });
+            }
+          });
+        } else {
+          // For desktop, use left-to-right fade-in animations
+          gsap.set(panelInner, {
+            x: -100,
+            opacity: 0,
+            force3D: true
+          });
+          
+          // Special handling for the first panel (home) - make it visible initially
+          if (index === 0) {
+            gsap.set(panelInner, {
+              x: 0,
+              opacity: 1,
+              force3D: true
+            });
+          }
+          
+          // For now, let's try a simpler approach - just set the initial state
+          // and let the main scroll system handle the animations
+          console.log('[HS-Scroller] Setting initial state for panel', panel.id);
+          
+          // We'll handle the animations in the main timeline instead
+        }
+      }
+    });
+  }
   
   // Global references
   let mainTimeline;
@@ -259,6 +333,8 @@
       heroStartOffsetPx = 0;
     }
 
+
+
     // Create main timeline
     mainTimeline = gsap.timeline({
       scrollTrigger: {
@@ -289,6 +365,44 @@
             gsap.set(heroPanel.parentElement, { alignItems: 'flex-start' });
             gsap.set(heroPanel, { y: currentTop });
           }
+          
+          // Handle panel entrance animations
+          panels.forEach((panel, index) => {
+            const panelInner = panel.querySelector('.hs-inner');
+            if (panelInner) {
+              // Skip animation for home panel (index 0)
+              if (index === 0) {
+                gsap.set(panelInner, {
+                  x: 0,
+                  opacity: 1,
+                  force3D: true
+                });
+                return;
+              }
+              
+              // Calculate when this panel should start animating
+              // Start animation when panel is about to enter viewport (earlier)
+              const panelStartProgress = Math.max(0, (index - 0.8) / (panelCount - 1));
+              const panelEndProgress = (index + 0.2) / (panelCount - 1);
+              
+              // Calculate animation progress for this panel
+              let panelProgress = 0;
+              if (progress >= panelStartProgress && progress <= panelEndProgress) {
+                panelProgress = (progress - panelStartProgress) / (panelEndProgress - panelStartProgress);
+                panelProgress = Math.max(0, Math.min(1, panelProgress)); // Clamp to 0-1
+              } else if (progress > panelEndProgress) {
+                panelProgress = 1; // Panel is fully visible
+              }
+              
+              // Apply the animation with easing
+              const easedProgress = gsap.parseEase("power2.out")(panelProgress);
+              gsap.set(panelInner, {
+                x: -100 + (easedProgress * 100), // Move from -100px to 0px
+                opacity: easedProgress, // Fade from 0 to 1
+                force3D: true
+              });
+            }
+          });
           
           if (window.__HS_DEBUG__) {
             console.log('[HS-Scroller] Progress:', progress.toFixed(3), 'Active panel:', activePanel, 'Panel ID:', getPanelId(activePanel), 'Target X:', targetX + 'px');
@@ -673,6 +787,7 @@
    * Initialize everything
    */
   function init() {
+    console.log('[HS-Scroller] Initializing HS Scroller with GSAP');
     log('Initializing HS Scroller with GSAP');
     
     try {
@@ -694,6 +809,11 @@
       } else {
         log('Using native scroll mode');
       }
+      
+      // Set up panel entrance animations for all cases
+      console.log('[HS-Scroller] About to call setupPanelAnimations');
+      setupPanelAnimations();
+      console.log('[HS-Scroller] setupPanelAnimations completed');
     } catch (error) {
       console.error('[HS-Scroller] Error in animation setup:', error);
     }
@@ -702,7 +822,7 @@
     initNavigation();
     
     // Handle deep links
-    handleDeepLink();
+    // handleDeepLink(); // Temporarily disabled for testing
     
     // Handle popstate
     initPopState();

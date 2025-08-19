@@ -6,7 +6,7 @@
 }
 .site-loader__counter {
   font-family: 'Baskervville', Georgia, 'Times New Roman', serif;
-  font-size: 25pt; color: #000; letter-spacing: -0.02em;
+  font-size: 125pt; color: #000; letter-spacing: -0.02em;
 }
 /* Gooey water band (SVG) */
 .gooey-band { position: fixed; left: 0; right: 0; bottom: 0; height: 96px; width: 100vw; z-index: 900; pointer-events: none; }
@@ -166,7 +166,7 @@ body {
     display: flex;
     flex-direction: row; /* horizontal row of dots */
     align-items: center;
-    gap: 10px;
+    gap: 6px;
     z-index: 1100;
 }
 
@@ -629,8 +629,12 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover { color: 
   margin-bottom: 3rem !important;
   max-width: none !important;
   width: 100% !important;
-  word-wrap: break-word !important;
-  overflow-wrap: break-word !important;
+  word-break: normal !important;
+  overflow-wrap: anywhere !important;
+  white-space: normal !important;
+  hyphens: none !important;
+  word-spacing: normal !important;
+  text-wrap: wrap !important;
 }
 
 /* Contact page text styling - override any panel styles */
@@ -1349,6 +1353,10 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover { color: 
     font-size: 30px !important;
     line-height: 1.3 !important;
     margin-bottom: 2rem !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+    white-space: normal !important;
+    hyphens: none !important;
   }
   
 
@@ -1414,6 +1422,39 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover { color: 
 }
 
 /* General styles removed - now handled by .sr-threecol prefixed rules above */
+
+/* Blog Bubbles Mobile Responsiveness */
+.blog-bubbles-grid {
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+  gap: 16px !important;
+  padding: 20px !important;
+}
+
+@media (max-width: 768px) {
+  .blog-bubbles-grid {
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)) !important;
+    gap: 12px !important;
+    padding: 16px !important;
+  }
+  
+  .blog-bubble-card {
+    padding: 12px 8px !important;
+    border-radius: 8px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-bubbles-grid {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)) !important;
+    gap: 10px !important;
+    padding: 12px !important;
+  }
+  
+  .blog-bubble-card {
+    padding: 10px 6px !important;
+    border-radius: 6px !important;
+  }
+}
 
 /* Blocks */
 .sr-block + .sr-block{ margin-top:1rem; }

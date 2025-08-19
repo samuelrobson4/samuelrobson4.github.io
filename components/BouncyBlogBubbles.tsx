@@ -24,17 +24,18 @@ export default function BouncyBlogBubbles({ cards }: Props) {
 
   return (
     <div className="blog-container" style={{ position: 'relative' }}>
-      <div className="blog-bubbles-grid" style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
-        gap: '16px',
-        padding: '20px',
-        width: '100%',
-        maxWidth: '100%',
-        overflowX: 'auto'
-      }}>
+      <div className="blog-bubbles-grid"
+           style={{ 
+             display: 'grid', 
+             gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+             gap: '16px',
+             padding: '20px',
+             width: '80%',
+             maxWidth: '80%',
+             overflowX: 'auto'
+           }}>
         {cards.map((c) => (
-          <div key={c.id} className="blog-bubble-grid" role="link" tabIndex={0} 
+          <div key={c.id} className="blog-bubble-card" role="link" tabIndex={0} 
                onClick={() => { audio.click(); window.open(c.url, '_blank', 'noopener'); }}
                style={{
                  background: 'rgba(255,255,255,0.9)',
