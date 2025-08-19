@@ -157,37 +157,14 @@
         log('Setting up animation for panel', index, panel.id);
         
         if (isMobile() || prefersReducedMotion) {
-          // For mobile or reduced motion, use simpler fade-in animations
+          // For mobile or reduced motion, make all panels visible immediately
           gsap.set(panelInner, {
-            opacity: 0,
-            y: 50,
+            opacity: 1,
+            y: 0,
             force3D: true
           });
           
-          // Make first panel visible immediately
-          if (index === 0) {
-            gsap.set(panelInner, {
-              opacity: 1,
-              y: 0,
-              force3D: true
-            });
-          }
-          
-          // Create scroll-triggered fade-in animation
-          ScrollTrigger.create({
-            trigger: panel,
-            start: 'top 80%',
-            end: 'top 20%',
-            scrub: 1,
-            onUpdate: (self) => {
-              const progress = self.progress;
-              gsap.set(panelInner, {
-                opacity: progress,
-                y: 50 - (progress * 50), // Move from 50px down to 0px
-                force3D: true
-              });
-            }
-          });
+          // No ScrollTrigger for mobile - just keep panels visible
         } else {
           // For desktop, use left-to-right fade-in animations
           gsap.set(panelInner, {
