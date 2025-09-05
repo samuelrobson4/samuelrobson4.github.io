@@ -27,6 +27,7 @@ export default function BouncyBlogBubbles({ cards }: Props) {
       <div className="blog-bubbles-grid">
         {cards.map((c) => (
           <div key={c.id} className="blog-bubble-card" role="link" tabIndex={0} 
+               style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}
                onClick={() => { audio.click(); window.open(c.url, '_blank', 'noopener'); }}
                onMouseEnter={(e) => {
                  (e.currentTarget as HTMLElement).style.transform = 'scale(1.05)';
@@ -37,7 +38,7 @@ export default function BouncyBlogBubbles({ cards }: Props) {
                  (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
                }}>
             <div className="blog-bubble-title">{(c.title || '').toLowerCase()}</div>
-            {c.subtitle ? <div className="blog-bubble-sub">{c.subtitle}</div> : null}
+            {c.subtitle ? <div className="blog-bubble-sub" style={{ fontSize: '10px' }}>{c.subtitle}</div> : null}
           </div>
         ))}
       </div>
