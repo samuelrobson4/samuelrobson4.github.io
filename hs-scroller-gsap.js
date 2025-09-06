@@ -107,10 +107,9 @@
     // Panel mapping for navigation
     panelMap: {
       'home': 0,
-      'about': 1, 
-      'projects': 2,
-      'blog': 3,
-      'contact': 4
+      'projects': 1,
+      'blog': 2,
+      'contact': 3
     }
   };
   
@@ -623,62 +622,27 @@
       mountProjectsIfReady();
     }
     
-    // Blog: on mobile, always mount bubbles (scrollable and draggable). On desktop, prefer 3D shelf if available
+    // Blog: use same physics-based approach as projects
     const blogEl = document.getElementById('hs-blog-bouncy');
     if (blogEl) {
-      (async () => {
-        // Build cards first
-        let cards = [];
-        try {
-          const res = await fetch('dist/substack.json', { cache: 'no-store' });
-          const posts = res.ok ? await res.json() : [];
-          cards = posts.slice(0, 12).map((p, i) => ({
-            id: String(i + 1),
-            title: (p.title || '').toLowerCase(),
-            subtitle: new Date(p.date || Date.now()).toLocaleDateString(),
-            url: p.url || '#',
-          }));
-        } catch (e) {
-          cards = [
-            { id: 'b1', title: 'designing for delight', subtitle: 'writing', url: '#' },
-            { id: 'b2', title: 'simple > complex', subtitle: 'writing', url: '#' },
-            { id: 'b3', title: 'human-first tech', subtitle: 'writing', url: '#' },
-          ];
-        }
-        // Create blog grid for all devices
-        const grid = document.createElement('div');
-        grid.className = 'blog-grid';
-        cards.forEach((card, index) => {
-          const item = document.createElement('div');
-          item.className = 'blog-grid-item';
-          item.style.animationDelay = `${index * 0.1}s`;
-          item.innerHTML = `
-            <div class="blog-grid-title">${card.title}</div>
-            <div class="blog-grid-date">${card.subtitle}</div>
-          `;
-          item.addEventListener('click', () => window.open(card.url, '_blank', 'noopener'));
-          grid.appendChild(item);
-        });
-        blogEl.appendChild(grid);
-        
-        // Trigger animations when section comes into view
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const items = entry.target.querySelectorAll('.blog-grid-item');
-              items.forEach((item, index) => {
-                setTimeout(() => {
-                  item.style.animation = `fadeInUp 0.6s ease ${index * 0.1}s forwards`;
-                }, 100);
-              });
-              observer.unobserve(entry.target);
+      const mountBlogIfReady = () => {
+        if (window.mountProjects) {
+          log('Calling mountProjects for blog panel');
+          window.mountProjects(blogEl);
+          log('Blog mounted');
+        } else {
+          // Fallback: wait for window load
+          blogEl.innerHTML = '<p class="muted">loading blog…</p>';
+          window.addEventListener('load', () => {
+            if (window.mountProjects) {
+              log('Calling mountProjects for blog panel after load');
+              window.mountProjects(blogEl);
+              log('Blog mounted after load');
             }
-          });
-        }, { threshold: 0.3 });
-        
-        observer.observe(grid);
-        return;
-      })();
+          }, { once: true });
+        }
+      };
+      mountBlogIfReady();
     }
     
     // Contact form

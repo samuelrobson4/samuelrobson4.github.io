@@ -2,8 +2,11 @@
 .container {
   position: relative;
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
   user-select: none;
+  /* Enable touch scrolling on mobile */
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y; /* Allow vertical scrolling but prevent horizontal */
 }
 
 .card {
@@ -33,7 +36,7 @@
   color: #000;
   text-transform: lowercase;
 }
-.subtitle { font-size: 15px; color: #777777; }
+.subtitle { font-size: 13px; color: #777777; }
 
 .srOnly { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
 

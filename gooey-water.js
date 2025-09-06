@@ -70,8 +70,8 @@
     makeWalls();
 
     // Droplets
-    // Halve the count
-    const DROPS = Math.min(240, Math.max(120, Math.floor(W / 6)));
+    // Halved the count
+    const DROPS = Math.min(120, Math.max(60, Math.floor(W / 12)));
     const bodies = []; const nodes = [];
     function spawn(x, y, r) {
       const b = Bodies.circle(x, y, r, {
@@ -84,7 +84,7 @@
       bodies.push(b); Composite.add(engine.world, b);
       const c = document.createElementNS(svg.namespaceURI, 'circle');
       c.setAttribute('r', String(r));
-      c.setAttribute('fill', '#000');
+      c.setAttribute('fill', '#9e9c98');
       c.setAttribute('stroke', 'none');
       group.appendChild(c); nodes.push(c);
     }

@@ -35,20 +35,45 @@ function getResponsiveWidth(): string {
   return '100%'; // 90% width as requested
 }
 
-declare global { interface Window { bouncyMount?: (el: HTMLElement, cards: Card[]) => void; renderSubstack?: (el: HTMLElement) => void; mountProjects?: (el: HTMLElement) => void; mountBlogBubbles?: (el: HTMLElement) => void } }
+declare global { interface Window { bouncyMount?: (el: HTMLElement, cards: Card[]) => void; renderSubstack?: (el: HTMLElement) => void; mountProjects?: (el: HTMLElement) => void; mountBlogBubbles?: (el: HTMLElement) => void; mountBlog?: (el: HTMLElement) => void } }
 
 function mount(el: HTMLElement, cards: Card[]) {
+  // Check if we're on the blog page by looking at the page title OR if we're in the blog panel
+  const isBlogPage = document.title.includes('Blog') || el.id === 'hs-blog-bouncy';
+  console.log('mount function - Page title:', document.title);
+  console.log('mount function - Element ID:', el.id);
+  console.log('mount function - isBlogPage:', isBlogPage);
+  console.log('mount function - cards:', cards);
+  
   const root = createRoot(el);
-  root.render(
-    <BouncyProjectCards
-      cards={cards}
-      width={getResponsiveWidth()}
-      height={getResponsiveHeight()}
-      restitution={0.95}
-      airFriction={0.015}
-      hoverScale={1.03}
-    />
-  );
+  
+  if (isBlogPage) {
+    // Render blog bubbles with squiggly edges
+    console.log('Rendering BouncyBlogBubbles component');
+    root.render(
+      <BouncyBlogBubbles
+        cards={cards}
+        width={getResponsiveWidth()}
+        height={getResponsiveHeight()}
+        restitution={0.95}
+        airFriction={0.015}
+        hoverScale={1.03}
+      />
+    );
+  } else {
+    // Render regular project cards
+    console.log('Rendering BouncyProjectCards component');
+    root.render(
+      <BouncyProjectCards
+        cards={cards}
+        width={getResponsiveWidth()}
+        height={getResponsiveHeight()}
+        restitution={0.95}
+        airFriction={0.015}
+        hoverScale={1.03}
+      />
+    );
+  }
 }
 
 window.bouncyMount = mount;
@@ -75,18 +100,69 @@ window.renderSubstack = (el: HTMLElement) => { renderSubstackList(el); };
 
 // Projects loader from data/projects.json
 async function mountProjects(el: HTMLElement) {
+  // Check if we're on the blog page by looking at the page title OR if we're in the blog panel
+  const isBlogPage = document.title.includes('Blog') || el.id === 'hs-blog-bouncy';
+  console.log('mountProjects - Page title:', document.title);
+  console.log('mountProjects - Element ID:', el.id);
+  console.log('mountProjects - isBlogPage:', isBlogPage);
+  
+  if (isBlogPage) {
+    // Load blog data for blog page
+    console.log('Loading blog data...');
+    try {
+      const res = await fetch('dist/substack.json', { cache: 'no-store' });
+      const posts = await res.json();
+      console.log('Blog posts loaded:', posts);
+      const cards: Card[] = posts.slice(0, 8).map((p: any, i: number) => ({
+        id: String(i + 1),
+        title: p.title || '',
+        subtitle: new Date(p.date || Date.now()).toLocaleDateString(),
+        url: p.url || '#'
+      }));
+      console.log('Blog cards created:', cards);
+      mount(el, cards);
+    } catch (e) {
+      console.error('Blog data loading error:', e);
+      // fallback to empty
+      el.innerHTML = '<p class="muted">No blog posts found.</p>';
+    }
+  } else {
+    // Load project data for projects page
+    console.log('Loading project data...');
+    try {
+      const res = await fetch('data/projects.json', { cache: 'no-store' });
+      if (!res.ok) throw new Error('projects not found');
+      const cards: Card[] = await res.json();
+      console.log('Project cards loaded:', cards);
+      mount(el, cards);
+    } catch (e) {
+      console.error('Project data loading error:', e);
+      // fallback to empty
+      el.innerHTML = '<p class="muted">No projects found. Add them to data/projects.json.</p>';
+    }
+  }
+}
+
+// Blog loader for standalone blog page
+async function mountBlog(el: HTMLElement) {
   try {
-    const res = await fetch('data/projects.json', { cache: 'no-store' });
-    if (!res.ok) throw new Error('projects not found');
-    const cards: Card[] = await res.json();
+    const res = await fetch('dist/substack.json', { cache: 'no-store' });
+    const posts = await res.json();
+    const cards: Card[] = posts.slice(0, 8).map((p: any, i: number) => ({
+      id: String(i + 1),
+      title: p.title || '',
+      subtitle: new Date(p.date || Date.now()).toLocaleDateString(),
+      url: p.url || '#'
+    }));
     mount(el, cards);
   } catch (e) {
     // fallback to empty
-    el.innerHTML = '<p class="muted">No projects found. Add them to data/projects.json.</p>';
+    el.innerHTML = '<p class="muted">No blog posts found.</p>';
   }
 }
 
 window.mountProjects = mountProjects;
+window.mountBlog = mountBlog;
 
 // Public mount for blog bubbles
 (window as any).mountBlogBubbles = async (el: HTMLElement) => {
@@ -100,7 +176,16 @@ window.mountProjects = mountProjects;
       url: p.url || '#'
     }));
     const root = createRoot(el);
-    root.render(<BouncyBlogBubbles cards={cards} />);
+    root.render(
+      <BouncyBlogBubbles 
+        cards={cards}
+        width={getResponsiveWidth()}
+        height={getResponsiveHeight()}
+        restitution={0.95}
+        airFriction={0.015}
+        hoverScale={1.03}
+      />
+    );
   } catch (e) {
     el.innerHTML = '<p class="muted">Unable to load blog posts.</p>';
   }

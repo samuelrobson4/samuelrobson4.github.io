@@ -121,6 +121,62 @@ export const BouncyProjectCards = forwardRef<BouncyProjectCardsRef, Props>(funct
       },
       { capture: true }
     );
+    
+    // Smart touch handling: allow scrolling AND card dragging
+    mouse.element.removeEventListener('touchstart', mouse.mousedown);
+    mouse.element.removeEventListener('touchmove', mouse.mousemove);
+    mouse.element.removeEventListener('touchend', mouse.mouseup);
+    
+    let touchStartY = 0;
+    let touchStartTime = 0;
+    let isDraggingCard = false;
+    
+    mouse.element.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+        isDraggingCard = false;
+        
+        // Check if touch is on a card
+        const touch = e.touches[0];
+        const element = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (element && element.closest('.bouncy-card')) {
+          // Start potential card drag
+          mouse.mousedown(e);
+        }
+      }
+    }, { passive: false });
+    
+    mouse.element.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 1) {
+        const deltaY = Math.abs(e.touches[0].clientY - touchStartY);
+        const deltaTime = Date.now() - touchStartTime;
+        
+        // If it's a quick vertical swipe, allow scrolling
+        if (deltaY > 15 && deltaTime < 200 && !isDraggingCard) {
+          // This is a scroll gesture - don't prevent it
+          return;
+        }
+        
+        // Check if we're over a card
+        const touch = e.touches[0];
+        const element = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (element && element.closest('.bouncy-card')) {
+          // We're dragging a card - prevent scrolling
+          isDraggingCard = true;
+          e.preventDefault();
+          mouse.mousemove(e);
+        }
+      }
+    }, { passive: false });
+    
+    mouse.element.addEventListener('touchend', (e) => {
+      if (isDraggingCard) {
+        mouse.mouseup(e);
+      }
+      isDraggingCard = false;
+    }, { passive: true });
+    
     const mouseConstraint = MouseConstraint.create(engine, { mouse, constraint: { stiffness: 0.2 } });
     World.add(engine.world, mouseConstraint);
 
@@ -384,7 +440,13 @@ export const BouncyProjectCards = forwardRef<BouncyProjectCardsRef, Props>(funct
     <div
       ref={containerRef}
       className="bouncy-container"
-      style={{ width, height, margin: '0 auto' }}
+      style={{ 
+        width, 
+        minHeight: height, 
+        height: 'auto', 
+        margin: '0 auto',
+        paddingBottom: '50px' // Extra space for mobile scrolling
+      }}
       aria-label="bouncy project cards"
     >
       {cards.map((card) => (
@@ -394,10 +456,60 @@ export const BouncyProjectCards = forwardRef<BouncyProjectCardsRef, Props>(funct
           role="link"
           tabIndex={0}
           className="bouncy-card"
-          style={{ background: card.color || 'transparent' }}
+          style={{ 
+            background: card.color || 'transparent',
+            padding: '15px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '16px',
+            textAlign: 'left'
+          }}
         >
-          <div className="bouncy-title">{card.title.toLowerCase()}</div>
-          {card.subtitle ? <div className="bouncy-subtitle">{card.subtitle}</div> : null}
+          {/* Title */}
+          <div className="bouncy-title" style={{ 
+            fontSize: '16px',
+            fontWeight: '600',
+            letterSpacing: '-0.02em',
+            lineHeight: '1em',
+            color: '#000',
+            textTransform: 'lowercase'
+          }}>
+            {card.title.toLowerCase()}
+          </div>
+          
+          {/* Description */}
+          {card.description && (
+            <div className="bouncy-subtitle project-description" style={{ 
+              fontSize: '12px',
+              color: 'var(--text)',
+              lineHeight: '1.4',
+              padding: '2px 2px',
+              marginTop: '12px'
+            }}>
+              {card.description}
+            </div>
+          )}
+          
+          {/* Status Tag */}
+          <div className="project-status-tag" style={{ 
+            marginTop: '-8px'
+          }}>
+            <span
+              style={{
+                backgroundColor: '#E3F2FD',
+                color: '#1976D2',
+                padding: '2px 6px',
+                borderRadius: '12px',
+                fontSize: '10px',
+                fontWeight: '500',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px'
+              }}
+            >
+              IN PROGRESS
+            </span>
+          </div>
+          
         </div>
       ))}
       <ul className="sr-only" aria-hidden="false">

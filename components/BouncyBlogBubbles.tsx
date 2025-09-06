@@ -1,50 +1,510 @@
-import React from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useImperativeHandle, forwardRef } from 'react';
+import Matter, { Engine, World, Bodies, Runner, Mouse, MouseConstraint, Body, Events, Composite } from 'matter-js';
 import type { Card } from '../types';
 import { audio } from '../web/audio';
 
 type Props = {
   cards: Card[];
-  height?: number; // Keep for backward compatibility but won't be used
+  width?: number | string;
+  height?: number;
+  restitution?: number;
+  airFriction?: number;
+  hoverScale?: number;
+  onCardClick?: (card: Card) => void;
 };
 
-export default function BouncyBlogBubbles({ cards }: Props) {
-  const scrollLeft = () => {
-    const container = document.querySelector('.blog-bubbles-grid');
-    if (container) {
-      container.scrollBy({ left: -200, behavior: 'smooth' });
-    }
-  };
+export type BouncyBlogBubblesRef = {
+  shuffle: () => void;
+  addCard: (card: Card) => void;
+};
 
-  const scrollRight = () => {
-    const container = document.querySelector('.blog-bubbles-grid');
-    if (container) {
-      container.scrollBy({ left: 200, behavior: 'smooth' });
+function getCssCardSize(container: HTMLElement) {
+  const styles = getComputedStyle(container);
+  const w = parseFloat(styles.getPropertyValue('--card-w')) || 260;
+  const h = parseFloat(styles.getPropertyValue('--card-h')) || 140;
+  return { w, h };
+}
+
+
+export const BouncyBlogBubbles = forwardRef<BouncyBlogBubblesRef, Props>(function BouncyBlogBubbles(
+  {
+    cards,
+    width = '90%',
+    height = 480,
+    restitution = 0.95,
+    airFriction = 0.015,
+    hoverScale = 1.03,
+    onCardClick,
+  },
+  ref
+) {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const worldRef = useRef<{
+    engine: Engine;
+    runner: Runner;
+    mouse?: Mouse;
+    mouseConstraint?: MouseConstraint;
+    bodiesById: Map<string, Body>;
+    isDraggingId?: string;
+  } | null>(null);
+
+  // Initialize matter world
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const engine = Engine.create();
+    engine.gravity.y = 0;
+    const runner = Runner.create();
+    Runner.run(runner, engine);
+
+    const container = containerRef.current;
+    const bounds = container.getBoundingClientRect();
+    let cardSize = getCssCardSize(container);
+
+    // walls
+    const thickness = 50;
+    const half = thickness / 2;
+    const opts = { isStatic: true, restitution } as const;
+    const walls = [
+      Bodies.rectangle(bounds.width / 2, -half, bounds.width, thickness, opts),
+      Bodies.rectangle(bounds.width / 2, bounds.height + half, bounds.width, thickness, opts),
+      Bodies.rectangle(-half, bounds.height / 2, thickness, bounds.height, opts),
+      Bodies.rectangle(bounds.width + half, bounds.height / 2, thickness, bounds.height, opts),
+    ];
+    World.add(engine.world, walls);
+
+    const bodiesById = new Map<string, Body>();
+    const positions: { x: number; y: number }[] = [];
+
+    function nextFreePosition(index: number) {
+      // Centered default layout: two rows around vertical middle, columns centered horizontally
+      const gapX = 28;
+      const rows = 2;
+      const columns = Math.ceil(cards.length / rows);
+      const usedWidth = columns * (cardSize.w + gapX) - gapX;
+      const startX = Math.max(60, (bounds.width - usedWidth) / 2);
+      const col = Math.floor(index / rows);
+      const row = index % rows; // 0 or 1
+      const x = startX + col * (cardSize.w + gapX) + (Math.random() - 0.5) * 12;
+
+      // Vertical positioning uses a percentage of container height (not fixed px)
+      const topBandPercent = 0.14; // 14% from the top for the first row
+      const topBand = bounds.height * topBandPercent;
+      const rowGapY = cardSize.h + 6;
+      const startY = topBand; // row 0
+      const yBase = startY + row * rowGapY; // row 1 slightly below
+      const margin = Math.max(20, Math.min(60, bounds.height * 0.08));
+      const y = Math.min(Math.max(yBase + (Math.random() - 0.5) * 10, margin), bounds.height - margin);
+      return { x: Math.min(Math.max(x, 60), bounds.width - 60), y };
     }
-  };
+
+    cards.forEach((card, i) => {
+      const pos = nextFreePosition(i);
+      positions.push(pos);
+      const body = Bodies.rectangle(pos.x, pos.y, cardSize.w, cardSize.h, {
+        restitution,
+        frictionAir: airFriction,
+        angle: (Math.random() - 0.5) * 0.06,
+      });
+      Body.setVelocity(body, { x: (Math.random() - 0.5) * 2.2, y: (Math.random() - 0.5) * 2.2 });
+      bodiesById.set(card.id, body);
+      World.add(engine.world, body);
+    });
+
+    // Mouse drag
+    const mouse = Mouse.create(container);
+    // Ensure page scrolling works over the canvas area
+    // Stop Matter's wheel handler from preventing default scrolling
+    container.addEventListener(
+      'wheel',
+      (e) => {
+        // Do not prevent default; just stop Matter's listener
+        e.stopImmediatePropagation();
+      },
+      { capture: true }
+    );
+    
+    // Smart touch handling: allow scrolling AND card dragging
+    mouse.element.removeEventListener('touchstart', mouse.mousedown);
+    mouse.element.removeEventListener('touchmove', mouse.mousemove);
+    mouse.element.removeEventListener('touchend', mouse.mouseup);
+    
+    let touchStartY = 0;
+    let touchStartTime = 0;
+    let isDraggingCard = false;
+    
+    mouse.element.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+        isDraggingCard = false;
+        
+        // Check if touch is on a card
+        const touch = e.touches[0];
+        const element = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (element && element.closest('.bouncy-card')) {
+          // Start potential card drag
+          mouse.mousedown(e);
+        }
+      }
+    }, { passive: false });
+    
+    mouse.element.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 1) {
+        const deltaY = Math.abs(e.touches[0].clientY - touchStartY);
+        const deltaTime = Date.now() - touchStartTime;
+        
+        // If it's a quick vertical swipe, allow scrolling
+        if (deltaY > 15 && deltaTime < 200 && !isDraggingCard) {
+          // This is a scroll gesture - don't prevent it
+          return;
+        }
+        
+        // Check if we're over a card
+        const touch = e.touches[0];
+        const element = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (element && element.closest('.bouncy-card')) {
+          // We're dragging a card - prevent scrolling
+          isDraggingCard = true;
+          e.preventDefault();
+          mouse.mousemove(e);
+        }
+      }
+    }, { passive: false });
+    
+    mouse.element.addEventListener('touchend', (e) => {
+      if (isDraggingCard) {
+        mouse.mouseup(e);
+      }
+      isDraggingCard = false;
+    }, { passive: true });
+    
+    const mouseConstraint = MouseConstraint.create(engine, { mouse, constraint: { stiffness: 0.2 } });
+    World.add(engine.world, mouseConstraint);
+
+    Events.on(mouseConstraint, 'startdrag', (e: any) => {
+      const body = e.body as Body;
+      for (const [id, b] of bodiesById.entries()) {
+        if (b === body) {
+          worldRef.current!.isDraggingId = id;
+          b.frictionAir = Math.max(airFriction, 0.08);
+          break;
+        }
+      }
+    });
+    Events.on(mouseConstraint, 'enddrag', (e: any) => {
+      const body = e.body as Body;
+      for (const [id, b] of bodiesById.entries()) {
+        if (b === body) {
+          worldRef.current!.isDraggingId = undefined;
+          b.frictionAir = airFriction;
+          break;
+        }
+      }
+    });
+
+    // Collision sounds: listen to collisions and map impact to audio
+    Events.on(engine, 'collisionStart', (evt) => {
+      const pairs = (evt as any).pairs as Array<any>;
+      for (const p of pairs) {
+        const a: Body = p.bodyA; const b: Body = p.bodyB;
+        // Estimate impact intensity using relative velocity
+        const rvx = (a.velocity?.x || 0) - (b.velocity?.x || 0);
+        const rvy = (a.velocity?.y || 0) - (b.velocity?.y || 0);
+        const impact = Math.hypot(rvx, rvy);
+        if (impact > 1.0) audio.collision(Math.min(impact, 20));
+      }
+    });
+
+    worldRef.current = { engine, runner, mouse, mouseConstraint, bodiesById };
+
+    // Clean up
+    return () => {
+      if (worldRef.current) {
+        Runner.stop(worldRef.current.runner);
+        World.clear(worldRef.current.engine.world, false);
+        Engine.clear(worldRef.current.engine);
+        (worldRef.current as any) = null;
+      }
+    };
+  }, []);
+
+  // Gentle idle motion so cards settle but remain draggable
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      const ref = worldRef.current; if (!ref) return;
+      for (const [id, body] of ref.bodiesById.entries()) {
+        if (ref.isDraggingId === id) continue;
+        const speed = Math.hypot(body.velocity.x, body.velocity.y);
+        if (speed < 0.4) {
+          const angle = Math.random() * Math.PI * 2;
+          const magnitude = 0.0006; // tiny nudge
+          Body.applyForce(body, body.position, { x: Math.cos(angle) * magnitude, y: Math.sin(angle) * magnitude });
+          Body.setAngularVelocity(body, body.angularVelocity + (Math.random() - 0.5) * 0.002);
+        }
+      }
+    }, 1100);
+    return () => window.clearInterval(interval);
+  }, []);
+
+  // Sync DOM with bodies
+  useLayoutEffect(() => {
+    let raf = 0;
+    function tick() {
+      raf = requestAnimationFrame(tick);
+      const ref = worldRef.current;
+      const container = containerRef.current;
+      if (!ref || !container) return;
+      const size = getCssCardSize(container);
+      const nodes = container.querySelectorAll('[data-card-id]');
+      const b = container.getBoundingClientRect();
+      nodes.forEach((node) => {
+        const id = (node as HTMLElement).dataset.cardId!;
+        const body = ref.bodiesById.get(id);
+        if (!body) return;
+        
+        // Cap velocities tighter
+        body.velocity.x = Math.max(Math.min(body.velocity.x, 6), -6);
+        body.velocity.y = Math.max(Math.min(body.velocity.y, 6), -6);
+        
+        // Immediate boundary detection and bouncing
+        const halfW = size.w / 2;
+        const halfH = size.h / 2;
+        let px = body.position.x;
+        let py = body.position.y;
+        let bounced = false;
+        
+        // Check left boundary
+        if (px < halfW) {
+          px = halfW;
+          body.velocity.x = Math.abs(body.velocity.x) * 0.8; // Bounce back with some energy loss
+          bounced = true;
+        }
+        // Check right boundary
+        else if (px > b.width - halfW) {
+          px = b.width - halfW;
+          body.velocity.x = -Math.abs(body.velocity.x) * 0.8; // Bounce back with some energy loss
+          bounced = true;
+        }
+        
+        // Check top boundary
+        if (py < halfH) {
+          py = halfH;
+          body.velocity.y = Math.abs(body.velocity.y) * 0.8; // Bounce back with some energy loss
+          bounced = true;
+        }
+        // Check bottom boundary
+        else if (py > b.height - halfH) {
+          py = b.height - halfH;
+          body.velocity.y = -Math.abs(body.velocity.y) * 0.8; // Bounce back with some energy loss
+          bounced = true;
+        }
+        
+        // Apply position correction immediately if bounced
+        if (bounced) {
+          Body.setPosition(body, { x: px, y: py });
+        }
+        
+        (node as HTMLElement).style.transform = `translate3d(${body.position.x - size.w / 2}px, ${body.position.y - size.h / 2}px, 0) rotate(${body.angle}rad)`;
+      });
+    }
+    tick();
+    return () => cancelAnimationFrame(raf);
+  }, [cards.length]);
+
+  // Resize handling
+  useEffect(() => {
+    if (!containerRef.current || !worldRef.current) return;
+    const container = containerRef.current;
+    const ref = worldRef.current;
+    const ro = new ResizeObserver(() => {
+      const b = container.getBoundingClientRect();
+      const size = getCssCardSize(container);
+      // Recreate walls at new positions
+      const all = Composite.allBodies(ref.engine.world);
+      // Remove previous walls (static bodies)
+      all.forEach((body) => {
+        if (body.isStatic) World.remove(ref.engine.world, body);
+      });
+      const thickness = 50;
+      const half = thickness / 2;
+      const opts = { isStatic: true, restitution } as const;
+      World.add(ref.engine.world, [
+        Bodies.rectangle(b.width / 2, -half, b.width, thickness, opts),
+        Bodies.rectangle(b.width / 2, b.height + half, b.width, thickness, opts),
+        Bodies.rectangle(-half, b.height / 2, thickness, b.height, opts),
+        Bodies.rectangle(b.width + half, b.height / 2, thickness, b.height, opts),
+      ]);
+      // Clamp bodies inside and update body sizes if CSS size changed
+      for (const [id, body] of ref.bodiesById.entries()) {
+        const halfW = size.w / 2;
+        const halfH = size.h / 2;
+        let px = body.position.x;
+        let py = body.position.y;
+        let bounced = false;
+        
+        // Check boundaries with immediate bouncing
+        if (px < halfW) {
+          px = halfW;
+          body.velocity.x = Math.abs(body.velocity.x) * 0.8;
+          bounced = true;
+        } else if (px > b.width - halfW) {
+          px = b.width - halfW;
+          body.velocity.x = -Math.abs(body.velocity.x) * 0.8;
+          bounced = true;
+        }
+        
+        if (py < halfH) {
+          py = halfH;
+          body.velocity.y = Math.abs(body.velocity.y) * 0.8;
+          bounced = true;
+        } else if (py > b.height - halfH) {
+          py = b.height - halfH;
+          body.velocity.y = -Math.abs(body.velocity.y) * 0.8;
+          bounced = true;
+        }
+        
+        if (bounced) {
+          Body.setPosition(body, { x: px, y: py });
+        }
+        
+        // Reset inertia when resizing approximation (cheap): set vertices via scale
+        const currentW = body.bounds.max.x - body.bounds.min.x;
+        const currentH = body.bounds.max.y - body.bounds.min.y;
+        const sx = size.w / currentW;
+        const sy = size.h / currentH;
+        if (Math.abs(sx - 1) > 0.05 || Math.abs(sy - 1) > 0.05) {
+          Body.scale(body, sx, sy);
+        }
+      }
+    });
+    ro.observe(container);
+    return () => ro.disconnect();
+  }, [restitution]);
+
+  // Public API
+  useImperativeHandle(ref, () => ({
+    shuffle() {
+      const refW = worldRef.current; if (!refW) return;
+      for (const body of refW.bodiesById.values()) {
+        Body.setVelocity(body, { x: (Math.random() - 0.5) * 20, y: (Math.random() - 0.5) * 20 });
+        Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.2);
+      }
+    },
+    addCard(card) {
+      const refW = worldRef.current; if (!refW || !containerRef.current) return;
+      const b = containerRef.current.getBoundingClientRect();
+      const cssSize = getCssCardSize(containerRef.current);
+      const body = Bodies.rectangle(Math.random() * b.width * 0.8 + 50, 60, cssSize.w, cssSize.h, {
+        restitution,
+        frictionAir: airFriction,
+      });
+      refW.bodiesById.set(card.id, body);
+      World.add(refW.engine.world, body);
+    },
+  }), [restitution, airFriction]);
+
+  // Click vs drag detection on DOM nodes
+  useEffect(() => {
+    const container = containerRef.current; if (!container) return;
+    const downData = new Map<string, { t: number; x: number; y: number }>();
+    function onDown(e: PointerEvent) {
+      const target = (e.target as HTMLElement).closest('[data-card-id]') as HTMLElement | null;
+      if (!target) return;
+      const id = target.dataset.cardId!;
+      downData.set(id, { t: performance.now(), x: e.clientX, y: e.clientY });
+    }
+    function onUp(e: PointerEvent) {
+      const target = (e.target as HTMLElement).closest('[data-card-id]') as HTMLElement | null;
+      if (!target) return;
+      const id = target.dataset.cardId!;
+      const d = downData.get(id); if (!d) return;
+      const dt = performance.now() - d.t;
+      const dist = Math.hypot(e.clientX - d.x, e.clientY - d.y);
+      if (dt < 180 && dist < 5) {
+        audio.click();
+        const card = cards.find((c) => c.id === id);
+        if (!card) return;
+        if (onCardClick) onCardClick(card);
+        else window.open(card.url, '_blank', 'noopener');
+      }
+      downData.delete(id);
+    }
+    container.addEventListener('pointerdown', onDown);
+    container.addEventListener('pointerup', onUp);
+    return () => {
+      container.removeEventListener('pointerdown', onDown);
+      container.removeEventListener('pointerup', onUp);
+    };
+  }, [cards, onCardClick]);
 
   return (
-    <div className="blog-container" style={{ position: 'relative' }}>
-      <div className="blog-bubbles-grid">
-        {cards.map((c) => (
-          <div key={c.id} className="blog-bubble-card" role="link" tabIndex={0} 
-               onClick={() => { audio.click(); window.open(c.url, '_blank', 'noopener'); }}
-               onMouseEnter={(e) => {
-                 (e.currentTarget as HTMLElement).style.transform = 'scale(1.05)';
-                 (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
-               }}
-               onMouseLeave={(e) => {
-                 (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
-                 (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
-               }}>
-            <div className="blog-bubble-title">{(c.title || '').toLowerCase()}</div>
-            {c.subtitle ? <div className="blog-bubble-sub">{c.subtitle}</div> : null}
+    <div
+      ref={containerRef}
+      className="bouncy-container"
+      style={{ 
+        width, 
+        minHeight: height, 
+        height: 'auto', 
+        margin: '0 auto',
+        paddingBottom: '50px' // Extra space for mobile scrolling
+      }}
+      aria-label="bouncy blog bubbles"
+    >
+      {cards.map((card) => (
+        <div
+          key={card.id}
+          data-card-id={card.id}
+          role="link"
+          tabIndex={0}
+          className="bouncy-card"
+          style={{ 
+            background: card.color || 'transparent',
+            padding: '20px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '16px',
+            textAlign: 'left',
+            '--card-w': '187px',
+            '--card-h': '107px',
+            width: 'var(--card-w)',
+            height: 'var(--card-h)'
+          }}
+        >
+          {/* Title */}
+          <div className="bouncy-title" style={{ 
+            fontSize: '16px',
+            fontWeight: '600',
+            letterSpacing: '-0.02em',
+            lineHeight: '1em',
+            color: '#000',
+            textTransform: 'lowercase'
+          }}>
+            {card.title.toLowerCase()}
           </div>
+          
+          {/* Date */}
+          {card.subtitle && (
+            <div className="bouncy-subtitle" style={{ 
+              fontSize: '12px',
+              color: 'var(--text)',
+              lineHeight: '1.4',
+              padding: '2px 2px',
+              marginTop: '12px'
+            }}>
+              {card.subtitle}
+            </div>
+          )}
+        </div>
+      ))}
+      <ul className="sr-only" aria-hidden="false">
+        {cards.map((c) => (
+          <li key={c.id}><a href={c.url} target="_blank" rel="noopener">{c.title}</a></li>
         ))}
-      </div>
-      <button className="blog-arrow blog-arrow-left" onClick={scrollLeft} aria-label="Scroll left">‹</button>
-      <button className="blog-arrow blog-arrow-right" onClick={scrollRight} aria-label="Scroll right">›</button>
+      </ul>
     </div>
   );
-}
+});
+
+export default BouncyBlogBubbles;
 
 

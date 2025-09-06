@@ -972,7 +972,7 @@
             }
             return lazyType;
           }
-          function forwardRef2(render) {
+          function forwardRef3(render) {
             {
               if (render != null && render.$$typeof === REACT_MEMO_TYPE) {
                 error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).");
@@ -1093,11 +1093,11 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useReducer(reducer, initialArg, init);
           }
-          function useRef2(initialValue) {
+          function useRef3(initialValue) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect2(create, deps) {
+          function useEffect3(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1105,7 +1105,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useInsertionEffect(create, deps);
           }
-          function useLayoutEffect2(create, deps) {
+          function useLayoutEffect3(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useLayoutEffect(create, deps);
           }
@@ -1117,7 +1117,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useMemo(create, deps);
           }
-          function useImperativeHandle2(ref, create, deps) {
+          function useImperativeHandle3(ref, create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useImperativeHandle(ref, create, deps);
           }
@@ -1870,7 +1870,7 @@
           exports.createElement = createElement$1;
           exports.createFactory = createFactory;
           exports.createRef = createRef;
-          exports.forwardRef = forwardRef2;
+          exports.forwardRef = forwardRef3;
           exports.isValidElement = isValidElement;
           exports.lazy = lazy;
           exports.memo = memo;
@@ -1880,14 +1880,14 @@
           exports.useContext = useContext;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect2;
+          exports.useEffect = useEffect3;
           exports.useId = useId;
-          exports.useImperativeHandle = useImperativeHandle2;
+          exports.useImperativeHandle = useImperativeHandle3;
           exports.useInsertionEffect = useInsertionEffect;
-          exports.useLayoutEffect = useLayoutEffect2;
+          exports.useLayoutEffect = useLayoutEffect3;
           exports.useMemo = useMemo;
           exports.useReducer = useReducer;
-          exports.useRef = useRef2;
+          exports.useRef = useRef3;
           exports.useState = useState;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
@@ -2384,9 +2384,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React2 = require_react();
+          var React3 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React2.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React3.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3991,7 +3991,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React2.Children.forEach(props.children, function(child) {
+                  React3.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -24284,8 +24284,8 @@
             /* 4 */
             /***/
             function(module2, exports2, __webpack_require__) {
-              var Body2 = {};
-              module2.exports = Body2;
+              var Body3 = {};
+              module2.exports = Body3;
               var Vertices = __webpack_require__(3);
               var Vector = __webpack_require__(2);
               var Sleeping = __webpack_require__(7);
@@ -24293,13 +24293,13 @@
               var Bounds = __webpack_require__(1);
               var Axes = __webpack_require__(11);
               (function() {
-                Body2._timeCorrection = true;
-                Body2._inertiaScale = 4;
-                Body2._nextCollidingGroupId = 1;
-                Body2._nextNonCollidingGroupId = -1;
-                Body2._nextCategory = 1;
-                Body2._baseDelta = 1e3 / 60;
-                Body2.create = function(options) {
+                Body3._timeCorrection = true;
+                Body3._inertiaScale = 4;
+                Body3._nextCollidingGroupId = 1;
+                Body3._nextNonCollidingGroupId = -1;
+                Body3._nextCategory = 1;
+                Body3._baseDelta = 1e3 / 60;
+                Body3.create = function(options) {
                   var defaults = {
                     id: Common.nextId(),
                     type: "body",
@@ -24366,18 +24366,18 @@
                   _initProperties(body, options);
                   return body;
                 };
-                Body2.nextGroup = function(isNonColliding) {
+                Body3.nextGroup = function(isNonColliding) {
                   if (isNonColliding)
-                    return Body2._nextNonCollidingGroupId--;
-                  return Body2._nextCollidingGroupId++;
+                    return Body3._nextNonCollidingGroupId--;
+                  return Body3._nextCollidingGroupId++;
                 };
-                Body2.nextCategory = function() {
-                  Body2._nextCategory = Body2._nextCategory << 1;
-                  return Body2._nextCategory;
+                Body3.nextCategory = function() {
+                  Body3._nextCategory = Body3._nextCategory << 1;
+                  return Body3._nextCategory;
                 };
                 var _initProperties = function(body, options) {
                   options = options || {};
-                  Body2.set(body, {
+                  Body3.set(body, {
                     bounds: body.bounds || Bounds.create(body.vertices),
                     positionPrev: body.positionPrev || Vector.clone(body.position),
                     anglePrev: body.anglePrev || body.angle,
@@ -24390,7 +24390,7 @@
                   Vertices.rotate(body.vertices, body.angle, body.position);
                   Axes.rotate(body.axes, body.angle);
                   Bounds.update(body.bounds, body.vertices, body.velocity);
-                  Body2.set(body, {
+                  Body3.set(body, {
                     axes: options.axes || body.axes,
                     area: options.area || body.area,
                     mass: options.mass || body.mass,
@@ -24403,7 +24403,7 @@
                   body.render.sprite.xOffset += -(body.bounds.min.x - body.position.x) / (body.bounds.max.x - body.bounds.min.x);
                   body.render.sprite.yOffset += -(body.bounds.min.y - body.position.y) / (body.bounds.max.y - body.bounds.min.y);
                 };
-                Body2.set = function(body, settings, value) {
+                Body3.set = function(body, settings, value) {
                   var property;
                   if (typeof settings === "string") {
                     property = settings;
@@ -24416,53 +24416,53 @@
                     value = settings[property];
                     switch (property) {
                       case "isStatic":
-                        Body2.setStatic(body, value);
+                        Body3.setStatic(body, value);
                         break;
                       case "isSleeping":
                         Sleeping.set(body, value);
                         break;
                       case "mass":
-                        Body2.setMass(body, value);
+                        Body3.setMass(body, value);
                         break;
                       case "density":
-                        Body2.setDensity(body, value);
+                        Body3.setDensity(body, value);
                         break;
                       case "inertia":
-                        Body2.setInertia(body, value);
+                        Body3.setInertia(body, value);
                         break;
                       case "vertices":
-                        Body2.setVertices(body, value);
+                        Body3.setVertices(body, value);
                         break;
                       case "position":
-                        Body2.setPosition(body, value);
+                        Body3.setPosition(body, value);
                         break;
                       case "angle":
-                        Body2.setAngle(body, value);
+                        Body3.setAngle(body, value);
                         break;
                       case "velocity":
-                        Body2.setVelocity(body, value);
+                        Body3.setVelocity(body, value);
                         break;
                       case "angularVelocity":
-                        Body2.setAngularVelocity(body, value);
+                        Body3.setAngularVelocity(body, value);
                         break;
                       case "speed":
-                        Body2.setSpeed(body, value);
+                        Body3.setSpeed(body, value);
                         break;
                       case "angularSpeed":
-                        Body2.setAngularSpeed(body, value);
+                        Body3.setAngularSpeed(body, value);
                         break;
                       case "parts":
-                        Body2.setParts(body, value);
+                        Body3.setParts(body, value);
                         break;
                       case "centre":
-                        Body2.setCentre(body, value);
+                        Body3.setCentre(body, value);
                         break;
                       default:
                         body[property] = value;
                     }
                   }
                 };
-                Body2.setStatic = function(body, isStatic) {
+                Body3.setStatic = function(body, isStatic) {
                   for (var i = 0; i < body.parts.length; i++) {
                     var part = body.parts[i];
                     part.isStatic = isStatic;
@@ -24499,7 +24499,7 @@
                     }
                   }
                 };
-                Body2.setMass = function(body, mass) {
+                Body3.setMass = function(body, mass) {
                   var moment = body.inertia / (body.mass / 6);
                   body.inertia = moment * (mass / 6);
                   body.inverseInertia = 1 / body.inertia;
@@ -24507,15 +24507,15 @@
                   body.inverseMass = 1 / body.mass;
                   body.density = body.mass / body.area;
                 };
-                Body2.setDensity = function(body, density) {
-                  Body2.setMass(body, density * body.area);
+                Body3.setDensity = function(body, density) {
+                  Body3.setMass(body, density * body.area);
                   body.density = density;
                 };
-                Body2.setInertia = function(body, inertia) {
+                Body3.setInertia = function(body, inertia) {
                   body.inertia = inertia;
                   body.inverseInertia = 1 / body.inertia;
                 };
-                Body2.setVertices = function(body, vertices) {
+                Body3.setVertices = function(body, vertices) {
                   if (vertices[0].body === body) {
                     body.vertices = vertices;
                   } else {
@@ -24523,14 +24523,14 @@
                   }
                   body.axes = Axes.fromVertices(body.vertices);
                   body.area = Vertices.area(body.vertices);
-                  Body2.setMass(body, body.density * body.area);
+                  Body3.setMass(body, body.density * body.area);
                   var centre = Vertices.centre(body.vertices);
                   Vertices.translate(body.vertices, centre, -1);
-                  Body2.setInertia(body, Body2._inertiaScale * Vertices.inertia(body.vertices, body.mass));
+                  Body3.setInertia(body, Body3._inertiaScale * Vertices.inertia(body.vertices, body.mass));
                   Vertices.translate(body.vertices, body.position);
                   Bounds.update(body.bounds, body.vertices, body.velocity);
                 };
-                Body2.setParts = function(body, parts, autoHull) {
+                Body3.setParts = function(body, parts, autoHull) {
                   var i;
                   parts = parts.slice(0);
                   body.parts.length = 0;
@@ -24553,21 +24553,21 @@
                     }
                     Vertices.clockwiseSort(vertices);
                     var hull = Vertices.hull(vertices), hullCentre = Vertices.centre(hull);
-                    Body2.setVertices(body, hull);
+                    Body3.setVertices(body, hull);
                     Vertices.translate(body.vertices, hullCentre);
                   }
-                  var total = Body2._totalProperties(body);
+                  var total = Body3._totalProperties(body);
                   body.area = total.area;
                   body.parent = body;
                   body.position.x = total.centre.x;
                   body.position.y = total.centre.y;
                   body.positionPrev.x = total.centre.x;
                   body.positionPrev.y = total.centre.y;
-                  Body2.setMass(body, total.mass);
-                  Body2.setInertia(body, total.inertia);
-                  Body2.setPosition(body, total.centre);
+                  Body3.setMass(body, total.mass);
+                  Body3.setInertia(body, total.inertia);
+                  Body3.setPosition(body, total.centre);
                 };
-                Body2.setCentre = function(body, centre, relative) {
+                Body3.setCentre = function(body, centre, relative) {
                   if (!relative) {
                     body.positionPrev.x = centre.x - (body.position.x - body.positionPrev.x);
                     body.positionPrev.y = centre.y - (body.position.y - body.positionPrev.y);
@@ -24580,7 +24580,7 @@
                     body.position.y += centre.y;
                   }
                 };
-                Body2.setPosition = function(body, position, updateVelocity) {
+                Body3.setPosition = function(body, position, updateVelocity) {
                   var delta = Vector.sub(position, body.position);
                   if (updateVelocity) {
                     body.positionPrev.x = body.position.x;
@@ -24600,7 +24600,7 @@
                     Bounds.update(part.bounds, part.vertices, body.velocity);
                   }
                 };
-                Body2.setAngle = function(body, angle, updateVelocity) {
+                Body3.setAngle = function(body, angle, updateVelocity) {
                   var delta = angle - body.angle;
                   if (updateVelocity) {
                     body.anglePrev = body.angle;
@@ -24620,58 +24620,58 @@
                     }
                   }
                 };
-                Body2.setVelocity = function(body, velocity) {
-                  var timeScale = body.deltaTime / Body2._baseDelta;
+                Body3.setVelocity = function(body, velocity) {
+                  var timeScale = body.deltaTime / Body3._baseDelta;
                   body.positionPrev.x = body.position.x - velocity.x * timeScale;
                   body.positionPrev.y = body.position.y - velocity.y * timeScale;
                   body.velocity.x = (body.position.x - body.positionPrev.x) / timeScale;
                   body.velocity.y = (body.position.y - body.positionPrev.y) / timeScale;
                   body.speed = Vector.magnitude(body.velocity);
                 };
-                Body2.getVelocity = function(body) {
-                  var timeScale = Body2._baseDelta / body.deltaTime;
+                Body3.getVelocity = function(body) {
+                  var timeScale = Body3._baseDelta / body.deltaTime;
                   return {
                     x: (body.position.x - body.positionPrev.x) * timeScale,
                     y: (body.position.y - body.positionPrev.y) * timeScale
                   };
                 };
-                Body2.getSpeed = function(body) {
-                  return Vector.magnitude(Body2.getVelocity(body));
+                Body3.getSpeed = function(body) {
+                  return Vector.magnitude(Body3.getVelocity(body));
                 };
-                Body2.setSpeed = function(body, speed) {
-                  Body2.setVelocity(body, Vector.mult(Vector.normalise(Body2.getVelocity(body)), speed));
+                Body3.setSpeed = function(body, speed) {
+                  Body3.setVelocity(body, Vector.mult(Vector.normalise(Body3.getVelocity(body)), speed));
                 };
-                Body2.setAngularVelocity = function(body, velocity) {
-                  var timeScale = body.deltaTime / Body2._baseDelta;
+                Body3.setAngularVelocity = function(body, velocity) {
+                  var timeScale = body.deltaTime / Body3._baseDelta;
                   body.anglePrev = body.angle - velocity * timeScale;
                   body.angularVelocity = (body.angle - body.anglePrev) / timeScale;
                   body.angularSpeed = Math.abs(body.angularVelocity);
                 };
-                Body2.getAngularVelocity = function(body) {
-                  return (body.angle - body.anglePrev) * Body2._baseDelta / body.deltaTime;
+                Body3.getAngularVelocity = function(body) {
+                  return (body.angle - body.anglePrev) * Body3._baseDelta / body.deltaTime;
                 };
-                Body2.getAngularSpeed = function(body) {
-                  return Math.abs(Body2.getAngularVelocity(body));
+                Body3.getAngularSpeed = function(body) {
+                  return Math.abs(Body3.getAngularVelocity(body));
                 };
-                Body2.setAngularSpeed = function(body, speed) {
-                  Body2.setAngularVelocity(body, Common.sign(Body2.getAngularVelocity(body)) * speed);
+                Body3.setAngularSpeed = function(body, speed) {
+                  Body3.setAngularVelocity(body, Common.sign(Body3.getAngularVelocity(body)) * speed);
                 };
-                Body2.translate = function(body, translation, updateVelocity) {
-                  Body2.setPosition(body, Vector.add(body.position, translation), updateVelocity);
+                Body3.translate = function(body, translation, updateVelocity) {
+                  Body3.setPosition(body, Vector.add(body.position, translation), updateVelocity);
                 };
-                Body2.rotate = function(body, rotation, point, updateVelocity) {
+                Body3.rotate = function(body, rotation, point, updateVelocity) {
                   if (!point) {
-                    Body2.setAngle(body, body.angle + rotation, updateVelocity);
+                    Body3.setAngle(body, body.angle + rotation, updateVelocity);
                   } else {
                     var cos = Math.cos(rotation), sin = Math.sin(rotation), dx = body.position.x - point.x, dy = body.position.y - point.y;
-                    Body2.setPosition(body, {
+                    Body3.setPosition(body, {
                       x: point.x + (dx * cos - dy * sin),
                       y: point.y + (dx * sin + dy * cos)
                     }, updateVelocity);
-                    Body2.setAngle(body, body.angle + rotation, updateVelocity);
+                    Body3.setAngle(body, body.angle + rotation, updateVelocity);
                   }
                 };
-                Body2.scale = function(body, scaleX, scaleY, point) {
+                Body3.scale = function(body, scaleX, scaleY, point) {
                   var totalArea = 0, totalInertia = 0;
                   point = point || body.position;
                   for (var i = 0; i < body.parts.length; i++) {
@@ -24679,9 +24679,9 @@
                     Vertices.scale(part.vertices, scaleX, scaleY, point);
                     part.axes = Axes.fromVertices(part.vertices);
                     part.area = Vertices.area(part.vertices);
-                    Body2.setMass(part, body.density * part.area);
+                    Body3.setMass(part, body.density * part.area);
                     Vertices.translate(part.vertices, { x: -part.position.x, y: -part.position.y });
-                    Body2.setInertia(part, Body2._inertiaScale * Vertices.inertia(part.vertices, part.mass));
+                    Body3.setInertia(part, Body3._inertiaScale * Vertices.inertia(part.vertices, part.mass));
                     Vertices.translate(part.vertices, { x: part.position.x, y: part.position.y });
                     if (i > 0) {
                       totalArea += part.area;
@@ -24694,8 +24694,8 @@
                   if (body.parts.length > 1) {
                     body.area = totalArea;
                     if (!body.isStatic) {
-                      Body2.setMass(body, body.density * totalArea);
-                      Body2.setInertia(body, totalInertia);
+                      Body3.setMass(body, body.density * totalArea);
+                      Body3.setInertia(body, totalInertia);
                     }
                   }
                   if (body.circleRadius) {
@@ -24706,9 +24706,9 @@
                     }
                   }
                 };
-                Body2.update = function(body, deltaTime) {
+                Body3.update = function(body, deltaTime) {
                   deltaTime = (typeof deltaTime !== "undefined" ? deltaTime : 1e3 / 60) * body.timeScale;
-                  var deltaTimeSquared = deltaTime * deltaTime, correction = Body2._timeCorrection ? deltaTime / (body.deltaTime || deltaTime) : 1;
+                  var deltaTimeSquared = deltaTime * deltaTime, correction = Body3._timeCorrection ? deltaTime / (body.deltaTime || deltaTime) : 1;
                   var frictionAir = 1 - body.frictionAir * (deltaTime / Common._baseDelta), velocityPrevX = (body.position.x - body.positionPrev.x) * correction, velocityPrevY = (body.position.y - body.positionPrev.y) * correction;
                   body.velocity.x = velocityPrevX * frictionAir + body.force.x / body.mass * deltaTimeSquared;
                   body.velocity.y = velocityPrevY * frictionAir + body.force.y / body.mass * deltaTimeSquared;
@@ -24737,21 +24737,21 @@
                     Bounds.update(part.bounds, part.vertices, body.velocity);
                   }
                 };
-                Body2.updateVelocities = function(body) {
-                  var timeScale = Body2._baseDelta / body.deltaTime, bodyVelocity = body.velocity;
+                Body3.updateVelocities = function(body) {
+                  var timeScale = Body3._baseDelta / body.deltaTime, bodyVelocity = body.velocity;
                   bodyVelocity.x = (body.position.x - body.positionPrev.x) * timeScale;
                   bodyVelocity.y = (body.position.y - body.positionPrev.y) * timeScale;
                   body.speed = Math.sqrt(bodyVelocity.x * bodyVelocity.x + bodyVelocity.y * bodyVelocity.y);
                   body.angularVelocity = (body.angle - body.anglePrev) * timeScale;
                   body.angularSpeed = Math.abs(body.angularVelocity);
                 };
-                Body2.applyForce = function(body, position, force) {
+                Body3.applyForce = function(body, position, force) {
                   var offset = { x: position.x - body.position.x, y: position.y - body.position.y };
                   body.force.x += force.x;
                   body.force.y += force.y;
                   body.torque += offset.x * force.y - offset.y * force.x;
                 };
-                Body2._totalProperties = function(body) {
+                Body3._totalProperties = function(body) {
                   var properties = {
                     mass: 0,
                     area: 0,
@@ -24773,11 +24773,11 @@
             /* 5 */
             /***/
             function(module2, exports2, __webpack_require__) {
-              var Events2 = {};
-              module2.exports = Events2;
+              var Events3 = {};
+              module2.exports = Events3;
               var Common = __webpack_require__(0);
               (function() {
-                Events2.on = function(object, eventNames, callback) {
+                Events3.on = function(object, eventNames, callback) {
                   var names = eventNames.split(" "), name;
                   for (var i = 0; i < names.length; i++) {
                     name = names[i];
@@ -24787,7 +24787,7 @@
                   }
                   return callback;
                 };
-                Events2.off = function(object, eventNames, callback) {
+                Events3.off = function(object, eventNames, callback) {
                   if (!eventNames) {
                     object.events = {};
                     return;
@@ -24808,7 +24808,7 @@
                     object.events[names[i]] = newCallbacks;
                   }
                 };
-                Events2.trigger = function(object, eventNames, event) {
+                Events3.trigger = function(object, eventNames, event) {
                   var names, name, callbacks, eventClone;
                   var events = object.events;
                   if (events && Common.keys(events).length > 0) {
@@ -24834,14 +24834,14 @@
             /* 6 */
             /***/
             function(module2, exports2, __webpack_require__) {
-              var Composite2 = {};
-              module2.exports = Composite2;
-              var Events2 = __webpack_require__(5);
+              var Composite3 = {};
+              module2.exports = Composite3;
+              var Events3 = __webpack_require__(5);
               var Common = __webpack_require__(0);
               var Bounds = __webpack_require__(1);
-              var Body2 = __webpack_require__(4);
+              var Body3 = __webpack_require__(4);
               (function() {
-                Composite2.create = function(options) {
+                Composite3.create = function(options) {
                   return Common.extend({
                     id: Common.nextId(),
                     type: "composite",
@@ -24859,7 +24859,7 @@
                     }
                   }, options);
                 };
-                Composite2.setModified = function(composite, isModified, updateParents, updateChildren) {
+                Composite3.setModified = function(composite, isModified, updateParents, updateChildren) {
                   composite.isModified = isModified;
                   if (isModified && composite.cache) {
                     composite.cache.allBodies = null;
@@ -24867,18 +24867,18 @@
                     composite.cache.allComposites = null;
                   }
                   if (updateParents && composite.parent) {
-                    Composite2.setModified(composite.parent, isModified, updateParents, updateChildren);
+                    Composite3.setModified(composite.parent, isModified, updateParents, updateChildren);
                   }
                   if (updateChildren) {
                     for (var i = 0; i < composite.composites.length; i++) {
                       var childComposite = composite.composites[i];
-                      Composite2.setModified(childComposite, isModified, updateParents, updateChildren);
+                      Composite3.setModified(childComposite, isModified, updateParents, updateChildren);
                     }
                   }
                 };
-                Composite2.add = function(composite, object) {
+                Composite3.add = function(composite, object) {
                   var objects = [].concat(object);
-                  Events2.trigger(composite, "beforeAdd", { object });
+                  Events3.trigger(composite, "beforeAdd", { object });
                   for (var i = 0; i < objects.length; i++) {
                     var obj = objects[i];
                     switch (obj.type) {
@@ -24887,116 +24887,116 @@
                           Common.warn("Composite.add: skipped adding a compound body part (you must add its parent instead)");
                           break;
                         }
-                        Composite2.addBody(composite, obj);
+                        Composite3.addBody(composite, obj);
                         break;
                       case "constraint":
-                        Composite2.addConstraint(composite, obj);
+                        Composite3.addConstraint(composite, obj);
                         break;
                       case "composite":
-                        Composite2.addComposite(composite, obj);
+                        Composite3.addComposite(composite, obj);
                         break;
                       case "mouseConstraint":
-                        Composite2.addConstraint(composite, obj.constraint);
+                        Composite3.addConstraint(composite, obj.constraint);
                         break;
                     }
                   }
-                  Events2.trigger(composite, "afterAdd", { object });
+                  Events3.trigger(composite, "afterAdd", { object });
                   return composite;
                 };
-                Composite2.remove = function(composite, object, deep) {
+                Composite3.remove = function(composite, object, deep) {
                   var objects = [].concat(object);
-                  Events2.trigger(composite, "beforeRemove", { object });
+                  Events3.trigger(composite, "beforeRemove", { object });
                   for (var i = 0; i < objects.length; i++) {
                     var obj = objects[i];
                     switch (obj.type) {
                       case "body":
-                        Composite2.removeBody(composite, obj, deep);
+                        Composite3.removeBody(composite, obj, deep);
                         break;
                       case "constraint":
-                        Composite2.removeConstraint(composite, obj, deep);
+                        Composite3.removeConstraint(composite, obj, deep);
                         break;
                       case "composite":
-                        Composite2.removeComposite(composite, obj, deep);
+                        Composite3.removeComposite(composite, obj, deep);
                         break;
                       case "mouseConstraint":
-                        Composite2.removeConstraint(composite, obj.constraint);
+                        Composite3.removeConstraint(composite, obj.constraint);
                         break;
                     }
                   }
-                  Events2.trigger(composite, "afterRemove", { object });
+                  Events3.trigger(composite, "afterRemove", { object });
                   return composite;
                 };
-                Composite2.addComposite = function(compositeA, compositeB) {
+                Composite3.addComposite = function(compositeA, compositeB) {
                   compositeA.composites.push(compositeB);
                   compositeB.parent = compositeA;
-                  Composite2.setModified(compositeA, true, true, false);
+                  Composite3.setModified(compositeA, true, true, false);
                   return compositeA;
                 };
-                Composite2.removeComposite = function(compositeA, compositeB, deep) {
+                Composite3.removeComposite = function(compositeA, compositeB, deep) {
                   var position = Common.indexOf(compositeA.composites, compositeB);
                   if (position !== -1) {
-                    Composite2.removeCompositeAt(compositeA, position);
+                    Composite3.removeCompositeAt(compositeA, position);
                   }
                   if (deep) {
                     for (var i = 0; i < compositeA.composites.length; i++) {
-                      Composite2.removeComposite(compositeA.composites[i], compositeB, true);
+                      Composite3.removeComposite(compositeA.composites[i], compositeB, true);
                     }
                   }
                   return compositeA;
                 };
-                Composite2.removeCompositeAt = function(composite, position) {
+                Composite3.removeCompositeAt = function(composite, position) {
                   composite.composites.splice(position, 1);
-                  Composite2.setModified(composite, true, true, false);
+                  Composite3.setModified(composite, true, true, false);
                   return composite;
                 };
-                Composite2.addBody = function(composite, body) {
+                Composite3.addBody = function(composite, body) {
                   composite.bodies.push(body);
-                  Composite2.setModified(composite, true, true, false);
+                  Composite3.setModified(composite, true, true, false);
                   return composite;
                 };
-                Composite2.removeBody = function(composite, body, deep) {
+                Composite3.removeBody = function(composite, body, deep) {
                   var position = Common.indexOf(composite.bodies, body);
                   if (position !== -1) {
-                    Composite2.removeBodyAt(composite, position);
+                    Composite3.removeBodyAt(composite, position);
                   }
                   if (deep) {
                     for (var i = 0; i < composite.composites.length; i++) {
-                      Composite2.removeBody(composite.composites[i], body, true);
+                      Composite3.removeBody(composite.composites[i], body, true);
                     }
                   }
                   return composite;
                 };
-                Composite2.removeBodyAt = function(composite, position) {
+                Composite3.removeBodyAt = function(composite, position) {
                   composite.bodies.splice(position, 1);
-                  Composite2.setModified(composite, true, true, false);
+                  Composite3.setModified(composite, true, true, false);
                   return composite;
                 };
-                Composite2.addConstraint = function(composite, constraint) {
+                Composite3.addConstraint = function(composite, constraint) {
                   composite.constraints.push(constraint);
-                  Composite2.setModified(composite, true, true, false);
+                  Composite3.setModified(composite, true, true, false);
                   return composite;
                 };
-                Composite2.removeConstraint = function(composite, constraint, deep) {
+                Composite3.removeConstraint = function(composite, constraint, deep) {
                   var position = Common.indexOf(composite.constraints, constraint);
                   if (position !== -1) {
-                    Composite2.removeConstraintAt(composite, position);
+                    Composite3.removeConstraintAt(composite, position);
                   }
                   if (deep) {
                     for (var i = 0; i < composite.composites.length; i++) {
-                      Composite2.removeConstraint(composite.composites[i], constraint, true);
+                      Composite3.removeConstraint(composite.composites[i], constraint, true);
                     }
                   }
                   return composite;
                 };
-                Composite2.removeConstraintAt = function(composite, position) {
+                Composite3.removeConstraintAt = function(composite, position) {
                   composite.constraints.splice(position, 1);
-                  Composite2.setModified(composite, true, true, false);
+                  Composite3.setModified(composite, true, true, false);
                   return composite;
                 };
-                Composite2.clear = function(composite, keepStatic, deep) {
+                Composite3.clear = function(composite, keepStatic, deep) {
                   if (deep) {
                     for (var i = 0; i < composite.composites.length; i++) {
-                      Composite2.clear(composite.composites[i], keepStatic, true);
+                      Composite3.clear(composite.composites[i], keepStatic, true);
                     }
                   }
                   if (keepStatic) {
@@ -25008,56 +25008,56 @@
                   }
                   composite.constraints.length = 0;
                   composite.composites.length = 0;
-                  Composite2.setModified(composite, true, true, false);
+                  Composite3.setModified(composite, true, true, false);
                   return composite;
                 };
-                Composite2.allBodies = function(composite) {
+                Composite3.allBodies = function(composite) {
                   if (composite.cache && composite.cache.allBodies) {
                     return composite.cache.allBodies;
                   }
                   var bodies = [].concat(composite.bodies);
                   for (var i = 0; i < composite.composites.length; i++)
-                    bodies = bodies.concat(Composite2.allBodies(composite.composites[i]));
+                    bodies = bodies.concat(Composite3.allBodies(composite.composites[i]));
                   if (composite.cache) {
                     composite.cache.allBodies = bodies;
                   }
                   return bodies;
                 };
-                Composite2.allConstraints = function(composite) {
+                Composite3.allConstraints = function(composite) {
                   if (composite.cache && composite.cache.allConstraints) {
                     return composite.cache.allConstraints;
                   }
                   var constraints = [].concat(composite.constraints);
                   for (var i = 0; i < composite.composites.length; i++)
-                    constraints = constraints.concat(Composite2.allConstraints(composite.composites[i]));
+                    constraints = constraints.concat(Composite3.allConstraints(composite.composites[i]));
                   if (composite.cache) {
                     composite.cache.allConstraints = constraints;
                   }
                   return constraints;
                 };
-                Composite2.allComposites = function(composite) {
+                Composite3.allComposites = function(composite) {
                   if (composite.cache && composite.cache.allComposites) {
                     return composite.cache.allComposites;
                   }
                   var composites = [].concat(composite.composites);
                   for (var i = 0; i < composite.composites.length; i++)
-                    composites = composites.concat(Composite2.allComposites(composite.composites[i]));
+                    composites = composites.concat(Composite3.allComposites(composite.composites[i]));
                   if (composite.cache) {
                     composite.cache.allComposites = composites;
                   }
                   return composites;
                 };
-                Composite2.get = function(composite, id, type) {
+                Composite3.get = function(composite, id, type) {
                   var objects, object;
                   switch (type) {
                     case "body":
-                      objects = Composite2.allBodies(composite);
+                      objects = Composite3.allBodies(composite);
                       break;
                     case "constraint":
-                      objects = Composite2.allConstraints(composite);
+                      objects = Composite3.allConstraints(composite);
                       break;
                     case "composite":
-                      objects = Composite2.allComposites(composite).concat(composite);
+                      objects = Composite3.allComposites(composite).concat(composite);
                       break;
                   }
                   if (!objects)
@@ -25067,51 +25067,51 @@
                   });
                   return object.length === 0 ? null : object[0];
                 };
-                Composite2.move = function(compositeA, objects, compositeB) {
-                  Composite2.remove(compositeA, objects);
-                  Composite2.add(compositeB, objects);
+                Composite3.move = function(compositeA, objects, compositeB) {
+                  Composite3.remove(compositeA, objects);
+                  Composite3.add(compositeB, objects);
                   return compositeA;
                 };
-                Composite2.rebase = function(composite) {
-                  var objects = Composite2.allBodies(composite).concat(Composite2.allConstraints(composite)).concat(Composite2.allComposites(composite));
+                Composite3.rebase = function(composite) {
+                  var objects = Composite3.allBodies(composite).concat(Composite3.allConstraints(composite)).concat(Composite3.allComposites(composite));
                   for (var i = 0; i < objects.length; i++) {
                     objects[i].id = Common.nextId();
                   }
                   return composite;
                 };
-                Composite2.translate = function(composite, translation, recursive) {
-                  var bodies = recursive ? Composite2.allBodies(composite) : composite.bodies;
+                Composite3.translate = function(composite, translation, recursive) {
+                  var bodies = recursive ? Composite3.allBodies(composite) : composite.bodies;
                   for (var i = 0; i < bodies.length; i++) {
-                    Body2.translate(bodies[i], translation);
+                    Body3.translate(bodies[i], translation);
                   }
                   return composite;
                 };
-                Composite2.rotate = function(composite, rotation, point, recursive) {
-                  var cos = Math.cos(rotation), sin = Math.sin(rotation), bodies = recursive ? Composite2.allBodies(composite) : composite.bodies;
+                Composite3.rotate = function(composite, rotation, point, recursive) {
+                  var cos = Math.cos(rotation), sin = Math.sin(rotation), bodies = recursive ? Composite3.allBodies(composite) : composite.bodies;
                   for (var i = 0; i < bodies.length; i++) {
                     var body = bodies[i], dx = body.position.x - point.x, dy = body.position.y - point.y;
-                    Body2.setPosition(body, {
+                    Body3.setPosition(body, {
                       x: point.x + (dx * cos - dy * sin),
                       y: point.y + (dx * sin + dy * cos)
                     });
-                    Body2.rotate(body, rotation);
+                    Body3.rotate(body, rotation);
                   }
                   return composite;
                 };
-                Composite2.scale = function(composite, scaleX, scaleY, point, recursive) {
-                  var bodies = recursive ? Composite2.allBodies(composite) : composite.bodies;
+                Composite3.scale = function(composite, scaleX, scaleY, point, recursive) {
+                  var bodies = recursive ? Composite3.allBodies(composite) : composite.bodies;
                   for (var i = 0; i < bodies.length; i++) {
                     var body = bodies[i], dx = body.position.x - point.x, dy = body.position.y - point.y;
-                    Body2.setPosition(body, {
+                    Body3.setPosition(body, {
                       x: point.x + dx * scaleX,
                       y: point.y + dy * scaleY
                     });
-                    Body2.scale(body, scaleX, scaleY);
+                    Body3.scale(body, scaleX, scaleY);
                   }
                   return composite;
                 };
-                Composite2.bounds = function(composite) {
-                  var bodies = Composite2.allBodies(composite), vertices = [];
+                Composite3.bounds = function(composite) {
+                  var bodies = Composite3.allBodies(composite), vertices = [];
                   for (var i = 0; i < bodies.length; i += 1) {
                     var body = bodies[i];
                     vertices.push(body.bounds.min, body.bounds.max);
@@ -25125,8 +25125,8 @@
             function(module2, exports2, __webpack_require__) {
               var Sleeping = {};
               module2.exports = Sleeping;
-              var Body2 = __webpack_require__(4);
-              var Events2 = __webpack_require__(5);
+              var Body3 = __webpack_require__(4);
+              var Events3 = __webpack_require__(5);
               var Common = __webpack_require__(0);
               (function() {
                 Sleeping._motionWakeThreshold = 0.18;
@@ -25135,7 +25135,7 @@
                 Sleeping.update = function(bodies, delta) {
                   var timeScale = delta / Common._baseDelta, motionSleepThreshold = Sleeping._motionSleepThreshold;
                   for (var i = 0; i < bodies.length; i++) {
-                    var body = bodies[i], speed = Body2.getSpeed(body), angularSpeed = Body2.getAngularSpeed(body), motion = speed * speed + angularSpeed * angularSpeed;
+                    var body = bodies[i], speed = Body3.getSpeed(body), angularSpeed = Body3.getAngularSpeed(body), motion = speed * speed + angularSpeed * angularSpeed;
                     if (body.force.x !== 0 || body.force.y !== 0) {
                       Sleeping.set(body, false);
                       continue;
@@ -25183,13 +25183,13 @@
                     body.angularSpeed = 0;
                     body.motion = 0;
                     if (!wasSleeping) {
-                      Events2.trigger(body, "sleepStart");
+                      Events3.trigger(body, "sleepStart");
                     }
                   } else {
                     body.isSleeping = false;
                     body.sleepCounter = 0;
                     if (wasSleeping) {
-                      Events2.trigger(body, "sleepEnd");
+                      Events3.trigger(body, "sleepEnd");
                     }
                   }
                 };
@@ -25648,15 +25648,15 @@
             /* 12 */
             /***/
             function(module2, exports2, __webpack_require__) {
-              var Bodies2 = {};
-              module2.exports = Bodies2;
+              var Bodies3 = {};
+              module2.exports = Bodies3;
               var Vertices = __webpack_require__(3);
               var Common = __webpack_require__(0);
-              var Body2 = __webpack_require__(4);
+              var Body3 = __webpack_require__(4);
               var Bounds = __webpack_require__(1);
               var Vector = __webpack_require__(2);
               (function() {
-                Bodies2.rectangle = function(x, y, width, height, options) {
+                Bodies3.rectangle = function(x, y, width, height, options) {
                   options = options || {};
                   var rectangle = {
                     label: "Rectangle Body",
@@ -25674,9 +25674,9 @@
                     );
                     delete options.chamfer;
                   }
-                  return Body2.create(Common.extend({}, rectangle, options));
+                  return Body3.create(Common.extend({}, rectangle, options));
                 };
-                Bodies2.trapezoid = function(x, y, width, height, slope, options) {
+                Bodies3.trapezoid = function(x, y, width, height, slope, options) {
                   options = options || {};
                   slope *= 0.5;
                   var roof = (1 - slope * 2) * width;
@@ -25702,9 +25702,9 @@
                     );
                     delete options.chamfer;
                   }
-                  return Body2.create(Common.extend({}, trapezoid, options));
+                  return Body3.create(Common.extend({}, trapezoid, options));
                 };
-                Bodies2.circle = function(x, y, radius, options, maxSides) {
+                Bodies3.circle = function(x, y, radius, options, maxSides) {
                   options = options || {};
                   var circle = {
                     label: "Circle Body",
@@ -25714,12 +25714,12 @@
                   var sides = Math.ceil(Math.max(10, Math.min(maxSides, radius)));
                   if (sides % 2 === 1)
                     sides += 1;
-                  return Bodies2.polygon(x, y, sides, radius, Common.extend({}, circle, options));
+                  return Bodies3.polygon(x, y, sides, radius, Common.extend({}, circle, options));
                 };
-                Bodies2.polygon = function(x, y, sides, radius, options) {
+                Bodies3.polygon = function(x, y, sides, radius, options) {
                   options = options || {};
                   if (sides < 3)
-                    return Bodies2.circle(x, y, radius, options);
+                    return Bodies3.circle(x, y, radius, options);
                   var theta = 2 * Math.PI / sides, path = "", offset = theta * 0.5;
                   for (var i = 0; i < sides; i += 1) {
                     var angle = offset + i * theta, xx = Math.cos(angle) * radius, yy = Math.sin(angle) * radius;
@@ -25741,9 +25741,9 @@
                     );
                     delete options.chamfer;
                   }
-                  return Body2.create(Common.extend({}, polygon, options));
+                  return Body3.create(Common.extend({}, polygon, options));
                 };
-                Bodies2.fromVertices = function(x, y, vertexSets, options, flagInternal, removeCollinear, minimumArea, removeDuplicatePoints) {
+                Bodies3.fromVertices = function(x, y, vertexSets, options, flagInternal, removeCollinear, minimumArea, removeDuplicatePoints) {
                   var decomp = Common.getDecomp(), canDecomp, body, parts, isConvex, isConcave, vertices, i, j, k, v, z;
                   canDecomp = Boolean(decomp && decomp.quickDecomp);
                   options = options || {};
@@ -25802,7 +25802,7 @@
                     }
                   }
                   for (i = 0; i < parts.length; i++) {
-                    parts[i] = Body2.create(Common.extend(parts[i], options));
+                    parts[i] = Body3.create(Common.extend(parts[i], options));
                   }
                   if (flagInternal) {
                     var coincident_max_dist = 5;
@@ -25826,8 +25826,8 @@
                     }
                   }
                   if (parts.length > 1) {
-                    body = Body2.create(Common.extend({ parts: parts.slice(0) }, options));
-                    Body2.setPosition(body, { x, y });
+                    body = Body3.create(Common.extend({ parts: parts.slice(0) }, options));
+                    Body3.setPosition(body, { x, y });
                     return body;
                   } else {
                     return parts[0];
@@ -25914,11 +25914,11 @@
             /* 14 */
             /***/
             function(module2, exports2, __webpack_require__) {
-              var Mouse2 = {};
-              module2.exports = Mouse2;
+              var Mouse3 = {};
+              module2.exports = Mouse3;
               var Common = __webpack_require__(0);
               (function() {
-                Mouse2.create = function(element) {
+                Mouse3.create = function(element) {
                   var mouse = {};
                   if (!element) {
                     Common.log("Mouse.create: element was undefined, defaulting to document.body", "warn");
@@ -25940,7 +25940,7 @@
                     mousewheel: null
                   };
                   mouse.mousemove = function(event) {
-                    var position = Mouse2._getRelativeMousePosition(event, mouse.element, mouse.pixelRatio), touches = event.changedTouches;
+                    var position = Mouse3._getRelativeMousePosition(event, mouse.element, mouse.pixelRatio), touches = event.changedTouches;
                     if (touches) {
                       mouse.button = 0;
                       event.preventDefault();
@@ -25952,7 +25952,7 @@
                     mouse.sourceEvents.mousemove = event;
                   };
                   mouse.mousedown = function(event) {
-                    var position = Mouse2._getRelativeMousePosition(event, mouse.element, mouse.pixelRatio), touches = event.changedTouches;
+                    var position = Mouse3._getRelativeMousePosition(event, mouse.element, mouse.pixelRatio), touches = event.changedTouches;
                     if (touches) {
                       mouse.button = 0;
                       event.preventDefault();
@@ -25968,7 +25968,7 @@
                     mouse.sourceEvents.mousedown = event;
                   };
                   mouse.mouseup = function(event) {
-                    var position = Mouse2._getRelativeMousePosition(event, mouse.element, mouse.pixelRatio), touches = event.changedTouches;
+                    var position = Mouse3._getRelativeMousePosition(event, mouse.element, mouse.pixelRatio), touches = event.changedTouches;
                     if (touches) {
                       event.preventDefault();
                     }
@@ -25985,10 +25985,10 @@
                     mouse.wheelDelta = Math.max(-1, Math.min(1, event.wheelDelta || -event.detail));
                     event.preventDefault();
                   };
-                  Mouse2.setElement(mouse, mouse.element);
+                  Mouse3.setElement(mouse, mouse.element);
                   return mouse;
                 };
-                Mouse2.setElement = function(mouse, element) {
+                Mouse3.setElement = function(mouse, element) {
                   mouse.element = element;
                   element.addEventListener("mousemove", mouse.mousemove);
                   element.addEventListener("mousedown", mouse.mousedown);
@@ -25999,26 +25999,26 @@
                   element.addEventListener("touchstart", mouse.mousedown);
                   element.addEventListener("touchend", mouse.mouseup);
                 };
-                Mouse2.clearSourceEvents = function(mouse) {
+                Mouse3.clearSourceEvents = function(mouse) {
                   mouse.sourceEvents.mousemove = null;
                   mouse.sourceEvents.mousedown = null;
                   mouse.sourceEvents.mouseup = null;
                   mouse.sourceEvents.mousewheel = null;
                   mouse.wheelDelta = 0;
                 };
-                Mouse2.setOffset = function(mouse, offset) {
+                Mouse3.setOffset = function(mouse, offset) {
                   mouse.offset.x = offset.x;
                   mouse.offset.y = offset.y;
                   mouse.position.x = mouse.absolute.x * mouse.scale.x + mouse.offset.x;
                   mouse.position.y = mouse.absolute.y * mouse.scale.y + mouse.offset.y;
                 };
-                Mouse2.setScale = function(mouse, scale) {
+                Mouse3.setScale = function(mouse, scale) {
                   mouse.scale.x = scale.x;
                   mouse.scale.y = scale.y;
                   mouse.position.x = mouse.absolute.x * mouse.scale.x + mouse.offset.x;
                   mouse.position.y = mouse.absolute.y * mouse.scale.y + mouse.offset.y;
                 };
-                Mouse2._getRelativeMousePosition = function(event, element, pixelRatio) {
+                Mouse3._getRelativeMousePosition = function(event, element, pixelRatio) {
                   var elementBounds = element.getBoundingClientRect(), rootNode = document.documentElement || document.body.parentNode || document.body, scrollX = window.pageXOffset !== void 0 ? window.pageXOffset : rootNode.scrollLeft, scrollY = window.pageYOffset !== void 0 ? window.pageYOffset : rootNode.scrollTop, touches = event.changedTouches, x, y;
                   if (touches) {
                     x = touches[0].pageX - elementBounds.left - scrollX;
@@ -26244,19 +26244,19 @@
             /* 17 */
             /***/
             function(module2, exports2, __webpack_require__) {
-              var Engine2 = {};
-              module2.exports = Engine2;
+              var Engine3 = {};
+              module2.exports = Engine3;
               var Sleeping = __webpack_require__(7);
               var Resolver = __webpack_require__(18);
               var Detector = __webpack_require__(13);
               var Pairs = __webpack_require__(19);
-              var Events2 = __webpack_require__(5);
-              var Composite2 = __webpack_require__(6);
+              var Events3 = __webpack_require__(5);
+              var Composite3 = __webpack_require__(6);
               var Constraint = __webpack_require__(10);
               var Common = __webpack_require__(0);
-              var Body2 = __webpack_require__(4);
+              var Body3 = __webpack_require__(4);
               (function() {
-                Engine2.create = function(options) {
+                Engine3.create = function(options) {
                   options = options || {};
                   var defaults = {
                     positionIterations: 6,
@@ -26278,7 +26278,7 @@
                     }
                   };
                   var engine = Common.extend(defaults, options);
-                  engine.world = options.world || Composite2.create({ label: "World" });
+                  engine.world = options.world || Composite3.create({ label: "World" });
                   engine.pairs = options.pairs || Pairs.create();
                   engine.detector = options.detector || Detector.create();
                   engine.grid = { buckets: [] };
@@ -26287,7 +26287,7 @@
                   engine.metrics = {};
                   return engine;
                 };
-                Engine2.update = function(engine, delta) {
+                Engine3.update = function(engine, delta) {
                   var startTime = Common.now();
                   var world = engine.world, detector = engine.detector, pairs = engine.pairs, timing = engine.timing, timestamp = timing.timestamp, i;
                   delta = typeof delta !== "undefined" ? delta : Common._baseDelta;
@@ -26298,17 +26298,17 @@
                     timestamp: timing.timestamp,
                     delta
                   };
-                  Events2.trigger(engine, "beforeUpdate", event);
-                  var allBodies = Composite2.allBodies(world), allConstraints = Composite2.allConstraints(world);
+                  Events3.trigger(engine, "beforeUpdate", event);
+                  var allBodies = Composite3.allBodies(world), allConstraints = Composite3.allConstraints(world);
                   if (world.isModified) {
                     Detector.setBodies(detector, allBodies);
-                    Composite2.setModified(world, false, false, true);
+                    Composite3.setModified(world, false, false, true);
                   }
                   if (engine.enableSleeping)
                     Sleeping.update(allBodies, delta);
-                  Engine2._bodiesApplyGravity(allBodies, engine.gravity);
+                  Engine3._bodiesApplyGravity(allBodies, engine.gravity);
                   if (delta > 0) {
-                    Engine2._bodiesUpdate(allBodies, delta);
+                    Engine3._bodiesUpdate(allBodies, delta);
                   }
                   Constraint.preSolveAll(allBodies);
                   for (i = 0; i < engine.constraintIterations; i++) {
@@ -26321,7 +26321,7 @@
                   if (engine.enableSleeping)
                     Sleeping.afterCollisions(pairs.list);
                   if (pairs.collisionStart.length > 0)
-                    Events2.trigger(engine, "collisionStart", { pairs: pairs.collisionStart });
+                    Events3.trigger(engine, "collisionStart", { pairs: pairs.collisionStart });
                   var positionDamping = Common.clamp(20 / engine.positionIterations, 0, 1);
                   Resolver.preSolvePosition(pairs.list);
                   for (i = 0; i < engine.positionIterations; i++) {
@@ -26337,22 +26337,22 @@
                   for (i = 0; i < engine.velocityIterations; i++) {
                     Resolver.solveVelocity(pairs.list, delta);
                   }
-                  Engine2._bodiesUpdateVelocities(allBodies);
+                  Engine3._bodiesUpdateVelocities(allBodies);
                   if (pairs.collisionActive.length > 0)
-                    Events2.trigger(engine, "collisionActive", { pairs: pairs.collisionActive });
+                    Events3.trigger(engine, "collisionActive", { pairs: pairs.collisionActive });
                   if (pairs.collisionEnd.length > 0)
-                    Events2.trigger(engine, "collisionEnd", { pairs: pairs.collisionEnd });
-                  Engine2._bodiesClearForces(allBodies);
-                  Events2.trigger(engine, "afterUpdate", event);
+                    Events3.trigger(engine, "collisionEnd", { pairs: pairs.collisionEnd });
+                  Engine3._bodiesClearForces(allBodies);
+                  Events3.trigger(engine, "afterUpdate", event);
                   engine.timing.lastElapsed = Common.now() - startTime;
                   return engine;
                 };
-                Engine2.merge = function(engineA, engineB) {
+                Engine3.merge = function(engineA, engineB) {
                   Common.extend(engineA, engineB);
                   if (engineB.world) {
                     engineA.world = engineB.world;
-                    Engine2.clear(engineA);
-                    var bodies = Composite2.allBodies(engineA.world);
+                    Engine3.clear(engineA);
+                    var bodies = Composite3.allBodies(engineA.world);
                     for (var i = 0; i < bodies.length; i++) {
                       var body = bodies[i];
                       Sleeping.set(body, false);
@@ -26360,11 +26360,11 @@
                     }
                   }
                 };
-                Engine2.clear = function(engine) {
+                Engine3.clear = function(engine) {
                   Pairs.clear(engine.pairs);
                   Detector.clear(engine.detector);
                 };
-                Engine2._bodiesClearForces = function(bodies) {
+                Engine3._bodiesClearForces = function(bodies) {
                   var bodiesLength = bodies.length;
                   for (var i = 0; i < bodiesLength; i++) {
                     var body = bodies[i];
@@ -26373,7 +26373,7 @@
                     body.torque = 0;
                   }
                 };
-                Engine2._bodiesApplyGravity = function(bodies, gravity) {
+                Engine3._bodiesApplyGravity = function(bodies, gravity) {
                   var gravityScale = typeof gravity.scale !== "undefined" ? gravity.scale : 1e-3, bodiesLength = bodies.length;
                   if (gravity.x === 0 && gravity.y === 0 || gravityScale === 0) {
                     return;
@@ -26386,19 +26386,19 @@
                     body.force.x += body.mass * gravity.x * gravityScale;
                   }
                 };
-                Engine2._bodiesUpdate = function(bodies, delta) {
+                Engine3._bodiesUpdate = function(bodies, delta) {
                   var bodiesLength = bodies.length;
                   for (var i = 0; i < bodiesLength; i++) {
                     var body = bodies[i];
                     if (body.isStatic || body.isSleeping)
                       continue;
-                    Body2.update(body, delta);
+                    Body3.update(body, delta);
                   }
                 };
-                Engine2._bodiesUpdateVelocities = function(bodies) {
+                Engine3._bodiesUpdateVelocities = function(bodies) {
                   var bodiesLength = bodies.length;
                   for (var i = 0; i < bodiesLength; i++) {
-                    Body2.updateVelocities(bodies[i]);
+                    Body3.updateVelocities(bodies[i]);
                   }
                 };
               })();
@@ -26663,61 +26663,61 @@
             /* 20 */
             /***/
             function(module2, exports2, __webpack_require__) {
-              var Matter2 = module2.exports = __webpack_require__(21);
-              Matter2.Axes = __webpack_require__(11);
-              Matter2.Bodies = __webpack_require__(12);
-              Matter2.Body = __webpack_require__(4);
-              Matter2.Bounds = __webpack_require__(1);
-              Matter2.Collision = __webpack_require__(8);
-              Matter2.Common = __webpack_require__(0);
-              Matter2.Composite = __webpack_require__(6);
-              Matter2.Composites = __webpack_require__(22);
-              Matter2.Constraint = __webpack_require__(10);
-              Matter2.Contact = __webpack_require__(16);
-              Matter2.Detector = __webpack_require__(13);
-              Matter2.Engine = __webpack_require__(17);
-              Matter2.Events = __webpack_require__(5);
-              Matter2.Grid = __webpack_require__(23);
-              Matter2.Mouse = __webpack_require__(14);
-              Matter2.MouseConstraint = __webpack_require__(24);
-              Matter2.Pair = __webpack_require__(9);
-              Matter2.Pairs = __webpack_require__(19);
-              Matter2.Plugin = __webpack_require__(15);
-              Matter2.Query = __webpack_require__(25);
-              Matter2.Render = __webpack_require__(26);
-              Matter2.Resolver = __webpack_require__(18);
-              Matter2.Runner = __webpack_require__(27);
-              Matter2.SAT = __webpack_require__(28);
-              Matter2.Sleeping = __webpack_require__(7);
-              Matter2.Svg = __webpack_require__(29);
-              Matter2.Vector = __webpack_require__(2);
-              Matter2.Vertices = __webpack_require__(3);
-              Matter2.World = __webpack_require__(30);
-              Matter2.Engine.run = Matter2.Runner.run;
-              Matter2.Common.deprecated(Matter2.Engine, "run", "Engine.run \u27A4 use Matter.Runner.run(engine) instead");
+              var Matter3 = module2.exports = __webpack_require__(21);
+              Matter3.Axes = __webpack_require__(11);
+              Matter3.Bodies = __webpack_require__(12);
+              Matter3.Body = __webpack_require__(4);
+              Matter3.Bounds = __webpack_require__(1);
+              Matter3.Collision = __webpack_require__(8);
+              Matter3.Common = __webpack_require__(0);
+              Matter3.Composite = __webpack_require__(6);
+              Matter3.Composites = __webpack_require__(22);
+              Matter3.Constraint = __webpack_require__(10);
+              Matter3.Contact = __webpack_require__(16);
+              Matter3.Detector = __webpack_require__(13);
+              Matter3.Engine = __webpack_require__(17);
+              Matter3.Events = __webpack_require__(5);
+              Matter3.Grid = __webpack_require__(23);
+              Matter3.Mouse = __webpack_require__(14);
+              Matter3.MouseConstraint = __webpack_require__(24);
+              Matter3.Pair = __webpack_require__(9);
+              Matter3.Pairs = __webpack_require__(19);
+              Matter3.Plugin = __webpack_require__(15);
+              Matter3.Query = __webpack_require__(25);
+              Matter3.Render = __webpack_require__(26);
+              Matter3.Resolver = __webpack_require__(18);
+              Matter3.Runner = __webpack_require__(27);
+              Matter3.SAT = __webpack_require__(28);
+              Matter3.Sleeping = __webpack_require__(7);
+              Matter3.Svg = __webpack_require__(29);
+              Matter3.Vector = __webpack_require__(2);
+              Matter3.Vertices = __webpack_require__(3);
+              Matter3.World = __webpack_require__(30);
+              Matter3.Engine.run = Matter3.Runner.run;
+              Matter3.Common.deprecated(Matter3.Engine, "run", "Engine.run \u27A4 use Matter.Runner.run(engine) instead");
             },
             /* 21 */
             /***/
             function(module2, exports2, __webpack_require__) {
-              var Matter2 = {};
-              module2.exports = Matter2;
+              var Matter3 = {};
+              module2.exports = Matter3;
               var Plugin = __webpack_require__(15);
               var Common = __webpack_require__(0);
               (function() {
-                Matter2.name = "matter-js";
-                Matter2.version = true ? "0.19.0" : void 0;
-                Matter2.uses = [];
-                Matter2.used = [];
-                Matter2.use = function() {
-                  Plugin.use(Matter2, Array.prototype.slice.call(arguments));
+                Matter3.name = "matter-js";
+                Matter3.version = true ? "0.19.0" : void 0;
+                Matter3.uses = [];
+                Matter3.used = [];
+                Matter3.use = function() {
+                  Plugin.use(Matter3, Array.prototype.slice.call(arguments));
                 };
-                Matter2.before = function(path, func) {
+                Matter3.before = function(path, func) {
                   path = path.replace(/^Matter./, "");
-                  return Common.chainPathBefore(Matter2, path, func);
+                  return Common.chainPathBefore(Matter3, path, func);
                 };
-                Matter2.after = function(path, func) {
+                Matter3.after = function(path, func) {
                   path = path.replace(/^Matter./, "");
-                  return Common.chainPathAfter(Matter2, path, func);
+                  return Common.chainPathAfter(Matter3, path, func);
                 };
               })();
             },
@@ -26726,15 +26726,15 @@
             function(module2, exports2, __webpack_require__) {
               var Composites = {};
               module2.exports = Composites;
-              var Composite2 = __webpack_require__(6);
+              var Composite3 = __webpack_require__(6);
               var Constraint = __webpack_require__(10);
               var Common = __webpack_require__(0);
-              var Body2 = __webpack_require__(4);
-              var Bodies2 = __webpack_require__(12);
+              var Body3 = __webpack_require__(4);
+              var Bodies3 = __webpack_require__(12);
               var deprecated = Common.deprecated;
               (function() {
                 Composites.stack = function(xx, yy, columns, rows, columnGap, rowGap, callback) {
-                  var stack = Composite2.create({ label: "Stack" }), x = xx, y = yy, lastBody, i = 0;
+                  var stack = Composite3.create({ label: "Stack" }), x = xx, y = yy, lastBody, i = 0;
                   for (var row = 0; row < rows; row++) {
                     var maxHeight = 0;
                     for (var column = 0; column < columns; column++) {
@@ -26743,9 +26743,9 @@
                         var bodyHeight = body.bounds.max.y - body.bounds.min.y, bodyWidth = body.bounds.max.x - body.bounds.min.x;
                         if (bodyHeight > maxHeight)
                           maxHeight = bodyHeight;
-                        Body2.translate(body, { x: bodyWidth * 0.5, y: bodyHeight * 0.5 });
+                        Body3.translate(body, { x: bodyWidth * 0.5, y: bodyHeight * 0.5 });
                         x = body.bounds.max.x + columnGap;
-                        Composite2.addBody(stack, body);
+                        Composite3.addBody(stack, body);
                         lastBody = body;
                         i += 1;
                       } else {
@@ -26768,7 +26768,7 @@
                       pointB: { x: bodyBWidth * xOffsetB, y: bodyBHeight * yOffsetB }
                     };
                     var constraint = Common.extend(defaults, options);
-                    Composite2.addConstraint(composite, Constraint.create(constraint));
+                    Composite3.addConstraint(composite, Constraint.create(constraint));
                   }
                   composite.label += " Chain";
                   return composite;
@@ -26779,20 +26779,20 @@
                     for (col = 1; col < columns; col++) {
                       bodyA = bodies[col - 1 + row * columns];
                       bodyB = bodies[col + row * columns];
-                      Composite2.addConstraint(composite, Constraint.create(Common.extend({ bodyA, bodyB }, options)));
+                      Composite3.addConstraint(composite, Constraint.create(Common.extend({ bodyA, bodyB }, options)));
                     }
                     if (row > 0) {
                       for (col = 0; col < columns; col++) {
                         bodyA = bodies[col + (row - 1) * columns];
                         bodyB = bodies[col + row * columns];
-                        Composite2.addConstraint(composite, Constraint.create(Common.extend({ bodyA, bodyB }, options)));
+                        Composite3.addConstraint(composite, Constraint.create(Common.extend({ bodyA, bodyB }, options)));
                         if (crossBrace && col > 0) {
                           bodyC = bodies[col - 1 + (row - 1) * columns];
-                          Composite2.addConstraint(composite, Constraint.create(Common.extend({ bodyA: bodyC, bodyB }, options)));
+                          Composite3.addConstraint(composite, Constraint.create(Common.extend({ bodyA: bodyC, bodyB }, options)));
                         }
                         if (crossBrace && col < columns - 1) {
                           bodyC = bodies[col + 1 + (row - 1) * columns];
-                          Composite2.addConstraint(composite, Constraint.create(Common.extend({ bodyA: bodyC, bodyB }, options)));
+                          Composite3.addConstraint(composite, Constraint.create(Common.extend({ bodyA: bodyC, bodyB }, options)));
                         }
                       }
                     }
@@ -26810,30 +26810,30 @@
                     if (column < start || column > end)
                       return;
                     if (i === 1) {
-                      Body2.translate(lastBody, { x: (column + (columns % 2 === 1 ? 1 : -1)) * lastBodyWidth, y: 0 });
+                      Body3.translate(lastBody, { x: (column + (columns % 2 === 1 ? 1 : -1)) * lastBodyWidth, y: 0 });
                     }
                     var xOffset = lastBody ? column * lastBodyWidth : 0;
                     return callback(xx + xOffset + column * columnGap, y, column, row, lastBody, i);
                   });
                 };
                 Composites.newtonsCradle = function(xx, yy, number, size, length) {
-                  var newtonsCradle = Composite2.create({ label: "Newtons Cradle" });
+                  var newtonsCradle = Composite3.create({ label: "Newtons Cradle" });
                   for (var i = 0; i < number; i++) {
-                    var separation = 1.9, circle = Bodies2.circle(
+                    var separation = 1.9, circle = Bodies3.circle(
                       xx + i * (size * separation),
                       yy + length,
                       size,
                       { inertia: Infinity, restitution: 1, friction: 0, frictionAir: 1e-4, slop: 1 }
                     ), constraint = Constraint.create({ pointA: { x: xx + i * (size * separation), y: yy }, bodyB: circle });
-                    Composite2.addBody(newtonsCradle, circle);
-                    Composite2.addConstraint(newtonsCradle, constraint);
+                    Composite3.addBody(newtonsCradle, circle);
+                    Composite3.addConstraint(newtonsCradle, constraint);
                   }
                   return newtonsCradle;
                 };
                 deprecated(Composites, "newtonsCradle", "Composites.newtonsCradle \u27A4 moved to newtonsCradle example");
                 Composites.car = function(xx, yy, width, height, wheelSize) {
-                  var group = Body2.nextGroup(true), wheelBase = 20, wheelAOffset = -width * 0.5 + wheelBase, wheelBOffset = width * 0.5 - wheelBase, wheelYOffset = 0;
-                  var car = Composite2.create({ label: "Car" }), body = Bodies2.rectangle(xx, yy, width, height, {
+                  var group = Body3.nextGroup(true), wheelBase = 20, wheelAOffset = -width * 0.5 + wheelBase, wheelBOffset = width * 0.5 - wheelBase, wheelYOffset = 0;
+                  var car = Composite3.create({ label: "Car" }), body = Bodies3.rectangle(xx, yy, width, height, {
                     collisionFilter: {
                       group
                     },
@@ -26842,13 +26842,13 @@
                     },
                     density: 2e-4
                   });
-                  var wheelA = Bodies2.circle(xx + wheelAOffset, yy + wheelYOffset, wheelSize, {
+                  var wheelA = Bodies3.circle(xx + wheelAOffset, yy + wheelYOffset, wheelSize, {
                     collisionFilter: {
                       group
                     },
                     friction: 0.8
                   });
-                  var wheelB = Bodies2.circle(xx + wheelBOffset, yy + wheelYOffset, wheelSize, {
+                  var wheelB = Bodies3.circle(xx + wheelBOffset, yy + wheelYOffset, wheelSize, {
                     collisionFilter: {
                       group
                     },
@@ -26868,11 +26868,11 @@
                     stiffness: 1,
                     length: 0
                   });
-                  Composite2.addBody(car, body);
-                  Composite2.addBody(car, wheelA);
-                  Composite2.addBody(car, wheelB);
-                  Composite2.addConstraint(car, axelA);
-                  Composite2.addConstraint(car, axelB);
+                  Composite3.addBody(car, body);
+                  Composite3.addBody(car, wheelA);
+                  Composite3.addBody(car, wheelB);
+                  Composite3.addConstraint(car, axelA);
+                  Composite3.addConstraint(car, axelB);
                   return car;
                 };
                 deprecated(Composites, "car", "Composites.car \u27A4 moved to car example");
@@ -26880,7 +26880,7 @@
                   particleOptions = Common.extend({ inertia: Infinity }, particleOptions);
                   constraintOptions = Common.extend({ stiffness: 0.2, render: { type: "line", anchors: false } }, constraintOptions);
                   var softBody = Composites.stack(xx, yy, columns, rows, columnGap, rowGap, function(x, y) {
-                    return Bodies2.circle(x, y, particleRadius, particleOptions);
+                    return Bodies3.circle(x, y, particleRadius, particleOptions);
                   });
                   Composites.mesh(softBody, columns, rows, crossBrace, constraintOptions);
                   softBody.label = "Soft Body";
@@ -27020,27 +27020,27 @@
             /* 24 */
             /***/
             function(module2, exports2, __webpack_require__) {
-              var MouseConstraint2 = {};
-              module2.exports = MouseConstraint2;
+              var MouseConstraint3 = {};
+              module2.exports = MouseConstraint3;
               var Vertices = __webpack_require__(3);
               var Sleeping = __webpack_require__(7);
-              var Mouse2 = __webpack_require__(14);
-              var Events2 = __webpack_require__(5);
+              var Mouse3 = __webpack_require__(14);
+              var Events3 = __webpack_require__(5);
               var Detector = __webpack_require__(13);
               var Constraint = __webpack_require__(10);
-              var Composite2 = __webpack_require__(6);
+              var Composite3 = __webpack_require__(6);
               var Common = __webpack_require__(0);
               var Bounds = __webpack_require__(1);
               (function() {
-                MouseConstraint2.create = function(engine, options) {
+                MouseConstraint3.create = function(engine, options) {
                   var mouse = (engine ? engine.mouse : null) || (options ? options.mouse : null);
                   if (!mouse) {
                     if (engine && engine.render && engine.render.canvas) {
-                      mouse = Mouse2.create(engine.render.canvas);
+                      mouse = Mouse3.create(engine.render.canvas);
                     } else if (options && options.element) {
-                      mouse = Mouse2.create(options.element);
+                      mouse = Mouse3.create(options.element);
                     } else {
-                      mouse = Mouse2.create();
+                      mouse = Mouse3.create();
                       Common.warn("MouseConstraint.create: options.mouse was undefined, options.element was undefined, may not function as expected");
                     }
                   }
@@ -27069,14 +27069,14 @@
                     }
                   };
                   var mouseConstraint = Common.extend(defaults, options);
-                  Events2.on(engine, "beforeUpdate", function() {
-                    var allBodies = Composite2.allBodies(engine.world);
-                    MouseConstraint2.update(mouseConstraint, allBodies);
-                    MouseConstraint2._triggerEvents(mouseConstraint);
+                  Events3.on(engine, "beforeUpdate", function() {
+                    var allBodies = Composite3.allBodies(engine.world);
+                    MouseConstraint3.update(mouseConstraint, allBodies);
+                    MouseConstraint3._triggerEvents(mouseConstraint);
                   });
                   return mouseConstraint;
                 };
-                MouseConstraint2.update = function(mouseConstraint, bodies) {
+                MouseConstraint3.update = function(mouseConstraint, bodies) {
                   var mouse = mouseConstraint.mouse, constraint = mouseConstraint.constraint, body = mouseConstraint.body;
                   if (mouse.button === 0) {
                     if (!constraint.bodyB) {
@@ -27091,7 +27091,7 @@
                               constraint.pointB = { x: mouse.position.x - body.position.x, y: mouse.position.y - body.position.y };
                               constraint.angleB = body.angle;
                               Sleeping.set(body, false);
-                              Events2.trigger(mouseConstraint, "startdrag", { mouse, body });
+                              Events3.trigger(mouseConstraint, "startdrag", { mouse, body });
                               break;
                             }
                           }
@@ -27105,18 +27105,18 @@
                     constraint.bodyB = mouseConstraint.body = null;
                     constraint.pointB = null;
                     if (body)
-                      Events2.trigger(mouseConstraint, "enddrag", { mouse, body });
+                      Events3.trigger(mouseConstraint, "enddrag", { mouse, body });
                   }
                 };
-                MouseConstraint2._triggerEvents = function(mouseConstraint) {
+                MouseConstraint3._triggerEvents = function(mouseConstraint) {
                   var mouse = mouseConstraint.mouse, mouseEvents = mouse.sourceEvents;
                   if (mouseEvents.mousemove)
-                    Events2.trigger(mouseConstraint, "mousemove", { mouse });
+                    Events3.trigger(mouseConstraint, "mousemove", { mouse });
                   if (mouseEvents.mousedown)
-                    Events2.trigger(mouseConstraint, "mousedown", { mouse });
+                    Events3.trigger(mouseConstraint, "mousedown", { mouse });
                   if (mouseEvents.mouseup)
-                    Events2.trigger(mouseConstraint, "mouseup", { mouse });
-                  Mouse2.clearSourceEvents(mouse);
+                    Events3.trigger(mouseConstraint, "mouseup", { mouse });
+                  Mouse3.clearSourceEvents(mouse);
                 };
               })();
             },
@@ -27128,7 +27128,7 @@
               var Vector = __webpack_require__(2);
               var Collision = __webpack_require__(8);
               var Bounds = __webpack_require__(1);
-              var Bodies2 = __webpack_require__(12);
+              var Bodies3 = __webpack_require__(12);
               var Vertices = __webpack_require__(3);
               (function() {
                 Query.collides = function(body, bodies) {
@@ -27152,7 +27152,7 @@
                 };
                 Query.ray = function(bodies, startPoint, endPoint, rayWidth) {
                   rayWidth = rayWidth || 1e-100;
-                  var rayAngle = Vector.angle(startPoint, endPoint), rayLength = Vector.magnitude(Vector.sub(startPoint, endPoint)), rayX = (endPoint.x + startPoint.x) * 0.5, rayY = (endPoint.y + startPoint.y) * 0.5, ray = Bodies2.rectangle(rayX, rayY, rayLength, rayWidth, { angle: rayAngle }), collisions = Query.collides(ray, bodies);
+                  var rayAngle = Vector.angle(startPoint, endPoint), rayLength = Vector.magnitude(Vector.sub(startPoint, endPoint)), rayX = (endPoint.x + startPoint.x) * 0.5, rayY = (endPoint.y + startPoint.y) * 0.5, ray = Bodies3.rectangle(rayX, rayY, rayLength, rayWidth, { angle: rayAngle }), collisions = Query.collides(ray, bodies);
                   for (var i = 0; i < collisions.length; i += 1) {
                     var collision = collisions[i];
                     collision.body = collision.bodyB = collision.bodyA;
@@ -27191,13 +27191,13 @@
             function(module2, exports2, __webpack_require__) {
               var Render = {};
               module2.exports = Render;
-              var Body2 = __webpack_require__(4);
+              var Body3 = __webpack_require__(4);
               var Common = __webpack_require__(0);
-              var Composite2 = __webpack_require__(6);
+              var Composite3 = __webpack_require__(6);
               var Bounds = __webpack_require__(1);
-              var Events2 = __webpack_require__(5);
+              var Events3 = __webpack_require__(5);
               var Vector = __webpack_require__(2);
-              var Mouse2 = __webpack_require__(14);
+              var Mouse3 = __webpack_require__(14);
               (function() {
                 var _requestAnimationFrame, _cancelAnimationFrame;
                 if (typeof window !== "undefined") {
@@ -27361,11 +27361,11 @@
                   render.bounds.min.y -= padding.y;
                   render.bounds.max.y -= padding.y;
                   if (render.mouse) {
-                    Mouse2.setScale(render.mouse, {
+                    Mouse3.setScale(render.mouse, {
                       x: (render.bounds.max.x - render.bounds.min.x) / render.canvas.width,
                       y: (render.bounds.max.y - render.bounds.min.y) / render.canvas.height
                     });
-                    Mouse2.setOffset(render.mouse, render.bounds.min);
+                    Mouse3.setOffset(render.mouse, render.bounds.min);
                   }
                 };
                 Render.startViewTransform = function(render) {
@@ -27385,11 +27385,11 @@
                 };
                 Render.world = function(render, time) {
                   var startTime = Common.now(), engine = render.engine, world = engine.world, canvas = render.canvas, context = render.context, options = render.options, timing = render.timing;
-                  var allBodies = Composite2.allBodies(world), allConstraints = Composite2.allConstraints(world), background = options.wireframes ? options.wireframeBackground : options.background, bodies = [], constraints = [], i;
+                  var allBodies = Composite3.allBodies(world), allConstraints = Composite3.allConstraints(world), background = options.wireframes ? options.wireframeBackground : options.background, bodies = [], constraints = [], i;
                   var event = {
                     timestamp: engine.timing.timestamp
                   };
-                  Events2.trigger(render, "beforeRender", event);
+                  Events3.trigger(render, "beforeRender", event);
                   if (render.currentBackground !== background)
                     _applyBackground(render, background);
                   context.globalCompositeOperation = "source-in";
@@ -27415,11 +27415,11 @@
                     }
                     Render.startViewTransform(render);
                     if (render.mouse) {
-                      Mouse2.setScale(render.mouse, {
+                      Mouse3.setScale(render.mouse, {
                         x: (render.bounds.max.x - render.bounds.min.x) / render.options.width,
                         y: (render.bounds.max.y - render.bounds.min.y) / render.options.height
                       });
-                      Mouse2.setOffset(render.mouse, render.bounds.min);
+                      Mouse3.setOffset(render.mouse, render.bounds.min);
                     }
                   } else {
                     constraints = allConstraints;
@@ -27457,19 +27457,19 @@
                   if (options.hasBounds) {
                     Render.endViewTransform(render);
                   }
-                  Events2.trigger(render, "afterRender", event);
+                  Events3.trigger(render, "afterRender", event);
                   timing.lastElapsed = Common.now() - startTime;
                 };
                 Render.stats = function(render, context, time) {
-                  var engine = render.engine, world = engine.world, bodies = Composite2.allBodies(world), parts = 0, width = 55, height = 44, x = 0, y = 0;
+                  var engine = render.engine, world = engine.world, bodies = Composite3.allBodies(world), parts = 0, width = 55, height = 44, x = 0, y = 0;
                   for (var i = 0; i < bodies.length; i += 1) {
                     parts += bodies[i].parts.length;
                   }
                   var sections = {
                     "Part": parts,
                     "Body": bodies.length,
-                    "Cons": Composite2.allConstraints(world).length,
-                    "Comp": Composite2.allComposites(world).length,
+                    "Cons": Composite3.allConstraints(world).length,
+                    "Comp": Composite3.allComposites(world).length,
                     "Pair": engine.pairs.list.length
                   };
                   context.fillStyle = "#0e0f19";
@@ -27854,7 +27854,7 @@
                     var body = bodies[i];
                     if (!body.render.visible)
                       continue;
-                    var velocity = Body2.getVelocity(body);
+                    var velocity = Body3.getVelocity(body);
                     c.moveTo(body.position.x, body.position.y);
                     c.lineTo(body.position.x + velocity.x, body.position.y + velocity.y);
                   }
@@ -28076,10 +28076,10 @@
             /* 27 */
             /***/
             function(module2, exports2, __webpack_require__) {
-              var Runner2 = {};
-              module2.exports = Runner2;
-              var Events2 = __webpack_require__(5);
-              var Engine2 = __webpack_require__(17);
+              var Runner3 = {};
+              module2.exports = Runner3;
+              var Events3 = __webpack_require__(5);
+              var Engine3 = __webpack_require__(17);
               var Common = __webpack_require__(0);
               (function() {
                 var _requestAnimationFrame, _cancelAnimationFrame;
@@ -28098,7 +28098,7 @@
                     clearTimeout(_frameTimeout);
                   };
                 }
-                Runner2.create = function(options) {
+                Runner3.create = function(options) {
                   var defaults = {
                     fps: 60,
                     deltaSampleSize: 60,
@@ -28117,20 +28117,20 @@
                   runner.fps = 1e3 / runner.delta;
                   return runner;
                 };
-                Runner2.run = function(runner, engine) {
+                Runner3.run = function(runner, engine) {
                   if (typeof runner.positionIterations !== "undefined") {
                     engine = runner;
-                    runner = Runner2.create();
+                    runner = Runner3.create();
                   }
                   (function run(time) {
                     runner.frameRequestId = _requestAnimationFrame(run);
                     if (time && runner.enabled) {
-                      Runner2.tick(runner, engine, time);
+                      Runner3.tick(runner, engine, time);
                     }
                   })();
                   return runner;
                 };
-                Runner2.tick = function(runner, engine, time) {
+                Runner3.tick = function(runner, engine, time) {
                   var timing = engine.timing, delta;
                   if (runner.isFixed) {
                     delta = runner.delta;
@@ -28147,24 +28147,24 @@
                   var event = {
                     timestamp: timing.timestamp
                   };
-                  Events2.trigger(runner, "beforeTick", event);
+                  Events3.trigger(runner, "beforeTick", event);
                   runner.frameCounter += 1;
                   if (time - runner.counterTimestamp >= 1e3) {
                     runner.fps = runner.frameCounter * ((time - runner.counterTimestamp) / 1e3);
                     runner.counterTimestamp = time;
                     runner.frameCounter = 0;
                   }
-                  Events2.trigger(runner, "tick", event);
-                  Events2.trigger(runner, "beforeUpdate", event);
-                  Engine2.update(engine, delta);
-                  Events2.trigger(runner, "afterUpdate", event);
-                  Events2.trigger(runner, "afterTick", event);
+                  Events3.trigger(runner, "tick", event);
+                  Events3.trigger(runner, "beforeUpdate", event);
+                  Engine3.update(engine, delta);
+                  Events3.trigger(runner, "afterUpdate", event);
+                  Events3.trigger(runner, "afterTick", event);
                 };
-                Runner2.stop = function(runner) {
+                Runner3.stop = function(runner) {
                   _cancelAnimationFrame(runner.frameRequestId);
                 };
-                Runner2.start = function(runner, engine) {
-                  Runner2.run(runner, engine);
+                Runner3.start = function(runner, engine) {
+                  Runner3.run(runner, engine);
                 };
               })();
             },
@@ -28340,18 +28340,18 @@
             /* 30 */
             /***/
             function(module2, exports2, __webpack_require__) {
-              var World2 = {};
-              module2.exports = World2;
-              var Composite2 = __webpack_require__(6);
+              var World3 = {};
+              module2.exports = World3;
+              var Composite3 = __webpack_require__(6);
               var Common = __webpack_require__(0);
               (function() {
-                World2.create = Composite2.create;
-                World2.add = Composite2.add;
-                World2.remove = Composite2.remove;
-                World2.clear = Composite2.clear;
-                World2.addComposite = Composite2.addComposite;
-                World2.addBody = Composite2.addBody;
-                World2.addConstraint = Composite2.addConstraint;
+                World3.create = Composite3.create;
+                World3.add = Composite3.add;
+                World3.remove = Composite3.remove;
+                World3.clear = Composite3.clear;
+                World3.addComposite = Composite3.addComposite;
+                World3.addBody = Composite3.addBody;
+                World3.addConstraint = Composite3.addConstraint;
               })();
             }
             /******/
@@ -28368,7 +28368,7 @@
       if (true) {
         (function() {
           "use strict";
-          var React2 = require_react();
+          var React3 = require_react();
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -28394,7 +28394,7 @@
             }
             return null;
           }
-          var ReactSharedInternals = React2.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React3.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function error(format) {
             {
               {
@@ -29555,6 +29555,46 @@
         },
         { capture: true }
       );
+      mouse.element.removeEventListener("touchstart", mouse.mousedown);
+      mouse.element.removeEventListener("touchmove", mouse.mousemove);
+      mouse.element.removeEventListener("touchend", mouse.mouseup);
+      let touchStartY = 0;
+      let touchStartTime = 0;
+      let isDraggingCard = false;
+      mouse.element.addEventListener("touchstart", (e) => {
+        if (e.touches.length === 1) {
+          touchStartY = e.touches[0].clientY;
+          touchStartTime = Date.now();
+          isDraggingCard = false;
+          const touch = e.touches[0];
+          const element = document.elementFromPoint(touch.clientX, touch.clientY);
+          if (element && element.closest(".bouncy-card")) {
+            mouse.mousedown(e);
+          }
+        }
+      }, { passive: false });
+      mouse.element.addEventListener("touchmove", (e) => {
+        if (e.touches.length === 1) {
+          const deltaY = Math.abs(e.touches[0].clientY - touchStartY);
+          const deltaTime = Date.now() - touchStartTime;
+          if (deltaY > 15 && deltaTime < 200 && !isDraggingCard) {
+            return;
+          }
+          const touch = e.touches[0];
+          const element = document.elementFromPoint(touch.clientX, touch.clientY);
+          if (element && element.closest(".bouncy-card")) {
+            isDraggingCard = true;
+            e.preventDefault();
+            mouse.mousemove(e);
+          }
+        }
+      }, { passive: false });
+      mouse.element.addEventListener("touchend", (e) => {
+        if (isDraggingCard) {
+          mouse.mouseup(e);
+        }
+        isDraggingCard = false;
+      }, { passive: true });
       const mouseConstraint = import_matter_js.MouseConstraint.create(engine, { mouse, constraint: { stiffness: 0.2 } });
       import_matter_js.World.add(engine.world, mouseConstraint);
       import_matter_js.Events.on(mouseConstraint, "startdrag", (e) => {
@@ -29799,7 +29839,14 @@
       {
         ref: containerRef,
         className: "bouncy-container",
-        style: { width, height, margin: "0 auto" },
+        style: {
+          width,
+          minHeight: height,
+          height: "auto",
+          margin: "0 auto",
+          paddingBottom: "50px"
+          // Extra space for mobile scrolling
+        },
         "aria-label": "bouncy project cards",
         children: [
           cards.map((card) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
@@ -29809,10 +29856,48 @@
               role: "link",
               tabIndex: 0,
               className: "bouncy-card",
-              style: { background: card.color || "transparent" },
+              style: {
+                background: card.color || "transparent",
+                padding: "15px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "16px",
+                textAlign: "left"
+              },
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bouncy-title", children: card.title.toLowerCase() }),
-                card.subtitle ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bouncy-subtitle", children: card.subtitle }) : null
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bouncy-title", style: {
+                  fontSize: "16px",
+                  fontWeight: "600",
+                  letterSpacing: "-0.02em",
+                  lineHeight: "1em",
+                  color: "#000",
+                  textTransform: "lowercase"
+                }, children: card.title.toLowerCase() }),
+                card.description && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bouncy-subtitle project-description", style: {
+                  fontSize: "12px",
+                  color: "var(--text)",
+                  lineHeight: "1.4",
+                  padding: "2px 2px",
+                  marginTop: "12px"
+                }, children: card.description }),
+                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "project-status-tag", style: {
+                  marginTop: "-8px"
+                }, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+                  "span",
+                  {
+                    style: {
+                      backgroundColor: "#E3F2FD",
+                      color: "#1976D2",
+                      padding: "2px 6px",
+                      borderRadius: "12px",
+                      fontSize: "10px",
+                      fontWeight: "500",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.5px"
+                    },
+                    children: "IN PROGRESS"
+                  }
+                ) })
               ]
             },
             card.id
@@ -29825,50 +29910,425 @@
   var BouncyProjectCards_default = BouncyProjectCards;
 
   // components/BouncyBlogBubbles.tsx
+  var import_react2 = __toESM(require_react(), 1);
+  var import_matter_js2 = __toESM(require_matter(), 1);
   var import_jsx_runtime2 = __toESM(require_jsx_runtime(), 1);
-  function BouncyBlogBubbles({ cards }) {
-    const scrollLeft = () => {
-      const container = document.querySelector(".blog-bubbles-grid");
-      if (container) {
-        container.scrollBy({ left: -200, behavior: "smooth" });
-      }
-    };
-    const scrollRight = () => {
-      const container = document.querySelector(".blog-bubbles-grid");
-      if (container) {
-        container.scrollBy({ left: 200, behavior: "smooth" });
-      }
-    };
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "blog-container", style: { position: "relative" }, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "blog-bubbles-grid", children: cards.map((c) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
-        "div",
-        {
-          className: "blog-bubble-card",
-          role: "link",
-          tabIndex: 0,
-          onClick: () => {
-            audio.click();
-            window.open(c.url, "_blank", "noopener");
-          },
-          onMouseEnter: (e) => {
-            e.currentTarget.style.transform = "scale(1.05)";
-            e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.15)";
-          },
-          onMouseLeave: (e) => {
-            e.currentTarget.style.transform = "scale(1)";
-            e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.1)";
-          },
-          children: [
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "blog-bubble-title", children: (c.title || "").toLowerCase() }),
-            c.subtitle ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "blog-bubble-sub", children: c.subtitle }) : null
-          ]
-        },
-        c.id
-      )) }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { className: "blog-arrow blog-arrow-left", onClick: scrollLeft, "aria-label": "Scroll left", children: "\u2039" }),
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("button", { className: "blog-arrow blog-arrow-right", onClick: scrollRight, "aria-label": "Scroll right", children: "\u203A" })
-    ] });
+  function getCssCardSize2(container) {
+    const styles = getComputedStyle(container);
+    const w = parseFloat(styles.getPropertyValue("--card-w")) || 260;
+    const h = parseFloat(styles.getPropertyValue("--card-h")) || 140;
+    return { w, h };
   }
+  var BouncyBlogBubbles = (0, import_react2.forwardRef)(function BouncyBlogBubbles2({
+    cards,
+    width = "90%",
+    height = 480,
+    restitution = 0.95,
+    airFriction = 0.015,
+    hoverScale = 1.03,
+    onCardClick
+  }, ref) {
+    const containerRef = (0, import_react2.useRef)(null);
+    const worldRef = (0, import_react2.useRef)(null);
+    (0, import_react2.useEffect)(() => {
+      if (!containerRef.current)
+        return;
+      const engine = import_matter_js2.Engine.create();
+      engine.gravity.y = 0;
+      const runner = import_matter_js2.Runner.create();
+      import_matter_js2.Runner.run(runner, engine);
+      const container = containerRef.current;
+      const bounds = container.getBoundingClientRect();
+      let cardSize = getCssCardSize2(container);
+      const thickness = 50;
+      const half = thickness / 2;
+      const opts = { isStatic: true, restitution };
+      const walls = [
+        import_matter_js2.Bodies.rectangle(bounds.width / 2, -half, bounds.width, thickness, opts),
+        import_matter_js2.Bodies.rectangle(bounds.width / 2, bounds.height + half, bounds.width, thickness, opts),
+        import_matter_js2.Bodies.rectangle(-half, bounds.height / 2, thickness, bounds.height, opts),
+        import_matter_js2.Bodies.rectangle(bounds.width + half, bounds.height / 2, thickness, bounds.height, opts)
+      ];
+      import_matter_js2.World.add(engine.world, walls);
+      const bodiesById = /* @__PURE__ */ new Map();
+      const positions = [];
+      function nextFreePosition(index) {
+        const gapX = 28;
+        const rows = 2;
+        const columns = Math.ceil(cards.length / rows);
+        const usedWidth = columns * (cardSize.w + gapX) - gapX;
+        const startX = Math.max(60, (bounds.width - usedWidth) / 2);
+        const col = Math.floor(index / rows);
+        const row = index % rows;
+        const x = startX + col * (cardSize.w + gapX) + (Math.random() - 0.5) * 12;
+        const topBandPercent = 0.14;
+        const topBand = bounds.height * topBandPercent;
+        const rowGapY = cardSize.h + 6;
+        const startY = topBand;
+        const yBase = startY + row * rowGapY;
+        const margin = Math.max(20, Math.min(60, bounds.height * 0.08));
+        const y = Math.min(Math.max(yBase + (Math.random() - 0.5) * 10, margin), bounds.height - margin);
+        return { x: Math.min(Math.max(x, 60), bounds.width - 60), y };
+      }
+      cards.forEach((card, i) => {
+        const pos = nextFreePosition(i);
+        positions.push(pos);
+        const body = import_matter_js2.Bodies.rectangle(pos.x, pos.y, cardSize.w, cardSize.h, {
+          restitution,
+          frictionAir: airFriction,
+          angle: (Math.random() - 0.5) * 0.06
+        });
+        import_matter_js2.Body.setVelocity(body, { x: (Math.random() - 0.5) * 2.2, y: (Math.random() - 0.5) * 2.2 });
+        bodiesById.set(card.id, body);
+        import_matter_js2.World.add(engine.world, body);
+      });
+      const mouse = import_matter_js2.Mouse.create(container);
+      container.addEventListener(
+        "wheel",
+        (e) => {
+          e.stopImmediatePropagation();
+        },
+        { capture: true }
+      );
+      mouse.element.removeEventListener("touchstart", mouse.mousedown);
+      mouse.element.removeEventListener("touchmove", mouse.mousemove);
+      mouse.element.removeEventListener("touchend", mouse.mouseup);
+      let touchStartY = 0;
+      let touchStartTime = 0;
+      let isDraggingCard = false;
+      mouse.element.addEventListener("touchstart", (e) => {
+        if (e.touches.length === 1) {
+          touchStartY = e.touches[0].clientY;
+          touchStartTime = Date.now();
+          isDraggingCard = false;
+          const touch = e.touches[0];
+          const element = document.elementFromPoint(touch.clientX, touch.clientY);
+          if (element && element.closest(".bouncy-card")) {
+            mouse.mousedown(e);
+          }
+        }
+      }, { passive: false });
+      mouse.element.addEventListener("touchmove", (e) => {
+        if (e.touches.length === 1) {
+          const deltaY = Math.abs(e.touches[0].clientY - touchStartY);
+          const deltaTime = Date.now() - touchStartTime;
+          if (deltaY > 15 && deltaTime < 200 && !isDraggingCard) {
+            return;
+          }
+          const touch = e.touches[0];
+          const element = document.elementFromPoint(touch.clientX, touch.clientY);
+          if (element && element.closest(".bouncy-card")) {
+            isDraggingCard = true;
+            e.preventDefault();
+            mouse.mousemove(e);
+          }
+        }
+      }, { passive: false });
+      mouse.element.addEventListener("touchend", (e) => {
+        if (isDraggingCard) {
+          mouse.mouseup(e);
+        }
+        isDraggingCard = false;
+      }, { passive: true });
+      const mouseConstraint = import_matter_js2.MouseConstraint.create(engine, { mouse, constraint: { stiffness: 0.2 } });
+      import_matter_js2.World.add(engine.world, mouseConstraint);
+      import_matter_js2.Events.on(mouseConstraint, "startdrag", (e) => {
+        const body = e.body;
+        for (const [id, b] of bodiesById.entries()) {
+          if (b === body) {
+            worldRef.current.isDraggingId = id;
+            b.frictionAir = Math.max(airFriction, 0.08);
+            break;
+          }
+        }
+      });
+      import_matter_js2.Events.on(mouseConstraint, "enddrag", (e) => {
+        const body = e.body;
+        for (const [id, b] of bodiesById.entries()) {
+          if (b === body) {
+            worldRef.current.isDraggingId = void 0;
+            b.frictionAir = airFriction;
+            break;
+          }
+        }
+      });
+      import_matter_js2.Events.on(engine, "collisionStart", (evt) => {
+        const pairs = evt.pairs;
+        for (const p of pairs) {
+          const a = p.bodyA;
+          const b = p.bodyB;
+          const rvx = (a.velocity?.x || 0) - (b.velocity?.x || 0);
+          const rvy = (a.velocity?.y || 0) - (b.velocity?.y || 0);
+          const impact = Math.hypot(rvx, rvy);
+          if (impact > 1)
+            audio.collision(Math.min(impact, 20));
+        }
+      });
+      worldRef.current = { engine, runner, mouse, mouseConstraint, bodiesById };
+      return () => {
+        if (worldRef.current) {
+          import_matter_js2.Runner.stop(worldRef.current.runner);
+          import_matter_js2.World.clear(worldRef.current.engine.world, false);
+          import_matter_js2.Engine.clear(worldRef.current.engine);
+          worldRef.current = null;
+        }
+      };
+    }, []);
+    (0, import_react2.useEffect)(() => {
+      const interval = window.setInterval(() => {
+        const ref2 = worldRef.current;
+        if (!ref2)
+          return;
+        for (const [id, body] of ref2.bodiesById.entries()) {
+          if (ref2.isDraggingId === id)
+            continue;
+          const speed = Math.hypot(body.velocity.x, body.velocity.y);
+          if (speed < 0.4) {
+            const angle = Math.random() * Math.PI * 2;
+            const magnitude = 6e-4;
+            import_matter_js2.Body.applyForce(body, body.position, { x: Math.cos(angle) * magnitude, y: Math.sin(angle) * magnitude });
+            import_matter_js2.Body.setAngularVelocity(body, body.angularVelocity + (Math.random() - 0.5) * 2e-3);
+          }
+        }
+      }, 1100);
+      return () => window.clearInterval(interval);
+    }, []);
+    (0, import_react2.useLayoutEffect)(() => {
+      let raf = 0;
+      function tick() {
+        raf = requestAnimationFrame(tick);
+        const ref2 = worldRef.current;
+        const container = containerRef.current;
+        if (!ref2 || !container)
+          return;
+        const size = getCssCardSize2(container);
+        const nodes = container.querySelectorAll("[data-card-id]");
+        const b = container.getBoundingClientRect();
+        nodes.forEach((node) => {
+          const id = node.dataset.cardId;
+          const body = ref2.bodiesById.get(id);
+          if (!body)
+            return;
+          body.velocity.x = Math.max(Math.min(body.velocity.x, 6), -6);
+          body.velocity.y = Math.max(Math.min(body.velocity.y, 6), -6);
+          const halfW = size.w / 2;
+          const halfH = size.h / 2;
+          let px = body.position.x;
+          let py = body.position.y;
+          let bounced = false;
+          if (px < halfW) {
+            px = halfW;
+            body.velocity.x = Math.abs(body.velocity.x) * 0.8;
+            bounced = true;
+          } else if (px > b.width - halfW) {
+            px = b.width - halfW;
+            body.velocity.x = -Math.abs(body.velocity.x) * 0.8;
+            bounced = true;
+          }
+          if (py < halfH) {
+            py = halfH;
+            body.velocity.y = Math.abs(body.velocity.y) * 0.8;
+            bounced = true;
+          } else if (py > b.height - halfH) {
+            py = b.height - halfH;
+            body.velocity.y = -Math.abs(body.velocity.y) * 0.8;
+            bounced = true;
+          }
+          if (bounced) {
+            import_matter_js2.Body.setPosition(body, { x: px, y: py });
+          }
+          node.style.transform = `translate3d(${body.position.x - size.w / 2}px, ${body.position.y - size.h / 2}px, 0) rotate(${body.angle}rad)`;
+        });
+      }
+      tick();
+      return () => cancelAnimationFrame(raf);
+    }, [cards.length]);
+    (0, import_react2.useEffect)(() => {
+      if (!containerRef.current || !worldRef.current)
+        return;
+      const container = containerRef.current;
+      const ref2 = worldRef.current;
+      const ro = new ResizeObserver(() => {
+        const b = container.getBoundingClientRect();
+        const size = getCssCardSize2(container);
+        const all = import_matter_js2.Composite.allBodies(ref2.engine.world);
+        all.forEach((body) => {
+          if (body.isStatic)
+            import_matter_js2.World.remove(ref2.engine.world, body);
+        });
+        const thickness = 50;
+        const half = thickness / 2;
+        const opts = { isStatic: true, restitution };
+        import_matter_js2.World.add(ref2.engine.world, [
+          import_matter_js2.Bodies.rectangle(b.width / 2, -half, b.width, thickness, opts),
+          import_matter_js2.Bodies.rectangle(b.width / 2, b.height + half, b.width, thickness, opts),
+          import_matter_js2.Bodies.rectangle(-half, b.height / 2, thickness, b.height, opts),
+          import_matter_js2.Bodies.rectangle(b.width + half, b.height / 2, thickness, b.height, opts)
+        ]);
+        for (const [id, body] of ref2.bodiesById.entries()) {
+          const halfW = size.w / 2;
+          const halfH = size.h / 2;
+          let px = body.position.x;
+          let py = body.position.y;
+          let bounced = false;
+          if (px < halfW) {
+            px = halfW;
+            body.velocity.x = Math.abs(body.velocity.x) * 0.8;
+            bounced = true;
+          } else if (px > b.width - halfW) {
+            px = b.width - halfW;
+            body.velocity.x = -Math.abs(body.velocity.x) * 0.8;
+            bounced = true;
+          }
+          if (py < halfH) {
+            py = halfH;
+            body.velocity.y = Math.abs(body.velocity.y) * 0.8;
+            bounced = true;
+          } else if (py > b.height - halfH) {
+            py = b.height - halfH;
+            body.velocity.y = -Math.abs(body.velocity.y) * 0.8;
+            bounced = true;
+          }
+          if (bounced) {
+            import_matter_js2.Body.setPosition(body, { x: px, y: py });
+          }
+          const currentW = body.bounds.max.x - body.bounds.min.x;
+          const currentH = body.bounds.max.y - body.bounds.min.y;
+          const sx = size.w / currentW;
+          const sy = size.h / currentH;
+          if (Math.abs(sx - 1) > 0.05 || Math.abs(sy - 1) > 0.05) {
+            import_matter_js2.Body.scale(body, sx, sy);
+          }
+        }
+      });
+      ro.observe(container);
+      return () => ro.disconnect();
+    }, [restitution]);
+    (0, import_react2.useImperativeHandle)(ref, () => ({
+      shuffle() {
+        const refW = worldRef.current;
+        if (!refW)
+          return;
+        for (const body of refW.bodiesById.values()) {
+          import_matter_js2.Body.setVelocity(body, { x: (Math.random() - 0.5) * 20, y: (Math.random() - 0.5) * 20 });
+          import_matter_js2.Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.2);
+        }
+      },
+      addCard(card) {
+        const refW = worldRef.current;
+        if (!refW || !containerRef.current)
+          return;
+        const b = containerRef.current.getBoundingClientRect();
+        const cssSize = getCssCardSize2(containerRef.current);
+        const body = import_matter_js2.Bodies.rectangle(Math.random() * b.width * 0.8 + 50, 60, cssSize.w, cssSize.h, {
+          restitution,
+          frictionAir: airFriction
+        });
+        refW.bodiesById.set(card.id, body);
+        import_matter_js2.World.add(refW.engine.world, body);
+      }
+    }), [restitution, airFriction]);
+    (0, import_react2.useEffect)(() => {
+      const container = containerRef.current;
+      if (!container)
+        return;
+      const downData = /* @__PURE__ */ new Map();
+      function onDown(e) {
+        const target = e.target.closest("[data-card-id]");
+        if (!target)
+          return;
+        const id = target.dataset.cardId;
+        downData.set(id, { t: performance.now(), x: e.clientX, y: e.clientY });
+      }
+      function onUp(e) {
+        const target = e.target.closest("[data-card-id]");
+        if (!target)
+          return;
+        const id = target.dataset.cardId;
+        const d = downData.get(id);
+        if (!d)
+          return;
+        const dt = performance.now() - d.t;
+        const dist = Math.hypot(e.clientX - d.x, e.clientY - d.y);
+        if (dt < 180 && dist < 5) {
+          audio.click();
+          const card = cards.find((c) => c.id === id);
+          if (!card)
+            return;
+          if (onCardClick)
+            onCardClick(card);
+          else
+            window.open(card.url, "_blank", "noopener");
+        }
+        downData.delete(id);
+      }
+      container.addEventListener("pointerdown", onDown);
+      container.addEventListener("pointerup", onUp);
+      return () => {
+        container.removeEventListener("pointerdown", onDown);
+        container.removeEventListener("pointerup", onUp);
+      };
+    }, [cards, onCardClick]);
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+      "div",
+      {
+        ref: containerRef,
+        className: "bouncy-container",
+        style: {
+          width,
+          minHeight: height,
+          height: "auto",
+          margin: "0 auto",
+          paddingBottom: "50px"
+          // Extra space for mobile scrolling
+        },
+        "aria-label": "bouncy blog bubbles",
+        children: [
+          cards.map((card) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+            "div",
+            {
+              "data-card-id": card.id,
+              role: "link",
+              tabIndex: 0,
+              className: "bouncy-card",
+              style: {
+                background: card.color || "transparent",
+                padding: "20px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "16px",
+                textAlign: "left",
+                "--card-w": "187px",
+                "--card-h": "107px",
+                width: "var(--card-w)",
+                height: "var(--card-h)"
+              },
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "bouncy-title", style: {
+                  fontSize: "16px",
+                  fontWeight: "600",
+                  letterSpacing: "-0.02em",
+                  lineHeight: "1em",
+                  color: "#000",
+                  textTransform: "lowercase"
+                }, children: card.title.toLowerCase() }),
+                card.subtitle && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "bouncy-subtitle", style: {
+                  fontSize: "12px",
+                  color: "var(--text)",
+                  lineHeight: "1.4",
+                  padding: "2px 2px",
+                  marginTop: "12px"
+                }, children: card.subtitle })
+              ]
+            },
+            card.id
+          )),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("ul", { className: "sr-only", "aria-hidden": "false", children: cards.map((c) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("a", { href: c.url, target: "_blank", rel: "noopener", children: c.title }) }, c.id)) })
+        ]
+      }
+    );
+  });
+  var BouncyBlogBubbles_default = BouncyBlogBubbles;
 
   // web/main.tsx
   var import_jsx_runtime3 = __toESM(require_jsx_runtime(), 1);
@@ -29890,20 +30350,43 @@
     return "100%";
   }
   function mount(el, cards) {
+    const isBlogPage = document.title.includes("Blog") || el.id === "hs-blog-bouncy";
+    console.log("mount function - Page title:", document.title);
+    console.log("mount function - Element ID:", el.id);
+    console.log("mount function - isBlogPage:", isBlogPage);
+    console.log("mount function - cards:", cards);
     const root = (0, import_client.createRoot)(el);
-    root.render(
-      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
-        BouncyProjectCards_default,
-        {
-          cards,
-          width: getResponsiveWidth(),
-          height: getResponsiveHeight(),
-          restitution: 0.95,
-          airFriction: 0.015,
-          hoverScale: 1.03
-        }
-      )
-    );
+    if (isBlogPage) {
+      console.log("Rendering BouncyBlogBubbles component");
+      root.render(
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+          BouncyBlogBubbles_default,
+          {
+            cards,
+            width: getResponsiveWidth(),
+            height: getResponsiveHeight(),
+            restitution: 0.95,
+            airFriction: 0.015,
+            hoverScale: 1.03
+          }
+        )
+      );
+    } else {
+      console.log("Rendering BouncyProjectCards component");
+      root.render(
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+          BouncyProjectCards_default,
+          {
+            cards,
+            width: getResponsiveWidth(),
+            height: getResponsiveHeight(),
+            restitution: 0.95,
+            airFriction: 0.015,
+            hoverScale: 1.03
+          }
+        )
+      );
+    }
   }
   window.bouncyMount = mount;
   async function renderSubstackList(el) {
@@ -29927,17 +30410,60 @@
     renderSubstackList(el);
   };
   async function mountProjects(el) {
+    const isBlogPage = document.title.includes("Blog") || el.id === "hs-blog-bouncy";
+    console.log("mountProjects - Page title:", document.title);
+    console.log("mountProjects - Element ID:", el.id);
+    console.log("mountProjects - isBlogPage:", isBlogPage);
+    if (isBlogPage) {
+      console.log("Loading blog data...");
+      try {
+        const res = await fetch("dist/substack.json", { cache: "no-store" });
+        const posts = await res.json();
+        console.log("Blog posts loaded:", posts);
+        const cards = posts.slice(0, 8).map((p, i) => ({
+          id: String(i + 1),
+          title: p.title || "",
+          subtitle: new Date(p.date || Date.now()).toLocaleDateString(),
+          url: p.url || "#"
+        }));
+        console.log("Blog cards created:", cards);
+        mount(el, cards);
+      } catch (e) {
+        console.error("Blog data loading error:", e);
+        el.innerHTML = '<p class="muted">No blog posts found.</p>';
+      }
+    } else {
+      console.log("Loading project data...");
+      try {
+        const res = await fetch("data/projects.json", { cache: "no-store" });
+        if (!res.ok)
+          throw new Error("projects not found");
+        const cards = await res.json();
+        console.log("Project cards loaded:", cards);
+        mount(el, cards);
+      } catch (e) {
+        console.error("Project data loading error:", e);
+        el.innerHTML = '<p class="muted">No projects found. Add them to data/projects.json.</p>';
+      }
+    }
+  }
+  async function mountBlog(el) {
     try {
-      const res = await fetch("data/projects.json", { cache: "no-store" });
-      if (!res.ok)
-        throw new Error("projects not found");
-      const cards = await res.json();
+      const res = await fetch("dist/substack.json", { cache: "no-store" });
+      const posts = await res.json();
+      const cards = posts.slice(0, 8).map((p, i) => ({
+        id: String(i + 1),
+        title: p.title || "",
+        subtitle: new Date(p.date || Date.now()).toLocaleDateString(),
+        url: p.url || "#"
+      }));
       mount(el, cards);
     } catch (e) {
-      el.innerHTML = '<p class="muted">No projects found. Add them to data/projects.json.</p>';
+      el.innerHTML = '<p class="muted">No blog posts found.</p>';
     }
   }
   window.mountProjects = mountProjects;
+  window.mountBlog = mountBlog;
   window.mountBlogBubbles = async (el) => {
     try {
       const res = await fetch("dist/substack.json", { cache: "no-store" });
@@ -29949,7 +30475,19 @@
         url: p.url || "#"
       }));
       const root = (0, import_client.createRoot)(el);
-      root.render(/* @__PURE__ */ (0, import_jsx_runtime3.jsx)(BouncyBlogBubbles, { cards }));
+      root.render(
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+          BouncyBlogBubbles_default,
+          {
+            cards,
+            width: getResponsiveWidth(),
+            height: getResponsiveHeight(),
+            restitution: 0.95,
+            airFriction: 0.015,
+            hoverScale: 1.03
+          }
+        )
+      );
     } catch (e) {
       el.innerHTML = '<p class="muted">Unable to load blog posts.</p>';
     }

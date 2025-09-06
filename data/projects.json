@@ -1,10 +1,67 @@
 [
-  { "id": "1", "title": "portfolio website", "subtitle": "2024", "url": "projects/project-alpha.html" },
-  { "id": "2", "title": "weather app", "subtitle": "2024", "url": "projects/project-beta.html" },
-  { "id": "3", "title": "notes tool", "subtitle": "2023", "url": "projects/project-gamma.html" },
-  { "id": "4", "title": "media library", "subtitle": "2023", "url": "projects/project-delta.html" },
-  { "id": "5", "title": "analytics dashboard", "subtitle": "2022", "url": "projects/project-epsilon.html" },
-  { "id": "6", "title": "recipe organizer", "subtitle": "2022", "url": "projects/project-zeta.html" }
+  { 
+    "id": "1", 
+    "title": "Portfolio Website", 
+    "subtitle": "2024", 
+    "description": "My personal portfolio website featuring a clean design and responsive layout to showcase my research and projects.",
+    "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
+    "githubUrl": "https://github.com/samuelrobson/portfolio",
+    "websiteUrl": "https://samuelrobson.com",
+    "date": "Jul 2025",
+    "url": "projects/project-alpha.html" 
+  },
+  { 
+    "id": "2", 
+    "title": "Weather App", 
+    "subtitle": "2024", 
+    "description": "A responsive weather application with real-time data and location-based forecasts.",
+    "technologies": ["React", "JavaScript", "CSS", "OpenWeather API"],
+    "githubUrl": "https://github.com/samuelrobson/weather-app",
+    "websiteUrl": "https://weather.samuelrobson.com",
+    "date": "Jun 2025",
+    "url": "projects/project-beta.html" 
+  },
+  { 
+    "id": "3", 
+    "title": "Notes Tool", 
+    "subtitle": "2023", 
+    "description": "A collaborative note-taking application with real-time synchronization and markdown support.",
+    "technologies": ["Vue.js", "Node.js", "MongoDB", "Socket.io"],
+    "githubUrl": "https://github.com/samuelrobson/notes-tool",
+    "date": "May 2025",
+    "url": "projects/project-gamma.html" 
+  },
+  { 
+    "id": "4", 
+    "title": "Media Library", 
+    "subtitle": "2023", 
+    "description": "A digital media management system with advanced search and categorization features.",
+    "technologies": ["React", "Express", "PostgreSQL", "AWS S3"],
+    "githubUrl": "https://github.com/samuelrobson/media-library",
+    "websiteUrl": "https://media.samuelrobson.com",
+    "date": "Apr 2025",
+    "url": "projects/project-delta.html" 
+  },
+  { 
+    "id": "5", 
+    "title": "Analytics Dashboard", 
+    "subtitle": "2022", 
+    "description": "A comprehensive analytics platform with interactive charts and real-time data visualization.",
+    "technologies": ["D3.js", "Python", "Flask", "Redis"],
+    "githubUrl": "https://github.com/samuelrobson/analytics-dashboard",
+    "date": "Mar 2025",
+    "url": "projects/project-epsilon.html" 
+  },
+  { 
+    "id": "6", 
+    "title": "Recipe Organizer", 
+    "subtitle": "2022", 
+    "description": "A recipe management app with meal planning features and nutritional information.",
+    "technologies": ["React Native", "Firebase", "JavaScript"],
+    "githubUrl": "https://github.com/samuelrobson/recipe-organizer",
+    "date": "Feb 2025",
+    "url": "projects/project-zeta.html" 
+  }
 ]
 
 

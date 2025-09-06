@@ -4,14 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blog – Samuel Robson</title>
-  <link rel="stylesheet" href="styles.css?v=1755566381492" />
+  <link rel="stylesheet" href="styles.css?v=1757118404797" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Baskervville:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <style>
     .page{max-width:1100px;margin:0 auto;padding:140px 2rem 4rem}
     .page h1{font-family:'Baskervville',serif;font-size:24px;font-weight:600;margin-bottom:1rem}
-    .lead{color:var(--text);margin-bottom:2rem}
+    .page p.lead{color:var(--text);margin-bottom:2rem;margin-top:4pt;font-weight:300;line-height:1.6}
+    @media (max-width: 768px) {
+      .page p.lead{font-size:14px} /* Reduced by 2pt on mobile */
+    }
   </style>
 </head>
 <body>
@@ -34,14 +37,14 @@
     <nav class="nav" aria-label="Primary">
       <div class="nav-container" role="navigation">
         <a class="nav-item" href="index.html">home</a>
-        <a class="nav-item" href="index.html#about">about</a>
+
         <a class="nav-item" href="index.html#projects">projects</a>
         <a class="nav-item" href="index.html#blog">blog</a>
         <a class="nav-item" href="index.html#contact">contact</a>
       </div>
       <div id="mobile-nav" class="mobile-nav" role="menu" aria-hidden="true">
         <a role="menuitem" href="index.html#home">home</a>
-        <a role="menuitem" href="index.html#about">about</a>
+
         <a role="menuitem" href="index.html#projects">projects</a>
         <a role="menuitem" href="index.html#blog">blog</a>
         <a role="menuitem" href="index.html#contact">contact</a>
@@ -51,36 +54,38 @@
   <main class="main page">
     <h1>studio log</h1>
     <p class="lead">New thoughts and ideas related to my work...</p>
-    <div id="blog-bouncy" style="margin-top:12px"></div>
+    <div id="react-bouncy"></div>
   </main>
-  <script src="dist/bundle.js?v=1755566381492"></script>
-  <script src="books-shelf.js"></script>
   <script>
-    async function mountBlogAsBooks() {
-      try {
-        const res = await fetch('dist/substack.json', { cache: 'no-store' });
-        const posts = res.ok ? await res.json() : [];
-        const cards = posts.slice(0, 12).map((p, i) => ({
-          id: String(i + 1),
-          title: (p.title || '').toLowerCase(),
-          subtitle: new Date(p.date || Date.now()).toLocaleDateString(),
-          url: p.url || '#'
-        }));
-        const el = document.getElementById('blog-bouncy');
-        if (window.mountBooksShelf) window.mountBooksShelf(el, cards);
-        else el.textContent = 'loading 3D shelf…';
-      } catch (e) {
-        const fallback = [
-          { id: 'b1', title: 'designing for delight', subtitle: 'writing', url: '#' },
-          { id: 'b2', title: 'simple > complex', subtitle: 'writing', url: '#' },
-          { id: 'b3', title: 'human-first tech', subtitle: 'writing', url: '#' }
-        ];
-        const el = document.getElementById('blog-bouncy');
-        if (window.mountBooksShelf) window.mountBooksShelf(el, fallback);
-      }
-    }
-    mountBlogAsBooks();
+    // Disable HS-Scroller on this page since it's a standalone page
+    window.hsScroller = null;
+    window.hsScrollerGSAP = null;
+    
+    // Override any HS-Scroller functions that might be loaded
+    window.addEventListener('load', () => {
+      window.hsScroller = null;
+      window.hsScrollerGSAP = null;
+    });
   </script>
+  <script src="dist/bundle.js?v=1757118404797"></script>
+      <script>
+      console.log('=== BLOG PAGE SCRIPT RUNNING ===');
+      console.log('Page URL:', window.location.href);
+      console.log('Page title:', document.title);
+      console.log('mountProjects function:', typeof window.mountProjects);
+      
+      window.mountProjects?.(document.getElementById('react-bouncy'));
+    </script>
+    <!-- Clock update script -->
+    <script>
+      function updateClocks() {
+        const now = new Date();
+        document.getElementById('time-sf').textContent = now.toLocaleTimeString('en-US', { timeZone: 'America/Los_Angeles', hour12: false });
+        document.getElementById('time-london').textContent = now.toLocaleTimeString('en-US', { timeZone: 'Europe/London', hour12: false });
+      }
+      updateClocks();
+      setInterval(updateClocks, 1000);
+    </script>
   <script src="gooey-water.js"></script>
   <script src="title-wiggle.js"></script>
   <script src="site-loader.js"></script>
@@ -115,17 +120,5 @@
       menu.querySelectorAll('a').forEach(a=> a.addEventListener('click', close));
     })();
   </script>
-  <!-- Clock update script -->
-  <script>
-    function updateClocks() {
-      const now = new Date();
-      document.getElementById('time-sf').textContent = now.toLocaleTimeString('en-US', { timeZone: 'America/Los_Angeles', hour12: false });
-      document.getElementById('time-london').textContent = now.toLocaleTimeString('en-US', { timeZone: 'Europe/London', hour12: false });
-    }
-    updateClocks();
-    setInterval(updateClocks, 1000);
-  </script>
 </body>
 </html>
-
-

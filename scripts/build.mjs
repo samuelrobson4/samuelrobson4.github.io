@@ -31,7 +31,7 @@ if (isWatch) {
   // Add a cache-busting version query to asset URLs in HTML files
   try {
     const version = (process.env.GITHUB_SHA ? process.env.GITHUB_SHA.slice(0, 8) : String(Date.now()));
-    const files = ['index.html', 'about.html', 'projects.html', 'blog.html', 'contact.html'];
+    const files = ['index.html', 'projects.html', 'blog.html', 'contact.html'];
     const patterns = [
       [/href="styles\.css(\?v=[^"]+)?"/g, (m) => `href="styles.css?v=${version}"`],
       [/src="dist\/bundle\.js(\?v=[^"]+)?"/g, (m) => `src="dist/bundle.js?v=${version}"`],

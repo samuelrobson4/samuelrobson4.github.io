@@ -4,7 +4,6 @@
 
   const PANELS = [
     { key: 'home', label: 'home' },
-    { key: 'about', label: 'about' },
     { key: 'projects', label: 'projects' },
     { key: 'blog', label: 'blog' },
     { key: 'contact', label: 'contact' },
@@ -85,14 +84,14 @@
 
     // Static dots
     const nodes = dots.map(d => {
-      const r = roundedRect(d.x - size/2, trackY - size/2, size, size, radius, { fill: '#0b0b0b' });
+      const r = roundedRect(d.x - size/2, trackY - size/2, size, size, radius, { fill: '#9e9c98' });
       gooLayer.appendChild(r); return r;
     });
 
     // Active blobs
     const actW = size + activePad, actR = radius + activePad / 2;
-    const aA = roundedRect(dots[0].x - actW/2, trackY - actW/2, actW, actW, actR, { fill: '#0b0b0b' });
-    const aB = roundedRect(dots[0].x - actW/2, trackY - actW/2, actW, actW, actR, { fill: '#0b0b0b' });
+    const aA = roundedRect(dots[0].x - actW/2, trackY - actW/2, actW, actW, actR, { fill: '#9e9c98' });
+    const aB = roundedRect(dots[0].x - actW/2, trackY - actW/2, actW, actW, actR, { fill: '#9e9c98' });
     gooLayer.appendChild(aA); gooLayer.appendChild(aB);
 
     // Determine initial active index from URL (hash on index, or page path)
@@ -103,10 +102,9 @@
         if (j >= 0) return j;
       }
       const p = location.pathname || '';
-      if (/about\.html$/i.test(p)) return 1;
-      if (/projects\.html$/i.test(p)) return 2;
-      if (/blog\.html$/i.test(p)) return 3;
-      if (/contact\.html$/i.test(p)) return 4;
+      if (/projects\.html$/i.test(p)) return 1;
+      if (/blog\.html$/i.test(p)) return 2;
+      if (/contact\.html$/i.test(p)) return 3;
       return 0;
     }
     const initialIndex = getInitialIndex();
