@@ -344,7 +344,7 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover { color: 
     line-height: 1.7;
     max-width: 600px;
     margin: 0 auto;
-    margin-top: 4pt; /* 4pt gap from title */
+    margin-top: 2pt; /* 4pt gap from title */
 }
 
 /* Landing layout (index) */
@@ -1202,7 +1202,7 @@ body:has([title*="Blog"]) .bouncy-card:hover {
   font-family: 'Baskervville', serif;
   font-weight: 600;
   color: #000;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
@@ -1223,12 +1223,12 @@ body:has([title*="Blog"]) .bouncy-card:hover {
 
 
 .hs-panel p.lead {
-  font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+  font-size: clamp(1rem, 2vw, 1.125rem); /* Reduced by ~2pt equivalent */
   color: #666;
   font-weight: 300;
   line-height: 1.6;
-  margin-bottom: 2rem;
-  margin-top: 4pt; /* 4pt gap from title */
+  margin-bottom: 10pt;
+  margin-top: 10pt; /* 4pt gap from title */
 }
 
 /* Hero panel (Panel 1) - special styling */
@@ -1254,8 +1254,8 @@ body:has([title*="Blog"]) .bouncy-card:hover {
   color: #666;
   font-weight: 300;
   line-height: 1.4;
-  margin-bottom: 4rem; /* Doubled from 2rem */
-  margin-top: 8pt; /* Doubled from 4pt */
+  margin-bottom: 5rem; /* Doubled from 2rem */
+  margin-top: 2rem; /* Doubled from 4pt */
   max-width: 65ch;
 }
 
@@ -1291,52 +1291,53 @@ body:has([title*="Blog"]) .bouncy-card:hover {
   flex-shrink: 0;
 }
 
-/* Mobile responsive styles - 2x2 grid */
+/* Mobile responsive styles - single row */
 @media (max-width: 768px) {
   .hs-hero__contact-links {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem 1.5rem; /* Increased gaps for better spacing */
-    margin-bottom: 3rem; /* Increased from 2rem for more spacing */
-    margin-top: 1rem; /* Added top margin for separation */
-    justify-items: flex-start; /* Left align items within grid */
-    max-width: 300px; /* Slightly increased max-width */
-    margin-left: 0; /* Left align the entire grid */
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem; /* Smaller gaps for compact layout */
+    margin-bottom: 0.5rem; /* Increased from 2rem for more spacing */
+    margin-top: 0.5rem; /* Added top margin for separation */
+    justify-content: flex-start; /* Left align items */
+    flex-wrap: nowrap; /* Keep all items on one line */
+    margin-left: 0; /* Left align the entire container */
     margin-right: auto;
   }
   
   .contact-link {
-    font-size: 0.9rem;
-    padding: 0.75rem 0.5rem;
+    font-size: 0.7rem; /* Smaller font for compact layout */
+    padding: 0.5rem 0.25rem; /* Reduced padding */
     justify-content: flex-start; /* Left align content within links */
-    min-width: 120px;
+    min-width: 60px; /* Much smaller minimum width */
     text-align: left; /* Left align text */
+    flex-shrink: 1; /* Allow shrinking to fit */
   }
   
   .contact-icon {
-    width: 1.2rem;
-    height: 1.2rem;
+    width: 0.9rem; /* Smaller icons for compact layout */
+    height: 0.9rem;
   }
 }
 
 /* Very small mobile screens */
 @media (max-width: 480px) {
   .hs-hero__contact-links {
-    max-width: 280px; /* Slightly increased */
-    gap: 1.5rem 1rem; /* Increased gaps */
+    gap: 0.5rem; /* Even smaller gaps for very small screens */
   }
   
   .contact-link {
-    min-width: 100px;
-    font-size: 0.85rem;
-    padding: 0.5rem 0.25rem;
-    justify-content: flex-start; /* Left align on small mobile too */
+    min-width: 50px; /* Even smaller minimum width */
+    font-size: 0.65rem; /* Even smaller font */
+    padding: 0.4rem 0.2rem; /* Even smaller padding */
+    justify-content: flex-start;
     text-align: left;
+    flex-shrink: 1;
   }
   
   .contact-icon {
-    width: 1.1rem;
-    height: 1.1rem;
+    width: 0.8rem; /* Even smaller icons */
+    height: 0.8rem;
   }
 }
 
@@ -1479,7 +1480,7 @@ body:has([title*="Blog"]) .bouncy-card:hover {
   /* Mobile scroll hint positioning - move to hero section */
   .hs-panel--hero .hs-hero__scroll-hint {
     position: relative;
-    margin-top: 2.5rem; /* Increased from 1.5rem for more spacing */
+    margin-top: 1.5rem; /* Increased from 1.5rem for more spacing */
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -1504,12 +1505,12 @@ body:has([title*="Blog"]) .bouncy-card:hover {
 
   
   .hs-panel .lead {
-    font-size: clamp(1rem, 3.5vw, 1.125rem); /* Reduced by ~2pt equivalent */
+    font-size: clamp(1rem, 2vw, 1.125rem); /* Reduced by ~2pt equivalent */
     color: #666;
     font-weight: 300;
     line-height: 1.6;
-    margin-bottom: 1.5rem;
-    margin-top: 4pt; /* 4pt gap from title */
+    margin-bottom: 3rem;
+    margin-top: 3rem; /* 4pt gap from title */
   }
   
 
@@ -1851,13 +1852,13 @@ body:has([title*="Blog"]) .bouncy-card:hover {
   }
   
   .logo-item {
-    height: 70px;
+    height: 105px;
     padding: 0.75rem;
   }
   
   .company-logo {
-    width: 100px;
-    height: 50px;
+    width: 150px;
+    height: 75px;
   }
   
   /* Company logos horizontal - 2x2 grid on mobile */
@@ -1868,7 +1869,7 @@ body:has([title*="Blog"]) .bouncy-card:hover {
     justify-content: flex-start;
     justify-items: center;
     margin-top: 1.5rem;
-    max-width: 320px;
+    max-width: 480px;
   }
   
   /* Home company logos mobile */
@@ -1895,19 +1896,19 @@ body:has([title*="Blog"]) .bouncy-card:hover {
   }
   
   .logo-item {
-    height: 60px;
+    height: 90px;
     padding: 0.5rem;
   }
   
   .company-logo {
-    width: 80px;
-    height: 40px;
+    width: 120px;
+    height: 60px;
   }
   
   /* Company logos horizontal - tighter 2x2 grid on small mobile */
   .company-logos-horizontal {
     gap: 1rem 0.75rem;
-    max-width: 280px;
+    max-width: 420px;
   }
   
   /* Home company logos small mobile */
@@ -1975,4 +1976,3 @@ body:has([title*="Blog"]) .bouncy-card:hover {
     padding-top: 0.75rem;
   }
 }
-
