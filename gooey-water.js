@@ -84,7 +84,7 @@
       bodies.push(b); Composite.add(engine.world, b);
       const c = document.createElementNS(svg.namespaceURI, 'circle');
       c.setAttribute('r', String(r));
-      c.setAttribute('fill', '#9e9c98');
+      c.setAttribute('fill', '#e6cfb8');
       c.setAttribute('stroke', 'none');
       group.appendChild(c); nodes.push(c);
     }

@@ -84,14 +84,14 @@
 
     // Static dots
     const nodes = dots.map(d => {
-      const r = roundedRect(d.x - size/2, trackY - size/2, size, size, radius, { fill: '#9e9c98' });
+      const r = roundedRect(d.x - size/2, trackY - size/2, size, size, radius, { fill: '#e6cfb8' });
       gooLayer.appendChild(r); return r;
     });
 
     // Active blobs
     const actW = size + activePad, actR = radius + activePad / 2;
-    const aA = roundedRect(dots[0].x - actW/2, trackY - actW/2, actW, actW, actR, { fill: '#9e9c98' });
-    const aB = roundedRect(dots[0].x - actW/2, trackY - actW/2, actW, actW, actR, { fill: '#9e9c98' });
+    const aA = roundedRect(dots[0].x - actW/2, trackY - actW/2, actW, actW, actR, { fill: '#e6cfb8' });
+    const aB = roundedRect(dots[0].x - actW/2, trackY - actW/2, actW, actW, actR, { fill: '#e6cfb8' });
     gooLayer.appendChild(aA); gooLayer.appendChild(aB);
 
     // Determine initial active index from URL (hash on index, or page path)
