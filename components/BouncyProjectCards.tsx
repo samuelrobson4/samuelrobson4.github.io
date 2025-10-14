@@ -424,7 +424,7 @@ export const BouncyProjectCards = forwardRef<BouncyProjectCardsRef, Props>(funct
         const card = cards.find((c) => c.id === id);
         if (!card) return;
         if (onCardClick) onCardClick(card);
-        else window.open(card.url, '_blank', 'noopener');
+        else window.location.href = card.url;
       }
       downData.delete(id);
     }
@@ -514,7 +514,7 @@ export const BouncyProjectCards = forwardRef<BouncyProjectCardsRef, Props>(funct
       ))}
       <ul className="sr-only" aria-hidden="false">
         {cards.map((c) => (
-          <li key={c.id}><a href={c.url} target="_blank" rel="noopener">{c.title}</a></li>
+          <li key={c.id}><a href={c.url}>{c.title}</a></li>
         ))}
       </ul>
     </div>

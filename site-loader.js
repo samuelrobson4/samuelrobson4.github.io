@@ -22,6 +22,10 @@
   }
 
   function init() {
+    // Only show loader on initial page load (not on navigation)
+    if (sessionStorage.getItem('siteLoaded')) return;
+    sessionStorage.setItem('siteLoaded', 'true');
+
     const loader = createLoader();
     if (!loader) return;
     const { el, span } = loader;

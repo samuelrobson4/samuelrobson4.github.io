@@ -29274,207 +29274,12 @@
   var import_matter_js = __toESM(require_matter(), 1);
 
   // web/audio.ts
-  var AudioManager = class {
-    constructor() {
-      this.context = null;
-      this.sfxGain = null;
-      this.volume = 0.6;
-      this.muted = false;
-      this.lastCollisionAt = 0;
-      this.lastScrollAt = 0;
-      this.lastWaterAt = 0;
-    }
-    ensureContext() {
-      if (this.context)
-        return;
-      const Ctx = window.AudioContext || window.webkitAudioContext;
-      if (!Ctx)
-        return;
-      const ctx = new Ctx();
-      const sfx = ctx.createGain();
-      sfx.gain.value = this.muted ? 0 : this.volume;
-      sfx.connect(ctx.destination);
-      this.context = ctx;
-      this.sfxGain = sfx;
-    }
-    setVolume(v) {
-      this.volume = Math.max(0, Math.min(1, v));
-      if (!this.sfxGain)
-        return;
-      this.sfxGain.gain.value = this.muted ? 0 : this.volume;
-    }
-    toggleMute() {
-      this.muted = !this.muted;
-      if (this.sfxGain)
-        this.sfxGain.gain.value = this.muted ? 0 : this.volume;
-    }
+  var audio = {
     click() {
-      this.ensureContext();
-      if (!this.context || !this.sfxGain)
-        return;
-      const ctx = this.context;
-      const o = ctx.createOscillator();
-      const g = ctx.createGain();
-      o.type = "square";
-      o.frequency.value = 660;
-      g.gain.value = 1e-4;
-      o.connect(g);
-      g.connect(this.sfxGain);
-      const t = ctx.currentTime;
-      g.gain.exponentialRampToValueAtTime(0.08, t + 1e-3);
-      g.gain.exponentialRampToValueAtTime(1e-5, t + 0.08);
-      o.start(t);
-      o.stop(t + 0.1);
-    }
-    collision(impact) {
-      const nowMs = performance.now();
-      if (nowMs - this.lastCollisionAt < 24)
-        return;
-      this.lastCollisionAt = nowMs;
-      this.ensureContext();
-      if (!this.context || !this.sfxGain)
-        return;
-      const ctx = this.context;
-      const o = ctx.createOscillator();
-      const g = ctx.createGain();
-      o.type = "sine";
-      const f = 90 + Math.min(20, Math.max(0, impact)) * 7.5;
-      o.frequency.value = f;
-      g.gain.value = 1e-4;
-      o.connect(g);
-      g.connect(this.sfxGain);
-      const t = ctx.currentTime;
-      const peak = Math.min(0.22, 0.04 + impact / 20 * 0.18);
-      g.gain.exponentialRampToValueAtTime(peak, t + 5e-3);
-      g.gain.exponentialRampToValueAtTime(1e-5, t + 0.18);
-      o.start(t);
-      o.stop(t + 0.22);
-    }
-    scrollWhoosh(amount) {
-      const nowMs = performance.now();
-      if (nowMs - this.lastScrollAt < 28)
-        return;
-      this.lastScrollAt = nowMs;
-      this.ensureContext();
-      if (!this.context || !this.sfxGain)
-        return;
-      const ctx = this.context;
-      const dir = Math.sign(amount) || 1;
-      const mag = Math.min(1, Math.abs(amount) / 250);
-      const noise = this.createNoise();
-      const inputGain = ctx.createGain();
-      inputGain.gain.setValueAtTime(1e-5, ctx.currentTime);
-      const bp = ctx.createBiquadFilter();
-      bp.type = "bandpass";
-      const bpStart = 500 + Math.random() * 200;
-      const bpEndBase = 1800 + Math.random() * 400;
-      const bpEnd = dir > 0 ? bpEndBase * (1 + mag * 0.6) : Math.max(400, bpEndBase * (1 - mag * 0.6));
-      bp.Q.value = 0.6 + Math.random() * 0.2;
-      const air = ctx.createBiquadFilter();
-      air.type = "highshelf";
-      air.frequency.value = 3500;
-      air.gain.value = 2.5 * mag;
-      const pan = ctx.createStereoPanner?.() ?? null;
-      if (pan)
-        pan.pan.setValueAtTime(0.12 * dir * (0.3 + 0.7 * mag), ctx.currentTime);
-      const split = ctx.createChannelSplitter(2);
-      const merge = ctx.createChannelMerger(2);
-      const haasSend = ctx.createGain();
-      haasSend.gain.value = 0.35;
-      const haasDelay = ctx.createDelay(0.02);
-      haasDelay.delayTime.setValueAtTime(8e-3 + 6e-3 * mag, ctx.currentTime);
-      const g = ctx.createGain();
-      const t = ctx.currentTime;
-      const attack = 7e-3;
-      const hold = 0.015 + mag * 0.015;
-      const decay = 0.16 + mag * 0.12;
-      g.gain.cancelScheduledValues(t);
-      g.gain.setValueAtTime(1e-5, t);
-      g.gain.linearRampToValueAtTime(0.05 + mag * 0.12, t + attack);
-      g.gain.setTargetAtTime(1e-5, t + attack + hold, decay);
-      bp.frequency.setValueAtTime(bpStart, t);
-      bp.frequency.exponentialRampToValueAtTime(Math.max(80, bpEnd), t + attack + hold + decay * 0.7);
-      noise.connect(inputGain);
-      inputGain.connect(bp);
-      bp.connect(air);
-      const postPanNode = pan ? pan : air;
-      air.connect(pan ?? g);
-      if (pan)
-        pan.connect(g);
-      (pan ?? air).connect(split);
-      split.connect(merge, 0, 0);
-      split.connect(haasSend, 1);
-      haasSend.connect(haasDelay);
-      haasDelay.connect(merge, 0, 1);
-      const haasMix = ctx.createGain();
-      haasMix.gain.value = 0.5;
-      merge.connect(haasMix);
-      haasMix.connect(g);
-      g.connect(this.sfxGain);
-      inputGain.gain.setValueAtTime(1, t);
-      const stopAt = t + attack + hold + decay + 0.12;
-      noise.start(t);
-      noise.stop(stopAt);
-      noise.addEventListener("ended", () => {
-        try {
-          noise.disconnect();
-          inputGain.disconnect();
-          bp.disconnect();
-          air.disconnect();
-          pan?.disconnect();
-          split.disconnect();
-          merge.disconnect();
-          haasSend.disconnect();
-          haasDelay.disconnect();
-          haasMix.disconnect();
-          g.disconnect();
-        } catch {
-        }
-      });
-    }
-    waterPlop(strength) {
-      const nowMs = performance.now();
-      if (nowMs - this.lastWaterAt < 24)
-        return;
-      this.lastWaterAt = nowMs;
-      this.ensureContext();
-      if (!this.context || !this.sfxGain)
-        return;
-      const ctx = this.context;
-      const o = ctx.createOscillator();
-      o.type = "sine";
-      const g = ctx.createGain();
-      g.gain.value = 1e-4;
-      const lp = ctx.createBiquadFilter();
-      lp.type = "lowpass";
-      lp.frequency.value = 1200;
-      o.connect(g);
-      g.connect(lp);
-      lp.connect(this.sfxGain);
-      const t = ctx.currentTime;
-      const f0 = 240 + Math.min(1, Math.max(0, strength)) * 260;
-      o.frequency.setValueAtTime(f0, t);
-      o.frequency.exponentialRampToValueAtTime(Math.max(110, f0 * 0.5), t + 0.14);
-      g.gain.linearRampToValueAtTime(0.06 + strength * 0.12, t + 0.01);
-      g.gain.exponentialRampToValueAtTime(1e-5, t + 0.22);
-      o.start(t);
-      o.stop(t + 0.26);
-    }
-    createNoise() {
-      const ctx = this.context;
-      const bufferSize = 2 * ctx.sampleRate;
-      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-      const data = buffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++)
-        data[i] = Math.random() * 2 - 1;
-      const node = ctx.createBufferSource();
-      node.buffer = buffer;
-      node.loop = true;
-      return node;
+    },
+    collision(intensity) {
     }
   };
-  var audio = new AudioManager();
-  window.audio = audio;
 
   // components/BouncyProjectCards.tsx
   var import_jsx_runtime = __toESM(require_jsx_runtime(), 1);
@@ -29823,7 +29628,7 @@
           if (onCardClick)
             onCardClick(card);
           else
-            window.open(card.url, "_blank", "noopener");
+            window.location.href = card.url;
         }
         downData.delete(id);
       }
@@ -29902,7 +29707,7 @@
             },
             card.id
           )),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", { className: "sr-only", "aria-hidden": "false", children: cards.map((c) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", { href: c.url, target: "_blank", rel: "noopener", children: c.title }) }, c.id)) })
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", { className: "sr-only", "aria-hidden": "false", children: cards.map((c) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", { href: c.url, children: c.title }) }, c.id)) })
         ]
       }
     );
