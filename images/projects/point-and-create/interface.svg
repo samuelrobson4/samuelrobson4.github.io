@@ -1,0 +1,8 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#1a202c"/>
+  <rect x="100" y="80" width="450" height="470" rx="10" fill="#2d3748"/>
+  <text x="325" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#667eea">Live Camera Feed</text>
+  <rect x="650" y="80" width="450" height="470" rx="10" fill="#2d3748"/>
+  <text x="875" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#667eea">AI Response</text>
+  <text x="50%" y="95%" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#667eea">Streamlit Interface</text>
+</svg>

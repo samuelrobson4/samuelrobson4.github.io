@@ -491,13 +491,13 @@ export const BouncyProjectCards = forwardRef<BouncyProjectCardsRef, Props>(funct
           )}
           
           {/* Status Tag */}
-          <div className="project-status-tag" style={{ 
+          <div className="project-status-tag" style={{
             marginTop: '-8px'
           }}>
             <span
               style={{
-                backgroundColor: '#E3F2FD',
-                color: '#1976D2',
+                backgroundColor: '#D4EDDA',
+                color: '#155724',
                 padding: '2px 6px',
                 borderRadius: '12px',
                 fontSize: '10px',
@@ -506,7 +506,7 @@ export const BouncyProjectCards = forwardRef<BouncyProjectCardsRef, Props>(funct
                 letterSpacing: '0.5px'
               }}
             >
-              IN PROGRESS
+              COMPLETE
             </span>
           </div>
           

@@ -1,67 +1,60 @@
 [
   {
     "id": "1",
-    "title": "Portfolio Website",
+    "title": "Spotipod",
     "subtitle": "2024",
-    "description": "My personal portfolio website featuring a clean design and responsive layout to showcase my research and projects.",
-    "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
-    "githubUrl": "https://github.com/samuelrobson/portfolio",
-    "websiteUrl": "https://samuelrobson.com",
+    "description": "Mobile-first Spotify controller with a tactile, disc-inspired interface for playlist navigation.",
+    "technologies": ["Next.js", "Tailwind CSS", "Framer Motion", "Spotify API"],
+    "githubUrl": "https://github.com/samuelrobson4/spotipod",
+    "websiteUrl": "https://spotipod.vercel.app",
     "date": "Jul 2025",
-    "url": "projects/project-detail.html?id=portfolio"
+    "url": "projects/project-detail.html?id=spotipod"
   },
   {
     "id": "2",
-    "title": "Weather App",
+    "title": "Point and Create Assistant",
     "subtitle": "2024",
-    "description": "A responsive weather application with real-time data and location-based forecasts.",
-    "technologies": ["React", "JavaScript", "CSS", "OpenWeather API"],
-    "githubUrl": "https://github.com/samuelrobson/weather-app",
-    "websiteUrl": "https://weather.samuelrobson.com",
-    "date": "Jun 2025",
-    "url": "projects/project-detail.html?id=weather-app"
+    "description": "Gesture-based AI assistant that interprets pointing gestures in live video and provides context-aware responses using GPT-4o.",
+    "technologies": ["Python", "Streamlit", "OpenCV", "MediaPipe", "GPT-4o"],
+    "githubUrl": "https://github.com/samuelrobson4/creative_assistant",
+    "date": "Jul 2025",
+    "url": "projects/project-detail.html?id=point-and-create"
   },
   {
     "id": "3",
-    "title": "Notes Tool",
-    "subtitle": "2023",
-    "description": "A collaborative note-taking application with real-time synchronization and markdown support.",
-    "technologies": ["Vue.js", "Node.js", "MongoDB", "Socket.io"],
-    "githubUrl": "https://github.com/samuelrobson/notes-tool",
-    "date": "May 2025",
-    "url": "projects/project-detail.html?id=notes-tool"
+    "title": "Interpretable Chatbot",
+    "subtitle": "2024",
+    "description": "Token-level confidence visualization for language models, making AI reasoning transparent and interpretable.",
+    "technologies": ["Python", "Streamlit", "OpenAI API", "GPT-3.5"],
+    "githubUrl": "https://github.com/samuelrobson4/interpretable_chatbot",
+    "date": "Jun 2025",
+    "url": "projects/project-detail.html?id=interpretable-chatbot"
   },
   {
     "id": "4",
-    "title": "Media Library",
-    "subtitle": "2023",
-    "description": "A digital media management system with advanced search and categorization features.",
-    "technologies": ["React", "Express", "PostgreSQL", "AWS S3"],
-    "githubUrl": "https://github.com/samuelrobson/media-library",
-    "websiteUrl": "https://media.samuelrobson.com",
-    "date": "Apr 2025",
-    "url": "projects/project-detail.html?id=media-library"
+    "title": "GenAI Ad Script Generator",
+    "subtitle": "2024",
+    "description": "AI application helping SMBs generate advertising scripts, reducing ad creation time by 50-70%.",
+    "technologies": ["GPT-3.5", "Next.js", "JavaScript"],
+    "date": "Jun 2025",
+    "url": "projects/project-detail.html?id=portfolio"
   },
   {
     "id": "5",
-    "title": "Analytics Dashboard",
-    "subtitle": "2022",
-    "description": "A comprehensive analytics platform with interactive charts and real-time data visualization.",
-    "technologies": ["D3.js", "Python", "Flask", "Redis"],
-    "githubUrl": "https://github.com/samuelrobson/analytics-dashboard",
-    "date": "Mar 2025",
-    "url": "projects/project-detail.html?id=analytics-dashboard"
+    "title": "AI Onboarding & Retention",
+    "subtitle": "2023",
+    "description": "Led redesign of advertiser onboarding with AI-powered support, achieving 1.5× QoQ revenue growth and 3.0× completion rates.",
+    "technologies": ["Product Analytics", "AI", "User Research"],
+    "date": "May 2025",
+    "url": "projects/project-detail.html?id=ai-onboarding"
   },
   {
     "id": "6",
-    "title": "Recipe Organizer",
-    "subtitle": "2022",
-    "description": "A recipe management app with meal planning features and nutritional information.",
-    "technologies": ["React Native", "Firebase", "JavaScript"],
-    "githubUrl": "https://github.com/samuelrobson/recipe-organizer",
-    "date": "Feb 2025",
-    "url": "projects/project-detail.html?id=recipe-organizer"
+    "title": "AI Data Infrastructure Prototype",
+    "subtitle": "2023",
+    "description": "Shipped ML-based data tagging tool for GDPR compliance in GCP with 90% accuracy and 80% efficiency gain.",
+    "technologies": ["Machine Learning", "GCP", "GDPR Compliance"],
+    "date": "Apr 2025",
+    "url": "projects/project-detail.html?id=ai-data-infrastructure"
   }
 ]
-
-

@@ -1,0 +1,7 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#1DB954"/>
+  <circle cx="600" cy="315" r="200" fill="#191414" opacity="0.8"/>
+  <circle cx="600" cy="315" r="50" fill="#1DB954"/>
+  <text x="50%" y="85%" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" fill="white" font-weight="bold">Spotipod</text>
+  <text x="50%" y="92%" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="white" opacity="0.8">CD-Style Spotify Controller</text>
+</svg>

@@ -1,43 +1,33 @@
 ---
-title: Portfolio Website
+title: GenAI Ad Script Generator
 subtitle: 2024
 images:
   - /images/projects/portfolio/hero.svg
   - /images/projects/portfolio/dashboard.svg
   - /images/projects/portfolio/mobile.svg
-technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"]
+technologies: ["GPT-3.5", "Next.js", "JavaScript", "HTML", "CSS"]
 ---
 
 ## Overview
 
-My personal portfolio website featuring a clean design and responsive layout to showcase my research and projects. Built with modern web technologies and optimized for performance.
+Developed an application using generative AI tools and Next.js to help SMBs quickly generate advertising scripts, reducing the time spent on ad creation by ~50-70%. The project served as a proof of concept to explore the potential of generative AI in streamlining content creation.
 
-## Key Features
+## Problem
 
-- **Responsive Design**: Seamlessly adapts to all screen sizes from mobile to desktop
-- **Interactive Elements**: Engaging animations and transitions for better user experience
-- **Project Showcase**: Dynamic project cards with physics-based interactions
-- **Blog Integration**: Automatically fetches and displays latest blog posts from Substack
+Small and medium-sized businesses (SMBs) spend a significant amount of time on the ad creation process, particularly in writing scripts for advertisements and content.
 
-## Technical Details
+## Solution
 
-The project leverages modern development practices including continuous integration, automated testing, and progressive enhancement to deliver a robust and reliable user experience across multiple platforms and devices.
+Created an app leveraging generative AI to automate the generation of advertising scripts, to reduce the time and effort required by SMBs. The tool allowed users to input key details about their product or service, and the AI would generate tailored ad scripts.
 
-Built with a focus on performance, the site achieves excellent Lighthouse scores through:
-- Optimized asset loading
-- Lazy loading of images
-- Efficient bundling with esbuild
-- Server-side rendering where applicable
+## Challenges
 
-## Challenges & Solutions
-
-Through strategic planning and agile development methodologies, we achieved significant improvements in system performance while reducing operational complexity and maintenance overhead.
-
-The main challenge was creating a physics-based interaction system that felt natural and performant across all devices, which was solved using Matter.js and careful optimization of render loops.
+- Exploring and integrating generative AI technologies in their early stages
+- Ensuring the AI-generated scripts were high-quality and relevant
+- Managing the limitations of a proof of concept, including scalability and user interface design
 
 ## Results
 
-- ⚡ 95+ Lighthouse performance score
-- 📱 100% mobile responsive
-- 🎨 Custom interactive components
-- 🚀 Deployed on GitHub Pages
+- **50-70% reduction** in time spent on ad script creation
+- Proof of concept validating generative AI applications in SMB workflows
+- Foundation for future scalability and feature expansion
