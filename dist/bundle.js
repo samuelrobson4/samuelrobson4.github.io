@@ -29691,8 +29691,8 @@
                   "span",
                   {
                     style: {
-                      backgroundColor: "#E3F2FD",
-                      color: "#1976D2",
+                      backgroundColor: "#D4EDDA",
+                      color: "#155724",
                       padding: "2px 6px",
                       borderRadius: "12px",
                       fontSize: "10px",
@@ -29700,7 +29700,7 @@
                       textTransform: "uppercase",
                       letterSpacing: "0.5px"
                     },
-                    children: "IN PROGRESS"
+                    children: "COMPLETE"
                   }
                 ) })
               ]

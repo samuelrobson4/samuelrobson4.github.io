@@ -8,7 +8,7 @@ images:
 technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "Spotify API", "Google Sheets API", "Vercel"]
 ---
 
-[View on GitHub](https://github.com/samuelrobson4/spotipod) | [Live Demo](https://spotipod.vercel.app)
+[View on GitHub](https://github.com/samuelrobson4/spotipod) | [Live Demo](https://spotipod-zeta.vercel.app/)
 
 ## Overview
 

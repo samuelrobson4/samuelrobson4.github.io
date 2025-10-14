@@ -6,7 +6,7 @@
     "description": "Mobile-first Spotify controller with a tactile, disc-inspired interface for playlist navigation.",
     "technologies": ["Next.js", "Tailwind CSS", "Framer Motion", "Spotify API"],
     "githubUrl": "https://github.com/samuelrobson4/spotipod",
-    "websiteUrl": "https://spotipod.vercel.app",
+    "websiteUrl": "https://spotipod-zeta.vercel.app/",
     "date": "Jul 2025",
     "url": "projects/project-detail.html?id=spotipod"
   },
