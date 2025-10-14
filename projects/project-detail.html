@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project Beta – Samuel Robson</title>
+  <title id="page-title">Loading... – Samuel Robson</title>
   <link rel="stylesheet" href="../styles.css?v=1757118404797" />
   <style>
     .page{max-width:1100px;margin:0 auto;padding:140px 2rem 4rem}
@@ -106,39 +106,19 @@
       </a>
     </div>
     
-    <h1>project alpha</h1>
-    <p class="lead">Innovative solution for modern challenges with emphasis on scalability and performance.</p>
+    <h1 id="project-title">Loading...</h1>
+    <p class="lead" id="project-subtitle"></p>
     
     <!-- Image carousel placeholder space -->
-    <div class="project-image-space">
+    <div class="project-image-space" id="project-carousel">
       <div class="carousel-placeholder">
-        <div class="carousel-arrow">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="15,18 9,12 15,6"></polyline>
-          </svg>
-        </div>
-        <div class="carousel-content">Project Image Carousel</div>
-        <div class="carousel-arrow">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="9,18 15,12 9,6"></polyline>
-          </svg>
-        </div>
-      </div>
-      <div class="carousel-dots">
-        <div class="carousel-dot active"></div>
-        <div class="carousel-dot"></div>
-        <div class="carousel-dot"></div>
-        <div class="carousel-dot"></div>
+        <div class="carousel-content">Loading images...</div>
       </div>
     </div>
     
     <!-- Project description -->
-    <div class="project-content">
-      <p>Project Beta represents a comprehensive approach to solving complex technical challenges through innovative architecture and user-centered design. The solution balances performance requirements with maintainability and scalability considerations.</p>
-      
-      <p>The project leverages modern development practices including continuous integration, automated testing, and progressive enhancement to deliver a robust and reliable user experience across multiple platforms and devices.</p>
-      
-      <p>Through strategic planning and agile development methodologies, we achieved significant improvements in system performance while reducing operational complexity and maintenance overhead.</p>
+    <div class="project-content" id="project-content">
+      <p>Loading project content...</p>
     </div>
   </main>
 
@@ -208,5 +188,152 @@
   <!-- Include the world clock script -->
   <script src="../world-clock.js"></script>
   <script src="../script.js"></script>
+
+  <!-- Markdown parsing libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+
+  <!-- Project content loader -->
+  <script>
+    (async function() {
+      // Get project ID from URL parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const projectId = urlParams.get('id');
+
+      if (!projectId) {
+        document.getElementById('project-title').textContent = 'Project Not Found';
+        document.getElementById('project-subtitle').textContent = '';
+        document.getElementById('project-content').innerHTML = '<p>No project ID specified in URL.</p>';
+        document.getElementById('project-carousel').style.display = 'none';
+        return;
+      }
+
+      try {
+        // Fetch the markdown file
+        const response = await fetch(`../data/projects/${projectId}.md`);
+        if (!response.ok) throw new Error('Project not found');
+
+        const markdownText = await response.text();
+
+        // Simple frontmatter parser (gray-matter replacement)
+        function parseFrontmatter(text) {
+          const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
+          const match = text.match(frontmatterRegex);
+
+          if (!match) {
+            return { data: {}, content: text };
+          }
+
+          const frontmatterText = match[1];
+          const content = match[2];
+          const data = {};
+
+          // Parse YAML-like frontmatter
+          const lines = frontmatterText.split('\n');
+          let currentKey = null;
+          let currentArray = null;
+
+          for (const line of lines) {
+            const trimmed = line.trim();
+            if (!trimmed) continue;
+
+            // Array item
+            if (trimmed.startsWith('- ')) {
+              if (currentArray) {
+                currentArray.push(trimmed.substring(2).replace(/^["']|["']$/g, ''));
+              }
+            }
+            // Key-value pair
+            else if (trimmed.includes(':')) {
+              const colonIndex = trimmed.indexOf(':');
+              const key = trimmed.substring(0, colonIndex).trim();
+              const value = trimmed.substring(colonIndex + 1).trim();
+
+              if (value) {
+                // Simple value
+                data[key] = value.replace(/^["']|["']$/g, '');
+                currentArray = null;
+              } else {
+                // Array follows
+                currentKey = key;
+                data[key] = [];
+                currentArray = data[key];
+              }
+            }
+          }
+
+          return { data, content };
+        }
+
+        const { data, content } = parseFrontmatter(markdownText);
+
+        // Update page title
+        const title = data.title || 'Project';
+        document.getElementById('page-title').textContent = `${title} – Samuel Robson`;
+        document.getElementById('project-title').textContent = title.toLowerCase();
+
+        // Update subtitle
+        const subtitle = data.subtitle || '';
+        document.getElementById('project-subtitle').textContent = subtitle;
+
+        // Render carousel if images exist
+        const images = data.images || [];
+        const carouselEl = document.getElementById('project-carousel');
+
+        if (images.length > 0) {
+          let currentIndex = 0;
+
+          function renderCarousel() {
+            carouselEl.innerHTML = `
+              <img src="${images[currentIndex]}"
+                   alt="${title}"
+                   style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+              ${images.length > 1 ? `
+                <div style="position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.5rem; align-items: center;">
+                  <button class="carousel-arrow" onclick="prevImage()" style="cursor: pointer; background: white;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="15,18 9,12 15,6"></polyline>
+                    </svg>
+                  </button>
+                  <div class="carousel-dots">
+                    ${images.map((_, i) => `<div class="carousel-dot ${i === currentIndex ? 'active' : ''}"></div>`).join('')}
+                  </div>
+                  <button class="carousel-arrow" onclick="nextImage()" style="cursor: pointer; background: white;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="9,18 15,12 9,6"></polyline>
+                    </svg>
+                  </button>
+                </div>
+              ` : ''}
+            `;
+          }
+
+          window.nextImage = function() {
+            currentIndex = (currentIndex + 1) % images.length;
+            renderCarousel();
+          };
+
+          window.prevImage = function() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            renderCarousel();
+          };
+
+          renderCarousel();
+        } else {
+          carouselEl.style.display = 'none';
+        }
+
+        // Render markdown content
+        const html = marked.parse(content);
+        document.getElementById('project-content').innerHTML = html;
+
+      } catch (error) {
+        console.error('Error loading project:', error);
+        document.getElementById('project-title').textContent = 'Project Not Found';
+        document.getElementById('project-subtitle').textContent = '';
+        document.getElementById('project-content').innerHTML = '<p>Unable to load project content.</p>';
+        document.getElementById('project-carousel').style.display = 'none';
+      }
+    })();
+  </script>
 </body>
 </html>
