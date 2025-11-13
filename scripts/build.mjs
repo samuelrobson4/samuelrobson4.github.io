@@ -31,11 +31,11 @@ if (isWatch) {
   // Add a cache-busting version query to asset URLs in HTML files
   try {
     const version = (process.env.GITHUB_SHA ? process.env.GITHUB_SHA.slice(0, 8) : String(Date.now()));
-    const files = ['index.html', 'projects.html', 'blog.html', 'contact.html'];
+    const files = ['index.html', 'projects.html', 'blog.html'];
     const patterns = [
-      [/href="styles\.css(\?v=[^"]+)?"/g, (m) => `href="styles.css?v=${version}"`],
+      [/href="assets\/css\/styles\.css(\?v=[^"]+)?"/g, (m) => `href="assets/css/styles.css?v=${version}"`],
       [/src="dist\/bundle\.js(\?v=[^"]+)?"/g, (m) => `src="dist/bundle.js?v=${version}"`],
-      [/src="hs-scroller-gsap\.js(\?v=[^"]+)?"/g, (m) => `src="hs-scroller-gsap.js?v=${version}"`],
+      [/src="assets\/js\/hs-scroller-gsap\.js(\?v=[^"]+)?"/g, (m) => `src="assets/js/hs-scroller-gsap.js?v=${version}"`],
       [/src="lib\/gsap\/gsap\.min\.js(\?v=[^"]+)?"/g, () => `src="lib/gsap/gsap.min.js?v=${version}"`],
       [/src="lib\/gsap\/ScrollTrigger\.min\.js(\?v=[^"]+)?"/g, () => `src="lib/gsap/ScrollTrigger.min.js?v=${version}"`],
     ];
