@@ -29684,25 +29684,7 @@
                   lineHeight: "1.4",
                   padding: "2px 2px",
                   marginTop: "12px"
-                }, children: card.description }),
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "project-status-tag", style: {
-                  marginTop: "-8px"
-                }, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
-                  "span",
-                  {
-                    style: {
-                      backgroundColor: "#D4EDDA",
-                      color: "#155724",
-                      padding: "2px 6px",
-                      borderRadius: "12px",
-                      fontSize: "10px",
-                      fontWeight: "500",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.5px"
-                    },
-                    children: "COMPLETE"
-                  }
-                ) })
+                }, children: card.description })
               ]
             },
             card.id

@@ -489,27 +489,7 @@ export const BouncyProjectCards = forwardRef<BouncyProjectCardsRef, Props>(funct
               {card.description}
             </div>
           )}
-          
-          {/* Status Tag */}
-          <div className="project-status-tag" style={{
-            marginTop: '-8px'
-          }}>
-            <span
-              style={{
-                backgroundColor: '#D4EDDA',
-                color: '#155724',
-                padding: '2px 6px',
-                borderRadius: '12px',
-                fontSize: '10px',
-                fontWeight: '500',
-                textTransform: 'uppercase',
-                letterSpacing: '0.5px'
-              }}
-            >
-              COMPLETE
-            </span>
-          </div>
-          
+
         </div>
       ))}
       <ul className="sr-only" aria-hidden="false">
