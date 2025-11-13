@@ -109,7 +109,7 @@
       'home': 0,
       'projects': 1,
       'blog': 2,
-      'contact': 3
+      'history': 3
     }
   };
   

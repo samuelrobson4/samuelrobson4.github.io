@@ -1799,6 +1799,11 @@ body:has([title*="Blog"]) .bouncy-card:hover {
   filter: grayscale(0%);
 }
 
+/* Add spacing above "past clients" heading */
+.company-logos-horizontal + h1 {
+  margin-top: 3rem;
+}
+
 /* Home page company logos - horizontal row */
 .home-company-logos {
   display: flex;
@@ -1855,15 +1860,15 @@ body:has([title*="Blog"]) .bouncy-card:hover {
   }
   
   .company-logo {
-    width: 180px; /* 150px * 1.2 = 180px */
-    height: 90px; /* 75px * 1.2 = 90px */
+    width: 100px; /* Reduced from 180px for tighter mobile fit */
+    height: 50px; /* Reduced from 90px for tighter mobile fit */
   }
-  
+
   /* Company logos horizontal - 2x2 grid on mobile */
   .company-logos-horizontal {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem 1rem;
+    gap: 2rem 1.5rem; /* Increased vertical and horizontal gap */
     justify-content: flex-start;
     justify-items: center;
     margin-top: 1.5rem;
