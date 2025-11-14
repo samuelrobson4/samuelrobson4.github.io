@@ -37,24 +37,19 @@ jobs:
         run: |
           # Create a clean deployment directory
           mkdir -p _site
-          
+
           # Copy essential files for the website
-          cp -r index.html projects.html blog.html contact.html _site/
-          cp -r styles.css _site/
-          cp -r resume.pdf _site/
+          cp -r index.html projects.html blog.html _site/
           cp -r dist/ _site/
           cp -r lib/ _site/
           cp -r components/ _site/
           cp -r data/ _site/
           cp -r projects/ _site/
-          cp -r audio/ _site/
-          
-          # Copy JavaScript files
-          cp *.js _site/
-          
+          cp -r assets/ _site/
+
           # Copy .nojekyll file to ensure proper GitHub Pages serving
           cp .nojekyll _site/
-          
+
           # Remove unnecessary files
           rm -rf node_modules
           rm -rf .github
