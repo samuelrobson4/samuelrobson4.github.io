@@ -8,39 +8,20 @@ images:
 technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "Spotify API", "Google Sheets API", "Vercel"]
 ---
 
-[View on GitHub](https://github.com/samuelrobson4/spotipod) | [Live Demo](https://spotipod-zeta.vercel.app/)
+[view on GitHub](https://github.com/samuelrobson4/spotipod) | [live demo](https://spotipod-zeta.vercel.app/)
 
-## Overview
+# Spotipod — Simple, Nostalgic Music Navigation for Spotify
 
-Spotipod is a mobile-first Spotify controller app designed to reimagine music browsing through a tactile, disc-inspired interface. The app turns playlist navigation into a physical, visual experience — like spinning a digital CD — while maintaining a seamless connection to your actual Spotify library.
+## inspiration
+Spotipod started from wanting a more **focused, tactile music experience**. Listening to albums at my dad’s stereo made me realize Spotify felt cluttered with playlists, recommendations, and podcasts. I wanted a simple, customizable interface that let me queue and play albums without distractions—something like an iPod for the streaming era.
 
-## Key Features
+## what I Built
+I designed a **clean, album-focused interface** that is minimalist but customizable. The backend uses **Google Sheets** for playlist and track management, while **Spotify’s Web API** handles live playback. On the frontend, the project is structured into modular components, built with **TypeScript, CSS, and JavaScript**, and optimized for mobile devices.
 
-- **CD-Style Interface**: A circular, touch-friendly design that lets users "spin" through playlists and tracks like flipping through a record collection
-- **Mobile-First Design**: Optimized for touch interactions and smooth animations on phones and tablets
-- **Google Sheets Backend**: Uses a connected Google Sheet as a simple, transparent database for playlists and track metadata
-- **Real-Time Spotify Control**: Directly plays, pauses, and skips tracks via the Spotify Web API
-- **One-Tap Deployment**: Fully hosted on Vercel with continuous deployment for rapid iteration
+## challenges & solutions
+- Making the UI feel **nostalgic, simple, and customizable**: designed modular components that adapt to different album displays and touch gestures.  
+- Ensuring **real-time sync between Google Sheets and Spotify**: implemented debounced API calls and structured validation to maintain consistent playback.  
+- Structuring the codebase for **clarity and scalability**: separated frontend and backend logic, enabling modularity and faster iteration.  
+- Deploying and iterating rapidly: hosted on **Vercel** for instant updates with minimal friction.
 
-## Technical Details
-
-Spotipod integrates Next.js, Tailwind CSS, and Framer Motion for a responsive and fluid UI. The app uses Google Sheets API as a lightweight CMS, fetching track data dynamically, and Spotify Web API for real-time playback control.
-
-Performance and usability are enhanced through:
-
-- Efficient client-side caching with SWR
-- Optimized bundle size and lazy-loaded components
-- Smooth motion design with GPU-accelerated animations
-
-## Challenges & Solutions
-
-The main challenge was achieving a natural-feeling "spin" mechanic that worked seamlessly across touch devices. This was solved using Framer Motion's gesture controls and velocity tracking to mimic real-world inertia.
-
-Another hurdle was synchronizing Google Sheets data with live Spotify playback — handled through debounced API calls and structured data validation.
-
-## Results
-
-- Tangible, disc-based playlist navigation with intuitive touch controls
-- Smooth touch gestures and animations optimized for mobile devices
-- Simple creator workflow via Google Sheets for non-technical users
-- Instant, mobile-ready deployment on Vercel with continuous integration
+Spotipod is a **mobile-first, album-focused controller** that balances simplicity, nostalgia, and real-time functionality. The project reinforced my approach to product design: combine **clear UX, practical technical architecture, and flexible customization**, skills I bring to both PM and hands-on product work.

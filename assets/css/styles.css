@@ -1380,9 +1380,17 @@ body:has([title*="Blog"]) .bouncy-card:hover {
 }
 
 @media (max-width: 768px) {
+  /* Match contact link styling on mobile */
+  .hs-hero__scroll-hint {
+    font-size: 0.875rem;
+    padding: 0.625rem 1.25rem;
+  }
+
   /* Arrow points downwards on mobile (default orientation) */
   .hs-hero__scroll-hint svg {
     transform: rotate(0deg);
+    width: 1.125rem;
+    height: 1.125rem;
   }
   @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {
@@ -1394,6 +1402,19 @@ body:has([title*="Blog"]) .bouncy-card:hover {
     60% {
       transform: translateY(-2px);
     }
+  }
+}
+
+@media (max-width: 480px) {
+  /* Match contact link styling on small mobile */
+  .hs-hero__scroll-hint {
+    font-size: 0.8125rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .hs-hero__scroll-hint svg {
+    width: 1rem;
+    height: 1rem;
   }
 }
 
@@ -1866,15 +1887,15 @@ body:has([title*="Blog"]) .bouncy-card:hover {
   }
   
   .company-logo {
-    width: 100px; /* Reduced from 180px for tighter mobile fit */
-    height: 50px; /* Reduced from 90px for tighter mobile fit */
+    width: 80px; /* Smaller logos for mobile */
+    height: 40px; /* Smaller logos for mobile */
   }
 
   /* Company logos horizontal - 2x2 grid on mobile */
   .company-logos-horizontal {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem 1.5rem; /* Increased vertical and horizontal gap */
+    gap: 2.5rem 2rem; /* More padding on all sides */
     justify-content: flex-start;
     justify-items: center;
     margin-top: 1.5rem;
@@ -1910,13 +1931,13 @@ body:has([title*="Blog"]) .bouncy-card:hover {
   }
   
   .company-logo {
-    width: 144px; /* 120px * 1.2 = 144px */
-    height: 72px; /* 60px * 1.2 = 72px */
+    width: 70px; /* Smaller logos for very small mobile */
+    height: 35px; /* Smaller logos for very small mobile */
   }
-  
+
   /* Company logos horizontal - tighter 2x2 grid on small mobile */
   .company-logos-horizontal {
-    gap: 1rem 0.75rem;
+    gap: 2rem 1.5rem; /* More padding even on small mobile */
     max-width: 420px;
   }
   
