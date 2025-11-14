@@ -9,6 +9,7 @@ export type Card = {
   date?: string;
   url: string;
   color?: string;
+  backgroundImage?: string;
 };
 
 export type Size = { width: number; height: number };

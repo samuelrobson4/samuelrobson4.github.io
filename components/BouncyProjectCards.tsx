@@ -456,37 +456,29 @@ export const BouncyProjectCards = forwardRef<BouncyProjectCardsRef, Props>(funct
           role="link"
           tabIndex={0}
           className="bouncy-card"
-          style={{ 
-            background: card.color || 'transparent',
-            padding: '15px',
+          style={{
+            background: card.backgroundImage
+              ? `#ffffff url(${card.backgroundImage}) center/cover no-repeat`
+              : (card.color || 'transparent'),
+            padding: '0',
             display: 'flex',
             flexDirection: 'column',
             gap: '16px',
             textAlign: 'left'
           }}
         >
-          {/* Title */}
-          <div className="bouncy-title" style={{ 
-            fontSize: '16px',
-            fontWeight: '600',
-            letterSpacing: '-0.02em',
-            lineHeight: '1em',
-            color: '#000',
-            textTransform: 'lowercase'
-          }}>
-            {card.title.toLowerCase()}
-          </div>
-          
-          {/* Description */}
-          {card.description && (
-            <div className="bouncy-subtitle project-description" style={{ 
-              fontSize: '12px',
-              color: 'var(--text)',
-              lineHeight: '1.4',
-              padding: '2px 2px',
-              marginTop: '12px'
+          {/* Show title only if no background image */}
+          {!card.backgroundImage && (
+            <div className="bouncy-title" style={{
+              fontSize: '16px',
+              fontWeight: '600',
+              letterSpacing: '-0.02em',
+              lineHeight: '1em',
+              color: '#000',
+              textTransform: 'lowercase',
+              margin: '15px'
             }}>
-              {card.description}
+              {card.title.toLowerCase()}
             </div>
           )}
 

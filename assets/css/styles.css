@@ -749,7 +749,7 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover { color: 
   display: flex !important;
   flex-direction: column !important;
   gap: 6px !important;
-  padding: 12px 14px !important;
+  padding: 0 !important;
   cursor: pointer !important;
   /* Ensure proper sizing */
   --card-w: 280px;

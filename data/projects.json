@@ -8,17 +8,19 @@
     "githubUrl": "https://github.com/samuelrobson4/spotipod",
     "websiteUrl": "https://spotipod-zeta.vercel.app/",
     "date": "Jul 2025",
-    "url": "projects/project-detail.html?id=spotipod"
+    "url": "projects/project-detail.html?id=spotipod",
+    "backgroundImage": "assets/images/projects/spotipod/logo.jpg"
   },
   {
     "id": "2",
-    "title": "Point and Create Assistant",
+    "title": "Intelligent Creation",
     "subtitle": "2024",
     "description": "Gesture-based AI assistant that interprets pointing gestures in live video and provides context-aware responses using GPT-4o.",
     "technologies": ["Python", "Streamlit", "OpenCV", "MediaPipe", "GPT-4o"],
     "githubUrl": "https://github.com/samuelrobson4/creative_assistant",
     "date": "Jul 2025",
-    "url": "projects/project-detail.html?id=point-and-create"
+    "url": "projects/project-detail.html?id=intelligent-creation",
+    "backgroundImage": "assets/images/projects/intelligent-creation/logo.jpg"
   },
   {
     "id": "3",
@@ -28,33 +30,27 @@
     "technologies": ["Python", "Streamlit", "OpenAI API", "GPT-3.5"],
     "githubUrl": "https://github.com/samuelrobson4/interpretable_chatbot",
     "date": "Jun 2025",
-    "url": "projects/project-detail.html?id=interpretable-chatbot"
+    "url": "projects/project-detail.html?id=interpretable-chatbot",
+    "backgroundImage": "assets/images/projects/interpretable-chatbot/logo.jpg"
   },
   {
     "id": "4",
-    "title": "GenAI Ad Script Generator",
-    "subtitle": "2024",
-    "description": "AI application helping SMBs generate advertising scripts, reducing ad creation time by 50-70%.",
-    "technologies": ["GPT-3.5", "Next.js", "JavaScript"],
-    "date": "Jun 2025",
-    "url": "projects/project-detail.html?id=portfolio"
-  },
-  {
-    "id": "5",
-    "title": "AI Onboarding & Retention",
+    "title": "Intelligent Symptom Tracker",
     "subtitle": "2023",
     "description": "Led redesign of advertiser onboarding with AI-powered support, achieving 1.5× QoQ revenue growth and 3.0× completion rates.",
     "technologies": ["Product Analytics", "AI", "User Research"],
     "date": "May 2025",
-    "url": "projects/project-detail.html?id=ai-onboarding"
+    "url": "projects/project-detail.html?id=intelligent-symptom-tracker",
+    "backgroundImage": "assets/images/projects/intelligent-symptom-tracker/logo.jpg"
   },
   {
-    "id": "6",
-    "title": "AI Data Infrastructure Prototype",
+    "id": "5",
+    "title": "Graph Expertise Search Engine",
     "subtitle": "2023",
     "description": "Shipped ML-based data tagging tool for GDPR compliance in GCP with 90% accuracy and 80% efficiency gain.",
     "technologies": ["Machine Learning", "GCP", "GDPR Compliance"],
     "date": "Apr 2025",
-    "url": "projects/project-detail.html?id=ai-data-infrastructure"
+    "url": "projects/project-detail.html?id=graph-expertise-search",
+    "backgroundImage": "assets/images/projects/graph-expertise-search/logo.jpg"
   }
 ]

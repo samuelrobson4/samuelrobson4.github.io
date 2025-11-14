@@ -29274,10 +29274,50 @@
   var import_matter_js = __toESM(require_matter(), 1);
 
   // web/audio.ts
+  var audioContext = null;
+  function getAudioContext() {
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    return audioContext;
+  }
   var audio = {
     click() {
+      try {
+        const ctx = getAudioContext();
+        const oscillator = ctx.createOscillator();
+        const gainNode = ctx.createGain();
+        oscillator.connect(gainNode);
+        gainNode.connect(ctx.destination);
+        oscillator.frequency.setValueAtTime(520, ctx.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(660, ctx.currentTime + 0.05);
+        oscillator.type = "sine";
+        gainNode.gain.setValueAtTime(0, ctx.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 0.01);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
+        oscillator.start(ctx.currentTime);
+        oscillator.stop(ctx.currentTime + 0.12);
+      } catch (e) {
+      }
     },
     collision(intensity) {
+      try {
+        const ctx = getAudioContext();
+        const oscillator = ctx.createOscillator();
+        const gainNode = ctx.createGain();
+        oscillator.connect(gainNode);
+        gainNode.connect(ctx.destination);
+        const freq = 300 + intensity * 5;
+        oscillator.frequency.value = Math.min(freq, 450);
+        oscillator.type = "sine";
+        const volume = Math.min(intensity / 150, 0.06);
+        gainNode.gain.setValueAtTime(0, ctx.currentTime);
+        gainNode.gain.linearRampToValueAtTime(volume, ctx.currentTime + 0.01);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+        oscillator.start(ctx.currentTime);
+        oscillator.stop(ctx.currentTime + 0.1);
+      } catch (e) {
+      }
     }
   };
 
@@ -29654,7 +29694,7 @@
         },
         "aria-label": "bouncy project cards",
         children: [
-          cards.map((card) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
+          cards.map((card) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
             "div",
             {
               "data-card-id": card.id,
@@ -29662,30 +29702,22 @@
               tabIndex: 0,
               className: "bouncy-card",
               style: {
-                background: card.color || "transparent",
-                padding: "15px",
+                background: card.backgroundImage ? `#ffffff url(${card.backgroundImage}) center/cover no-repeat` : card.color || "transparent",
+                padding: "0",
                 display: "flex",
                 flexDirection: "column",
                 gap: "16px",
                 textAlign: "left"
               },
-              children: [
-                /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bouncy-title", style: {
-                  fontSize: "16px",
-                  fontWeight: "600",
-                  letterSpacing: "-0.02em",
-                  lineHeight: "1em",
-                  color: "#000",
-                  textTransform: "lowercase"
-                }, children: card.title.toLowerCase() }),
-                card.description && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bouncy-subtitle project-description", style: {
-                  fontSize: "12px",
-                  color: "var(--text)",
-                  lineHeight: "1.4",
-                  padding: "2px 2px",
-                  marginTop: "12px"
-                }, children: card.description })
-              ]
+              children: !card.backgroundImage && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "bouncy-title", style: {
+                fontSize: "16px",
+                fontWeight: "600",
+                letterSpacing: "-0.02em",
+                lineHeight: "1em",
+                color: "#000",
+                textTransform: "lowercase",
+                margin: "15px"
+              }, children: card.title.toLowerCase() })
             },
             card.id
           )),
@@ -30080,7 +30112,7 @@
               className: "bouncy-card",
               style: {
                 background: card.color || "transparent",
-                padding: "20px",
+                padding: "0",
                 display: "flex",
                 flexDirection: "column",
                 gap: "16px",
@@ -30097,14 +30129,15 @@
                   letterSpacing: "-0.02em",
                   lineHeight: "1em",
                   color: "#000",
-                  textTransform: "lowercase"
+                  textTransform: "lowercase",
+                  margin: "20px 20px 8px 20px"
                 }, children: card.title.toLowerCase() }),
                 card.subtitle && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "bouncy-subtitle", style: {
                   fontSize: "12px",
                   color: "var(--text)",
                   lineHeight: "1.4",
-                  padding: "2px 2px",
-                  marginTop: "12px"
+                  padding: "0",
+                  margin: "0 20px 20px 20px"
                 }, children: card.subtitle })
               ]
             },

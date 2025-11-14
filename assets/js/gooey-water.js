@@ -2,7 +2,7 @@
 (function () {
   'use strict';
 
-  const BAND_HEIGHT = 96; // px ~ bottom inch
+  const BAND_HEIGHT = 144; // px ~ bottom inch (1.5x original 96)
   const Z_INDEX = 900;    // below header/nav (1000+)
 
   // Lazy load Matter.js if not present
@@ -70,8 +70,8 @@
     makeWalls();
 
     // Droplets
-    // Halved the count
-    const DROPS = Math.min(120, Math.max(60, Math.floor(W / 12)));
+    // Increased proportionally with taller band
+    const DROPS = Math.min(180, Math.max(90, Math.floor(W / 8)));
     const bodies = []; const nodes = [];
     function spawn(x, y, r) {
       const b = Bodies.circle(x, y, r, {
@@ -84,7 +84,7 @@
       bodies.push(b); Composite.add(engine.world, b);
       const c = document.createElementNS(svg.namespaceURI, 'circle');
       c.setAttribute('r', String(r));
-      c.setAttribute('fill', '#e6cfb8');
+      c.setAttribute('fill', '#949494');
       c.setAttribute('stroke', 'none');
       group.appendChild(c); nodes.push(c);
     }

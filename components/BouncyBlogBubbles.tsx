@@ -457,9 +457,9 @@ export const BouncyBlogBubbles = forwardRef<BouncyBlogBubblesRef, Props>(functio
           role="link"
           tabIndex={0}
           className="bouncy-card"
-          style={{ 
+          style={{
             background: card.color || 'transparent',
-            padding: '20px',
+            padding: '0',
             display: 'flex',
             flexDirection: 'column',
             gap: '16px',
@@ -471,25 +471,26 @@ export const BouncyBlogBubbles = forwardRef<BouncyBlogBubblesRef, Props>(functio
           }}
         >
           {/* Title */}
-          <div className="bouncy-title" style={{ 
+          <div className="bouncy-title" style={{
             fontSize: '16px',
             fontWeight: '600',
             letterSpacing: '-0.02em',
             lineHeight: '1em',
             color: '#000',
-            textTransform: 'lowercase'
+            textTransform: 'lowercase',
+            margin: '20px 20px 8px 20px'
           }}>
             {card.title.toLowerCase()}
           </div>
-          
+
           {/* Date */}
           {card.subtitle && (
-            <div className="bouncy-subtitle" style={{ 
+            <div className="bouncy-subtitle" style={{
               fontSize: '12px',
               color: 'var(--text)',
               lineHeight: '1.4',
-              padding: '2px 2px',
-              marginTop: '12px'
+              padding: '0',
+              margin: '0 20px 20px 20px'
             }}>
               {card.subtitle}
             </div>
