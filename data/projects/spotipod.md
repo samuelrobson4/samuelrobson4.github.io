@@ -2,7 +2,6 @@
 title: spotipod — Simple, Nostalgic Music Navigation for Spotify
 subtitle: 2024
 images:
-  - /assets/images/projects/spotipod/logo.png
   - /assets/images/projects/spotipod/view1.png
   - /assets/images/projects/spotipod/view2.png
 technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "Spotify API", "Google Sheets API", "Vercel"]
