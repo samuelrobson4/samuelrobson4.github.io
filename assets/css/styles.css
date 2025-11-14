@@ -49,7 +49,7 @@ html {
 }
 
 :root {
-    --bg: #fffbf2;
+    --bg: #fffdf7;
     --text: #777777; /* unify body text across pages */
     --muted: #777777;
     --blue: #0088FF;
@@ -1350,11 +1350,17 @@ body:has([title*="Blog"]) .bouncy-card:hover {
   color: #999;
   font-weight: 400;
   opacity: 0.8;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, border-color 0.2s ease;
+  padding: 10px 20px;
+  border: 1px solid #949494;
+  border-radius: 50px;
+  background: transparent;
+  cursor: pointer;
 }
 
 .hs-hero__scroll-hint:hover {
   opacity: 1;
+  border-color: #666;
 }
 
 .hs-hero__scroll-hint svg {
