@@ -25,6 +25,10 @@ Led a comprehensive redesign of the onboarding experience by:
 - Coordinating with 8+ cross-functional teams to implement AI-powered support and intelligent routing
 - Creating data-driven recommendations for onboarding flow optimization
 
+![Dashboard showing AI-powered onboarding interface with intelligent routing and support features](/images/projects/ai-onboarding/dashboard.svg)
+
+The new dashboard provided real-time insights and AI-powered guidance to help users navigate the onboarding process more effectively.
+
 ## Key Initiatives
 
 - Data Analysis: Deep-dive into product signals and survey data to uncover root causes of churn

@@ -9,13 +9,6 @@
     .page{max-width:1100px;margin:0 auto;padding:140px 2rem 4rem}
     .page h1{font-family:'Baskervville',serif;font-size:24px;font-weight:600;margin-bottom:1rem}
     .page p.lead{color:var(--text);margin-bottom:2rem;margin-top:4pt;font-weight:300;line-height:1.6;font-size:16px}
-    .project-image-space{height:300px;background:#f5f5f5;border-radius:8px;margin:2rem 0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#999;position:relative}
-    .carousel-placeholder{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
-    .carousel-arrow{width:24px;height:24px;border:2px solid #ccc;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}
-    .carousel-content{font-size:14px;color:#999}
-    .carousel-dots{display:flex;gap:8px;margin-top:1rem}
-    .carousel-dot{width:8px;height:8px;border-radius:50%;background:#ddd}
-    .carousel-dot.active{background:#999}
     .project-back-link{display:flex;align-items:center;gap:0.5rem;font-family:'Inter',sans-serif;font-size:0.875rem;color:#999;font-weight:400;opacity:0.8;margin-bottom:2rem;text-decoration:none}
     .project-content{font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;color:var(--text)}
     .project-content h2{font-family:'Baskervville',serif;font-size:20px;font-weight:600;margin-top:2.5rem;margin-bottom:1rem}
@@ -23,39 +16,51 @@
     .project-content p{margin-bottom:1rem;font-size:16px;line-height:1.6}
     .project-content ul{margin-bottom:1rem;padding-left:1.5rem}
     .project-content li{margin-bottom:0.5rem;font-size:16px;line-height:1.6}
+    .bento-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin:2.5rem 0}
+    .bento-box{background:#fafafa;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08);transition:transform 0.3s ease,box-shadow 0.3s ease;border:1px solid rgba(0,0,0,0.05)}
+    .bento-box:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.12)}
+    .bento-box img{width:100%;height:auto;display:block;object-fit:cover}
+    .bento-box-large{grid-column:span 2}
+    .bento-box-tall{grid-row:span 2}
+    .project-content img{max-width:100%;height:auto;border-radius:12px;margin:1.5rem 0;box-shadow:0 2px 12px rgba(0,0,0,0.08);display:block;transition:transform 0.3s ease,box-shadow 0.3s ease;border:1px solid rgba(0,0,0,0.05);background:#fafafa;padding:0.5rem}
+    .project-content img:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.12)}
+    .project-content img.float-left{float:left;margin:0 2rem 1.5rem 0;max-width:45%;border-radius:12px}
+    .project-content img.float-right{float:right;margin:0 0 1.5rem 2rem;max-width:45%;border-radius:12px}
+    .project-content figure{margin:2.5rem 0;text-align:center}
+    .project-content figure img{margin:0 auto;padding:0}
+    .project-content figcaption{font-family:'Inter',sans-serif;font-size:14px;color:#666;margin-top:0.75rem;font-style:italic;line-height:1.5}
+    .project-content a img{display:inline-block}
+    .project-content::after{content:"";display:table;clear:both}
     @media (max-width: 768px) {
       .page{padding:80px 1rem 2rem;max-width:calc(100vw - 2rem)}
       .page h1{font-size:clamp(1.5rem, 5vw, 2rem);margin-bottom:0.75rem}
       .page p.lead{font-size:14px;margin-bottom:1.5rem}
-      .project-image-space{height:200px;margin:1.5rem 0;border-radius:6px}
+      .bento-grid{grid-template-columns:1fr;gap:1.25rem;margin:2rem 0}
+      .bento-box-large{grid-column:span 1}
+      .bento-box-tall{grid-row:span 1}
+      .project-content img{margin:1.5rem 0;border-radius:10px;padding:0.25rem}
+      .project-content img.float-left,.project-content img.float-right{float:none;margin:1.5rem 0;max-width:100%}
+      .project-content figure{margin:2rem 0}
+      .project-content figcaption{font-size:13px;margin-top:0.5rem}
       .project-back-link{font-size:0.8rem;margin-bottom:1.5rem;gap:0.4rem}
       .project-content{font-size:15px}
       .project-content h2{font-size:18px;margin-top:2rem;margin-bottom:0.75rem}
       .project-content h3{font-size:15px;margin-top:1.5rem;margin-bottom:0.5rem}
       .project-content p{margin-bottom:0.875rem;font-size:15px;line-height:1.5}
       .project-content li{font-size:15px;line-height:1.5}
-      .carousel-arrow{width:18px;height:18px;border-width:1.5px}
-      .carousel-arrow svg{width:8px;height:8px}
-      .carousel-content{font-size:11px}
-      .carousel-dots{gap:6px;margin-top:0.75rem}
-      .carousel-dot{width:6px;height:6px}
-      .carousel-placeholder{gap:0.75rem;margin-bottom:0.75rem}
     }
     @media (max-width: 480px) {
       .page{padding:60px 1rem 1.5rem}
-      .project-image-space{height:160px;margin:1rem 0}
+      .bento-grid{gap:1rem;margin:1.5rem 0}
+      .project-content img{margin:1.25rem 0;border-radius:8px;padding:0.25rem}
+      .project-content figure{margin:1.5rem 0}
+      .project-content figcaption{font-size:12px;margin-top:0.5rem}
       .project-back-link{margin-bottom:1rem}
       .project-content{font-size:14px}
       .project-content h2{font-size:16px;margin-top:1.5rem;margin-bottom:0.5rem}
       .project-content h3{font-size:14px;margin-top:1.25rem;margin-bottom:0.5rem}
       .project-content p{font-size:14px;line-height:1.4;margin-bottom:0.75rem}
       .project-content li{font-size:14px;line-height:1.4}
-      .carousel-arrow{width:16px;height:16px;border-width:1px}
-      .carousel-arrow svg{width:7px;height:7px}
-      .carousel-content{font-size:10px}
-      .carousel-dots{gap:5px;margin-top:0.5rem}
-      .carousel-dot{width:5px;height:5px}
-      .carousel-placeholder{gap:0.5rem;margin-bottom:0.5rem}
     }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -119,13 +124,6 @@
     
     <h1 id="project-title">Loading...</h1>
     <p class="lead" id="project-subtitle"></p>
-    
-    <!-- Image carousel placeholder space -->
-    <div class="project-image-space" id="project-carousel">
-      <div class="carousel-placeholder">
-        <div class="carousel-content">Loading images...</div>
-      </div>
-    </div>
     
     <!-- Project description -->
     <div class="project-content" id="project-content">
@@ -214,7 +212,6 @@
         document.getElementById('project-title').textContent = 'Project Not Found';
         document.getElementById('project-subtitle').textContent = '';
         document.getElementById('project-content').innerHTML = '<p>No project ID specified in URL.</p>';
-        document.getElementById('project-carousel').style.display = 'none';
         return;
       }
 
@@ -286,55 +283,88 @@
         const subtitle = data.subtitle || '';
         document.getElementById('project-subtitle').textContent = subtitle;
 
-        // Render carousel if images exist
-        const images = data.images || [];
-        const carouselEl = document.getElementById('project-carousel');
-
-        if (images.length > 0) {
-          let currentIndex = 0;
-
-          function renderCarousel() {
-            carouselEl.innerHTML = `
-              <img src="${images[currentIndex]}"
-                   alt="${title}"
-                   style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-              ${images.length > 1 ? `
-                <div style="position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.5rem; align-items: center;">
-                  <button class="carousel-arrow" onclick="prevImage()" style="cursor: pointer; background: white;">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <polyline points="15,18 9,12 15,6"></polyline>
-                    </svg>
-                  </button>
-                  <div class="carousel-dots">
-                    ${images.map((_, i) => `<div class="carousel-dot ${i === currentIndex ? 'active' : ''}"></div>`).join('')}
-                  </div>
-                  <button class="carousel-arrow" onclick="nextImage()" style="cursor: pointer; background: white;">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <polyline points="9,18 15,12 9,6"></polyline>
-                    </svg>
-                  </button>
-                </div>
-              ` : ''}
-            `;
-          }
-
-          window.nextImage = function() {
-            currentIndex = (currentIndex + 1) % images.length;
-            renderCarousel();
-          };
-
-          window.prevImage = function() {
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            renderCarousel();
-          };
-
-          renderCarousel();
-        } else {
-          carouselEl.style.display = 'none';
-        }
+        // Configure marked for better image rendering
+        marked.setOptions({
+          breaks: true,
+          gfm: true
+        });
 
         // Render markdown content
-        const html = marked.parse(content);
+        let html = marked.parse(content);
+        
+        // Get images from frontmatter and create bento box grid at the start
+        const images = data.images || [];
+        let bentoGridHtml = '';
+        
+        if (images.length > 0) {
+          // Create bento box grid with images
+          if (images.length === 1) {
+            // Single image - full width
+            bentoGridHtml = `<div class="bento-grid"><div class="bento-box"><img src="${images[0]}" alt="${title}"></div></div>`;
+          } else if (images.length === 2) {
+            // Two images - side by side
+            bentoGridHtml = `<div class="bento-grid"><div class="bento-box"><img src="${images[0]}" alt="${title}"></div><div class="bento-box"><img src="${images[1]}" alt="${title}"></div></div>`;
+          } else if (images.length === 3) {
+            // Three images - first one large, two smaller
+            bentoGridHtml = `<div class="bento-grid"><div class="bento-box bento-box-large"><img src="${images[0]}" alt="${title}"></div><div class="bento-box"><img src="${images[1]}" alt="${title}"></div><div class="bento-box"><img src="${images[2]}" alt="${title}"></div></div>`;
+          } else {
+            // Four or more - grid layout
+            bentoGridHtml = `<div class="bento-grid">${images.map((img, i) => {
+              let classes = 'bento-box';
+              // Make first image larger if we have many
+              if (i === 0 && images.length > 4) {
+                classes += ' bento-box-large';
+              }
+              return `<div class="${classes}"><img src="${img}" alt="${title}"></div>`;
+            }).join('')}</div>`;
+          }
+        }
+        
+        // Insert bento grid at the beginning of content
+        if (bentoGridHtml) {
+          html = bentoGridHtml + html;
+        }
+        
+        // Post-process images to add better styling and support figure/caption syntax
+        // Support floating images: if alt text starts with "float-left" or "float-right"
+        html = html.replace(/<p><img([^>]*alt="([^"]*)"[^>]*)><\/p>/g, (match, imgAttrs, altText) => {
+          // Check for float classes in alt text
+          if (altText && altText.startsWith('float-left')) {
+            const cleanAlt = altText.replace(/^float-left\s*[-:]\s*/i, '');
+            return `<img${imgAttrs.replace(/alt="[^"]*"/, `alt="${cleanAlt}"`)} class="float-left">`;
+          }
+          if (altText && altText.startsWith('float-right')) {
+            const cleanAlt = altText.replace(/^float-right\s*[-:]\s*/i, '');
+            return `<img${imgAttrs.replace(/alt="[^"]*"/, `alt="${cleanAlt}"`)} class="float-right">`;
+          }
+          // If alt text is descriptive (more than 20 chars), treat it as a caption
+          if (altText && altText.length > 20 && !altText.match(/^https?:\/\//)) {
+            return `<figure><img${imgAttrs}><figcaption>${altText}</figcaption></figure>`;
+          }
+          // Otherwise, just remove the paragraph wrapper
+          return `<img${imgAttrs}>`;
+        });
+        
+        // Also handle images that are already standalone
+        html = html.replace(/<img([^>]*alt="([^"]*)"[^>]*)>/g, (match, imgAttrs, altText) => {
+          // Skip if already in a figure or bento box
+          if (match.includes('<figure>') || match.includes('bento-box') || match.includes('class=')) return match;
+          // Check for float classes in alt text
+          if (altText && altText.startsWith('float-left')) {
+            const cleanAlt = altText.replace(/^float-left\s*[-:]\s*/i, '');
+            return `<img${imgAttrs.replace(/alt="[^"]*"/, `alt="${cleanAlt}"`)} class="float-left">`;
+          }
+          if (altText && altText.startsWith('float-right')) {
+            const cleanAlt = altText.replace(/^float-right\s*[-:]\s*/i, '');
+            return `<img${imgAttrs.replace(/alt="[^"]*"/, `alt="${cleanAlt}"`)} class="float-right">`;
+          }
+          // If alt text is descriptive, wrap in figure
+          if (altText && altText.length > 20 && !altText.match(/^https?:\/\//)) {
+            return `<figure><img${imgAttrs}><figcaption>${altText}</figcaption></figure>`;
+          }
+          return match;
+        });
+        
         document.getElementById('project-content').innerHTML = html;
 
       } catch (error) {
@@ -342,7 +372,6 @@
         document.getElementById('project-title').textContent = 'Project Not Found';
         document.getElementById('project-subtitle').textContent = '';
         document.getElementById('project-content').innerHTML = '<p>Unable to load project content.</p>';
-        document.getElementById('project-carousel').style.display = 'none';
       }
     })();
   </script>

@@ -2,9 +2,9 @@
 title: Spotipod
 subtitle: 2024
 images:
-  - /images/projects/spotipod/hero.svg
-  - /images/projects/spotipod/interface.svg
-  - /images/projects/spotipod/mobile.svg
+  - /assets/images/projects/spotipod/logo.png
+  - /assets/images/projects/spotipod/view1.png
+  - /assets/images/projects/spotipod/view2.png
 technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "Spotify API", "Google Sheets API", "Vercel"]
 ---
 
