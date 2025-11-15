@@ -441,10 +441,10 @@ export const BouncyBlogBubbles = forwardRef<BouncyBlogBubblesRef, Props>(functio
     <div
       ref={containerRef}
       className="bouncy-container"
-      style={{ 
-        width, 
-        minHeight: height, 
-        height: 'auto', 
+      style={{
+        width,
+        minHeight: height,
+        height: 'auto',
         margin: '0 auto',
         paddingBottom: '50px' // Extra space for mobile scrolling
       }}

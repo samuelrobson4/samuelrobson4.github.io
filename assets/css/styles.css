@@ -809,12 +809,12 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover { color: 
     width: var(--card-w) !important;
     height: var(--card-h) !important;
   }
-  
+
   .blog-bubble .bouncy-title {
     font-size: 12px;
     margin-bottom: 3px;
   }
-  
+
   .blog-bubble .bouncy-subtitle {
     font-size: 9px;
   }
@@ -827,12 +827,12 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover { color: 
     width: var(--card-w) !important;
     height: var(--card-h) !important;
   }
-  
+
   .blog-bubble .bouncy-title {
     font-size: 11px;
     margin-bottom: 2px;
   }
-  
+
   .blog-bubble .bouncy-subtitle {
     font-size: 8px;
   }
@@ -1035,9 +1035,9 @@ body:has([title*="Blog"]) .bouncy-card:hover {
   .bouncy-title { font-size: 22px; }
 }
 @media (max-width: 768px) {
-  .bouncy-container { 
-    --card-w: 180px; 
-    --card-h: 90px; 
+  .bouncy-container {
+    --card-w: 180px;
+    --card-h: 90px;
     width: 100% !important; /* Override inline styles for mobile */
     margin: 0 auto;
     max-width: 100%;
@@ -1046,13 +1046,12 @@ body:has([title*="Blog"]) .bouncy-card:hover {
   .bouncy-title { font-size: 14px; }
 }
 @media (max-width: 480px) {
-  .bouncy-container { 
-    --card-w: 140px; 
-    --card-h: 70px; 
+  .bouncy-container {
+    --card-w: 150px;
+    --card-h: 75px;
     width: 100% !important; /* Override inline styles for mobile */
     margin: 0 auto;
   }
-  .bouncy-card { padding: 6px 8px; }
   .bouncy-title { font-size: 13px; }
   .bouncy-subtitle { font-size: 7px; /* Reduced by 2pt from 9px */ margin-top: 4pt; /* 4pt gap from title */ }
 }
