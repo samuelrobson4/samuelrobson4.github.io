@@ -1,62 +1,40 @@
 ---
-title: Interpretable Chatbot
+title: interpretable chatbot — a transparent interface for token-level model confidence
 subtitle: 2024
 images:
-  - /images/projects/interpretable-chatbot/hero.svg
-  - /images/projects/interpretable-chatbot/tooltip-demo.svg
-  - /images/projects/interpretable-chatbot/confidence-viz.svg
+  - /assets/images/projects/interpretable-chatbot/interpretablechatbot.png
+  - /assets/images/projects/interpretable-chatbot/interpretablechatbot2.png
 technologies: ["Python", "Streamlit", "OpenAI API", "GPT-3.5", "Data Visualization"]
 ---
 
-[View on GitHub](https://github.com/samuelrobson4/interpretable_chatbot)
+[view on gitgub](https://github.com/samuelrobson4/interpretable_chatbot)
 
-## Overview
+## inspiration
+As language models get more capable, the interface hasn’t caught up. Most chatbots still feel like black boxes: you get an answer, but not the reasoning behind it or how certain the model is. I wanted to explore what a more transparent interaction could look like — something that helps users read AI output with the same nuance they bring to human conversation. This prototype grew out of that question: *what would a clearer, more interpretable chatbot UI feel like?*
 
-The Interpretable Chatbot with Confidence Tooltips is a Streamlit web app that visualizes the reasoning confidence of language models at the token level. It transforms typical chatbot interactions into transparent, interpretable experiences — revealing how sure the model is about each word it generates. Designed as both a research and design prototype, it blends interpretability, UI design, and real-time analysis to make AI more explainable.
+## what i built
+I designed and built a **Streamlit-based chatbot interface** that exposes the model’s token-level confidence in real time. The tool highlights how sure the model is about each word, blending interpretability techniques with a minimalist UI.  
 
-## Key Features
+key pieces include:
+- A clean, distraction-free chat interface  
+- Color-coded confidence bands at the top of each response  
+- Token-level hover tooltips generated from logprobs  
+- A stable chat history with preserved visualizations  
+- A real-time analysis loop powered by OpenAI’s logprob API
 
-- **Interactive Chat Interface**: Clean, minimalist chatbot layout for intuitive use
-- **Token-Level Confidence Analysis**: Calculates and displays per-token confidence using OpenAI's logprobs output
-- **Hover Tooltips**: Hover over any token to see its confidence percentage
-- **Color-Coded Confidence Labels**: At-a-glance summary at the top of each response
-- **Chat History**: Review past exchanges with preserved confidence visualization
-- **Real-Time Analysis**: Powered by gpt-3.5-turbo-instruct for low-latency confidence evaluation
+The goal wasn’t to create another chatbot — it was to prototype what **interfaces for explainable AI** might look like as the underlying models get more complex.
 
-## Confidence Visualization System
+## challenges & solutions
+- **Making dense logprob data understandable**  
+  Designed a lightweight visualization system (color bands + subtle tooltips) so users can scan uncertainty without being overloaded.
 
-- **High (≥90%)** — Strong certainty
-- **Good (75–89%)** — Reliable response
-- **Moderate (60–74%)** — Some uncertainty
-- **Low (<60%)** — Needs review or rephrasing
+- **Accurate alignment between tokens and rendered text**  
+  Solved via a custom token-to-character mapping step that preserves fidelity across different tokenization boundaries.
 
-## Technical Details
+- **Balancing transparency with readability**  
+  Iterated on UI treatments until the interpretability layer supported the conversation without visually dominating it.
 
-The app is built with Streamlit, OpenAI's Python SDK, and python-dotenv for secure API key management. Each generated token is processed with OpenAI's logprobs feature, then converted into a percentage confidence score using:
+## outcome / lessons learned
+The result is a simple, expressive interface that makes a model’s confidence visible at a glance. It reinforced a broader insight: interpretability isn’t just a technical problem — it’s a **design problem**, and thoughtful UI can make model behavior feel intuitive without requiring users to understand logprobs.
 
-**confidence = e^(logprob) × 100**
-
-These values are averaged to produce an overall confidence metric per message.
-
-Performance and usability optimizations include:
-
-- Dynamic token rendering with hover interactivity
-- Stateless Streamlit session management for seamless chat history
-- Configurable deployment through Streamlit Cloud, Heroku, Docker, or Railway
-
-## Challenges & Solutions
-
-The main challenge was creating a lightweight, interpretable UI that could visualize dense logprob data without overwhelming users. This was solved with a minimalist tooltip system and color-coded cues that communicate uncertainty intuitively.
-
-Another challenge was aligning token segmentation between the API and display text — addressed through careful token-to-character mapping in preprocessing.
-
-## Results
-
-- Real-time interpretability for chatbot outputs
-- Clear, color-coded confidence feedback for every token
-- Framework for future research into model trust and explanation design
-- Deployable across multiple platforms with minimal setup
-
-## Why It Matters
-
-This project bridges human-centered design and AI interpretability, making the inner workings of language models visible and understandable. It serves as a foundation for future tools that help users not only use AI but understand it — one token at a time.
+This prototype now acts as a foundation for future experiments, including attention overlays, uncertainty summaries, and comparative model views — all aimed at shaping the next generation of transparent AI interfaces.

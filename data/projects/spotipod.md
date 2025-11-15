@@ -7,12 +7,12 @@ images:
 technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "Spotify API", "Google Sheets API", "Vercel"]
 ---
 
-[view on GitHub](https://github.com/samuelrobson4/spotipod) | [live demo](https://spotipod-zeta.vercel.app/)
+[view on github](https://github.com/samuelrobson4/spotipod) | [live demo](https://spotipod-zeta.vercel.app/)
 
 ## inspiration
 Spotipod started from wanting a more **focused, tactile music experience**. Listening to albums at my dad’s stereo made me realize Spotify felt cluttered with playlists, recommendations, and podcasts. I wanted a simple, customizable interface that let me queue and play albums without distractions—something like an iPod for the streaming era.
 
-## what I built
+## what i built
 I designed a **clean, album-focused interface** that is minimalist but customizable. The backend uses **Google Sheets** for playlist and track management, while **Spotify’s Web API** handles live playback. On the frontend, the project is structured into modular components, built with **TypeScript, CSS, and JavaScript**, and optimized for mobile devices.
 
 ## challenges & solutions

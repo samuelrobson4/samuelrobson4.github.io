@@ -1,45 +1,21 @@
 ---
-title: AI Data Infrastructure Prototype
-subtitle: 2023
+title: knowledge graph expertise search — connecting people, skills, and projects with AI
+subtitle: 2024
 images:
-  - /images/projects/ai-data-infrastructure/hero.svg
-  - /images/projects/ai-data-infrastructure/architecture.svg
-technologies: ["Machine Learning", "GCP", "GDPR Compliance", "Data Engineering"]
+technologies: ["React", "TypeScript", "FastAPI", "Python", "Claude API", "Neo4j", "Vite", "Cypher"]
 ---
+## PROJECT IN PROGRESS
 
-## Overview
+## inspiration
+In growing teams, I kept seeing people struggle to find the right expertise or documents—knowledge about "who knows what" was scattered across Slack, Google Docs, and Notion. This led to **duplicated work, slower progress, and missed collaboration opportunities**. I wanted to build a **centralized system** that connects people, skills, and projects, letting anyone ask "Who can help with data visualization?" and get instant, relevant answers.
 
-Shipped ML-based data tagging tool to enforce GDPR requirements in GCP, achieving 90% accuracy and 80% efficiency gain. Collaborated with diverse stakeholders from legal, engineering, and marketing teams, presenting outcomes to the Chief Data Officer.
+## what i built
+I built a **knowledge graph expertise search engine** that indexes people, skills, and projects from unstructured documents (status updates, meeting notes). The system uses **Claude API** for entity extraction and query parsing, **Neo4j** as the graph database, and a **React + TypeScript** frontend with a **FastAPI** backend. Users upload documents to seed the graph, then search using natural language queries that return ranked results showing people and their relevant work.
 
-## Problem
+## challenges & solutions
+- **Extracting structured data from messy documents**: designed prompts for Claude API to reliably identify people, skills, projects, and relationships with >70% accuracy across diverse document types.  
+- **Building an effective graph data model**: used Neo4j's property graph (Person, Skill, Project nodes; HAS_SKILL, WORKS_ON relationships) with constraints to ensure data integrity without complex semantic web overhead.  
+- **Making search feel intuitive**: implemented two-stage NLP where Claude parses query intent (find person vs. find project), then executes targeted Cypher queries with relevance ranking.  
+- **Balancing MVP scope with extensibility**: phased approach—validated extraction and queries early (Days 1-2), then built backend core, query system, and minimal UI incrementally.
 
-Ensuring GDPR compliance across large-scale data infrastructure required manual data tagging and classification, which was time-consuming, error-prone, and difficult to scale as data volumes grew.
-
-## Solution
-
-Developed and deployed a machine learning-based data tagging tool that automatically classifies and tags data according to GDPR requirements:
-
-- Built ML models to identify and categorize sensitive data types
-- Integrated the solution within Google Cloud Platform infrastructure
-- Implemented automated tagging workflows to ensure compliance
-- Created validation mechanisms to maintain accuracy standards
-
-## Collaboration & Stakeholder Management
-
-Successfully coordinated across multiple teams:
-
-- Legal: Ensured compliance with GDPR regulations and data protection requirements
-- Engineering: Integrated ML solution into existing data infrastructure
-- Marketing: Aligned on data usage requirements and business needs
-- Executive Leadership: Presented outcomes and strategic recommendations to CDO
-
-## Results
-
-- **90% accuracy** in automated data classification and tagging
-- **80% efficiency gain** compared to manual tagging processes
-- Successfully enforced GDPR compliance at scale across GCP infrastructure
-- Presented prototype and outcomes to Chief Data Officer with positive reception
-
-## Impact
-
-This project demonstrated the feasibility of using machine learning to automate compliance processes, setting the foundation for scalable data governance across the organization.
+This project demonstrates how to combine **modern AI (LLMs for NLP), graph databases, and clean UX** to solve real organizational problems. It reinforced my approach to product work: **validate assumptions early, build iteratively, and design systems that are both powerful and practical**—skills I bring to building intelligent products with real user value.

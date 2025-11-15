@@ -1,50 +1,70 @@
 ---
-title: Point and Create Assistant
+title: intelligent creation tools — experiments in spatial and generative interfaces
 subtitle: 2024
 images:
-  - /images/projects/point-and-create/hero.svg
-  - /images/projects/point-and-create/gesture-detection.svg
-  - /images/projects/point-and-create/interface.svg
+  - /assets/images/projects/intelligent-creation/pointandcreate.png
+  - /assets/images/projects/intelligent-creation/adscript1.jpeg
+  - /assets/images/projects/intelligent-creation/adscript2.jpeg
 technologies: ["Python", "Streamlit", "OpenCV", "MediaPipe", "GPT-4o", "OpenAI API"]
 ---
 
-[View on GitHub](https://github.com/samuelrobson4/creative_assistant)
+I’ve been exploring how AI can move beyond text boxes and become a more natural creative partner — tools that understand context, space, and what the user is actually doing. Over the past year, I built several prototypes to test this idea from different angles: spatial grounding, gesture-based interaction, and fast content generation. These projects helped me sharpen both my technical range (Python, CV, Next.js, LLM APIs) and my product intuition for what makes an “intelligent tool” feel useful instead of gimmicky.
 
-## Overview
 
-Point and Create Assistant is an interactive Streamlit prototype that lets users point at regions in a live camera feed and receive intelligent, multimodal responses from GPT-4o based on what they're gesturing toward. It's a lightweight, spatially grounded experiment that merges gesture tracking, computer vision, and LLM interpretability — designed to explore the future of AI co-pilots for physical tasks.
+# point & create — a spatially-grounded ai assistant
 
-## Key Features
+[view on github](https://github.com/samuelrobson4/creative_assistant)
 
-- **Gesture Recognition**: Detects hand position and pointing direction using MediaPipe
-- **Region Cropping**: Dynamically isolates the area being pointed to in the webcam feed
-- **Multimodal Understanding**: Sends both the cropped region and a text prompt to GPT-4o for context-aware responses
-- **Interactive Output**: Displays live model responses grounded in what the user physically points to
-- **Streamlit Interface**: Clean, browser-based UI for easy experimentation with live video and model output
+## inspiration
+I wanted to understand what AI could do when it’s not just responding to text, but to the **physical world**. That led to a simple question: *what if you could point at something, and the AI would understand exactly what you meant?* The goal wasn’t to build a polished product — it was to explore how multimodal models behave when tied to gestures, live video, and spatial context.
 
-## Technical Details
+## what i built
+Point & Create is a **Streamlit-based prototype** that lets users point at an object in their webcam feed and get a grounded response from GPT-4o based on the exact region they’re gesturing toward.  
 
-The prototype is built entirely in Python with Streamlit for the interface, OpenCV for image capture and processing, MediaPipe for real-time gesture detection, and the OpenAI API for multimodal inference. Environment variables are handled securely with python-dotenv.
+I built:
+- A real-time gesture-tracking pipeline with **MediaPipe**
+- Dynamic region cropping with **OpenCV**
+- A multimodal inference loop sending both **images + text** to GPT-4o  
+- A lightweight, responsive **Streamlit UI** for fast iteration
 
-Performance and usability are supported through:
+Everything runs locally in Python with clean modular structure, making it easy to extend with voice, overlays, or IoT integrations.
 
-- Efficient frame handling to prevent camera lag
-- Lightweight modular design for rapid iteration
-- Simple environment setup for local experimentation
+## challenges & solutions
+- **Reliable pointing detection across lighting and angles**  
+  Solved with adaptive thresholding, smoothed bounding boxes, and filtering for stable hand keypoints.
 
-## Challenges & Solutions
+- **Latency low enough for real-time interaction**  
+  Optimized by processing frames *only when a pointing gesture is detected*, significantly reducing load.
 
-A key challenge was ensuring reliable pointing detection across varying lighting conditions and hand orientations. This was addressed through adaptive thresholding in MediaPipe and bounding box smoothing to stabilize crops.
+- **Building a simple but expressive UX**  
+  Kept the interface minimal and focused: live feed, cropped region, and grounded model response.
 
-Another challenge was maintaining latency low enough for interactive use — optimized by processing frames only on gesture events rather than continuously.
+## outcome / lessons Learned
+The prototype demonstrated that spatially grounded AI can feel intuitive with the right feedback loop. It became a useful sandbox for testing multimodal behavior, interpretability overlays, and ideas for future tangible assistants — from cooking guidance to hardware repair help.
 
-## Results
 
-- Real-time pointing and object focus detection with smooth tracking
-- Seamless integration of vision and language models
-- A sandbox for studying spatial grounding and interpretability
-- Local prototype ready for extension to voice, attention overlays, or deployment on Streamlit Cloud
+# ad script generator — fast content ideation for SMBs
 
-## Why It Matters
+## inspiration
+Small businesses spend a surprising amount of time writing ads. I wanted to test whether a lightweight generative tool could remove that friction without requiring them to learn new workflows.
 
-Point and Create Assistant explores how AI systems can become physically grounded collaborators, capable of reasoning about the real world through human gestures. It serves as a foundation for tangible AI interfaces — the kind that could power future home assistants, repair guides, or recipe helpers that understand what you're referring to.
+## what i built
+A **Next.js web app** that generates short advertising scripts based on a business’s product details. It was built as an early experiment with generative models (GPT-3.5) and served as a simple proof of concept for speeding up content production.
+
+The stack included:
+- **Next.js + JavaScript** for the frontend
+- **HTML/CSS** for a clean, simple UI
+- **OpenAI API** for script generation
+
+## challenges & solutions
+- **Integrating early-stage generative APIs**  
+  Built defensive prompt templates and validation to keep output on-brand and coherent.
+
+- **Ensuring script quality and relevance**  
+  Added structured inputs and guardrails to help the model stay focused on benefits, tone, and audience.
+
+- **Managing POC constraints**  
+  Scoped tightly: generate scripts well first, expand features later.
+
+## outcome / lessons learned
+The tool reduced ad-writing time by an estimated **50–70%** in early tests and validated the opportunity for fast-creation tools for SMBs. It also gave me a practical foundation in deploying generative applications and designing interfaces around model limitations.
